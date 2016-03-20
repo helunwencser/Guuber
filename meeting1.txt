@@ -1,7 +1,7 @@
 1. lessons learnt:
 	servlet, database, web service, java basic
 2. back-end:
-	user information, history records(optional)
+	user information, chat history, history records(optional)
 3. gps, montion sensor, camera, position sensor, voice sensor
 
 TODO:
