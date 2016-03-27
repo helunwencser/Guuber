@@ -1,7 +1,9 @@
 # Guuber
 
 Android Application for Drivers/Passengers to find Passengers/Drivers
+
 18-641, Spring 2016, Carnegie Mellon University  
+
 Lunwen He, Yanning Liu, Ziming Wang
 
 Acknowledgements:
