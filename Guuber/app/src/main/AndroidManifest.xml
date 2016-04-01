@@ -21,6 +21,14 @@
         <activity
             android:name=".view.common.ChooseSignupSignin"
             android:label="@string/title_activity_choose_signup_signin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.common.Signup"
+            android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.common.Signin"
+            android:label="@string/title_activity_signin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
