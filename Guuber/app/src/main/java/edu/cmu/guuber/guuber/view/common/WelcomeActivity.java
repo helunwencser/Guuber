@@ -21,24 +21,8 @@ public class WelcomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
-        * read values
-        * */
-        String name = savedInstanceState.getString("name");
-        /**
-         * read values
-         * */
-
-        /**
-         * intent for screen flow
-         * */
-        //if there are multiple flows here, please use if else statement
-        Intent intent = new Intent(this, SignupActivity.class);
-        intent.putExtra("name", "bob");
+        Intent intent = new Intent(this, ChooseSignupSignin.class);
         this.startActivity(intent);
-        /**
-         * intent for screen flow
-         * */
     }
 
     @Override
