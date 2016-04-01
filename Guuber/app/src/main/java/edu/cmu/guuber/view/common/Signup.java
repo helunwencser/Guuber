@@ -1,13 +1,10 @@
-package edu.cmu.guuber.guuber.view.common;
+package edu.cmu.guuber.view.common;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -35,10 +32,10 @@ public class Signup extends AppCompatActivity {
         String carID = carIDEditText.getText().toString();
 
         /**
-         * validate before start welcomepage
+         * validate before start homepage
          * */
 
-        Intent intent = new Intent(this, WelcomePage.class);
+        Intent intent = new Intent(this, HomePage.class);
         intent.putExtra("userName", userName);
         intent.putExtra("password", password);
         intent.putExtra("userType", userType);

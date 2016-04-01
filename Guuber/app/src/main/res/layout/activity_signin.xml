@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="edu.cmu.guuber.guuber.view.common.Signin">
+    tools:context="edu.cmu.guuber.view.common.Signin">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

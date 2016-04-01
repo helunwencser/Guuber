@@ -11,7 +11,7 @@
     android:orientation="vertical"
     android:background="@android:color/holo_blue_light"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".view.common.WelcomeActivity"
+    tools:context="edu.cmu.guuber.view.common.WelcomeActivity"
     tools:showIn="@layout/activity_welcome">
 
     <TextView
