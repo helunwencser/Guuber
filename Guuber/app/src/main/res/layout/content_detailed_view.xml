@@ -12,25 +12,16 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="edu.cmu.guuber.view.driver.DetailedView"
-    tools:showIn="@layout/activity_detailed_view">
+    tools:showIn="@layout/activity_detailed_view"
+    android:gravity="center">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Guuber"
-            android:gravity="center" />
-    </LinearLayout>
-
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Guuber"
+        android:gravity="center"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -45,6 +36,7 @@
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:gravity="center">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -52,6 +44,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Passenger"
                 android:gravity="center" />
+
             <TextView
                 android:id="@+id/transactionPassenger"
                 android:layout_width="0dp"
@@ -70,6 +63,7 @@
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:gravity="center">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1.5"
@@ -77,6 +71,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Start Time"
                 android:gravity="center" />
+
             <TextView
                 android:id="@+id/transactionStartTime"
                 android:layout_width="0dp"
@@ -139,19 +134,11 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:text="Return"
+        android:id="@+id/returnButton"
         android:layout_gravity="center_horizontal"
-        android:gravity="center">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Return"
-            android:id="@+id/returnButton"
-            android:layout_gravity="center_horizontal" />
-
-    </LinearLayout>
+        android:layout_weight="1"/>
 </LinearLayout>
