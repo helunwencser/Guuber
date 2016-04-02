@@ -11,6 +11,12 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string-array name="drop_page">
+        <item>UserProfile</item>
+        <item>Transactions</item>
+        <item>Log out</item>
+    </string-array>
+
     <string name="title_activity_signin">Signin</string>
     <string name="title_activity_driverend">End Service</string>
     <string name="title_activity_driverstart">Start Service</string>

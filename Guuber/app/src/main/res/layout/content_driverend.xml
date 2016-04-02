@@ -29,9 +29,11 @@
         android:gravity="center" />
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="352dp"
+        android:paddingTop="10dp"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
-        android:layout_gravity="center_horizontal" />
+        android:src="@raw/map2"/>
+
 
 </LinearLayout>
