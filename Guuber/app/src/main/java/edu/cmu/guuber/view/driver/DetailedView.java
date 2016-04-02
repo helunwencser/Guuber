@@ -19,7 +19,7 @@ public class DetailedView extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button cancelButton =
-                (Button) findViewById(R.id.cancelButton);
+                (Button) findViewById(R.id.returnButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
     }
 

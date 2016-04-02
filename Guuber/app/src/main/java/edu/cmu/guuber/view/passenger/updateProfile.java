@@ -1,3 +1,6 @@
+package edu.cmu.guuber.view.passenger;
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +28,7 @@ public class UpdateProfile extends AppCompatActivity {
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent gotoFindDriver = new Intent(updateProfile.this, findDriver.class);
+            Intent gotoFindDriver = new Intent(UpdateProfile.this, FindDriver.class);
             startActivity(gotoFindDriver);
         }
     };
@@ -33,7 +36,7 @@ public class UpdateProfile extends AppCompatActivity {
     View.OnClickListener saveButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent saveChanged = new Intent(updateProfile.this, findDriver.class);
+            Intent saveChanged = new Intent(UpdateProfile.this, FindDriver.class);
             startActivity(saveChanged);
         }
     };

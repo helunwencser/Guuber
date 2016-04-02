@@ -51,23 +51,23 @@
             android:label="@string/title_activity_findpassenger"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="edu.cmu.guuber.view.passenger.endService"
+            android:name="edu.cmu.guuber.view.passenger.EndService"
             android:label="@string/title_activity_passengerend"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="edu.cmu.guuber.view.passenger.startService"
+            android:name="edu.cmu.guuber.view.passenger.StartService"
             android:label="@string/title_activity_passengerstart"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="edu.cmu.guuber.view.passenger.updateProfile"
+            android:name="edu.cmu.guuber.view.passenger.UpdateProfile"
             android:label="@string/title_activity_passengerupdate"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="edu.cmu.guuber.view.passenger.viewHistory"
+            android:name="edu.cmu.guuber.view.passenger.ViewHistory"
             android:label="@string/title_activity_transactionview"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="edu.cmu.guuber.view.passenger.findDriver"
+            android:name="edu.cmu.guuber.view.passenger.FindDriver"
             android:label="@string/title_activity_finddriver"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
