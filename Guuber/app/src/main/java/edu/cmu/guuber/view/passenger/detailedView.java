@@ -1,3 +1,4 @@
+package edu.cmu.guuber.view.passenger;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +9,7 @@ import android.widget.Button;
 
 import edu.cmu.guuber.guuber.R;
 
-public class detailedView extends AppCompatActivity {
+public class DetailedView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,7 @@ public class detailedView extends AppCompatActivity {
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent gotoViewHistory = new Intent(detailedView.this, viewHistory.class);
+            Intent gotoViewHistory = new Intent(DetailedView.this, ViewHistory.class);
             startActivity(gotoViewHistory);
         }
     };

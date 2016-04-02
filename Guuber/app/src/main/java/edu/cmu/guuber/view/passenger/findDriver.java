@@ -1,4 +1,4 @@
-package edu.cmu.guuber.view.driver;
+package edu.cmu.guuber.view.passenger;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import edu.cmu.guuber.guuber.R;
 import edu.cmu.guuber.view.common.WelcomeActivity;
 
 
-public class findDriver extends AppCompatActivity {
+public class FindDriver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,23 +26,23 @@ public class findDriver extends AppCompatActivity {
     View.OnClickListener findButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent findDriver = new Intent(findDriver.this, startService.class);
+            Intent findDriver = new Intent(FindDriver.this, StartService.class);
             startActivity(findDriver);
         }
     };
 
     public void updateProfile() {
-        Intent updateprofile = new Intent(findDriver.this, updateProfile.class);
+        Intent updateprofile = new Intent(FindDriver.this, UpdateProfile.class);
         startActivity(updateprofile);
     }
 
     public void viewHistory() {
-        Intent viewhistory = new Intent(findDriver.this, viewHistory.class);
+        Intent viewhistory = new Intent(FindDriver.this, ViewHistory.class);
         startActivity(viewhistory);
     }
 
     public void logOut() {
-        Intent logout = new Intent(findDriver.this, WelcomeActivity.class);
+        Intent logout = new Intent(FindDriver.this, WelcomeActivity.class);
         startActivity(logout);
     }
 }

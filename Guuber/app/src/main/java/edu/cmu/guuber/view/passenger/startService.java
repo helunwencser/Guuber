@@ -1,3 +1,5 @@
+package edu.cmu.guuber.view.passenger;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +9,7 @@ import android.widget.Button;
 
 import edu.cmu.guuber.guuber.R;
 
-public class startService extends AppCompatActivity {
+public class StartService extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,7 @@ public class startService extends AppCompatActivity {
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent goFindDriverPage = new Intent(startService.this, findDriver.class);
+            Intent goFindDriverPage = new Intent(StartService.this, FindDriver.class);
             startActivity(goFindDriverPage);
         }
     };
