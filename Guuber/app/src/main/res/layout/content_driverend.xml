@@ -35,5 +35,11 @@
         android:id="@+id/imageView2"
         android:src="@raw/map2"/>
 
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="End Service"
+        android:id="@+id/endButton"
+        android:onClick="start"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

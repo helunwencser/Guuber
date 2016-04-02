@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find Passenger"
-        android:id="@+id/findpassenger"
+        android:id="@+id/findButton"
         android:onClick="findpassenger"
         android:layout_gravity="center_horizontal" />
 
