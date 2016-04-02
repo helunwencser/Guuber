@@ -11,5 +11,24 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string-array name="drop_page">
+        <item>UserProfile</item>
+        <item>Transactions</item>
+        <item>Log out</item>
+    </string-array>
+
     <string name="title_activity_signin">Signin</string>
+    <string name="title_activity_driverend">End Service</string>
+    <string name="title_activity_driverstart">Start Service</string>
+    <string name="title_activity_driverupdate">Update Profile</string>
+    <string name="title_activity_driverview">View Transaction History</string>
+    <string name="title_activity_findpassenger">Find Passenger</string>
+
+
+    <string name="title_activity_passengerend">End Service</string>
+    <string name="title_activity_passengerstart">Start Service</string>
+    <string name="title_activity_passengerupdate">Update Profile</string>
+    <string name="title_activity_transactionview">View Transaction History</string>
+    <string name="title_activity_finddriver">Find Driver</string>
+
 </resources>

@@ -30,6 +30,46 @@
             android:name="edu.cmu.guuber.view.common.Signin"
             android:label="@string/title_activity_signin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.driver.EndService"
+            android:label="@string/title_activity_driverend"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.driver.StartService"
+            android:label="@string/title_activity_driverstart"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.driver.UpdateProfile"
+            android:label="@string/title_activity_driverupdate"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.driver.ViewHistory"
+            android:label="@string/title_activity_driverview"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.driver.FindPassenger"
+            android:label="@string/title_activity_findpassenger"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.endService"
+            android:label="@string/title_activity_passengerend"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.startService"
+            android:label="@string/title_activity_passengerstart"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.updateProfile"
+            android:label="@string/title_activity_passengerupdate"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.viewHistory"
+            android:label="@string/title_activity_transactionview"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.findDriver"
+            android:label="@string/title_activity_finddriver"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
