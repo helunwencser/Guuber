@@ -12,4 +12,10 @@
         <item>Female</item>
     </string-array>
     <string name="title_activity_signin">Signin</string>
+    <string name="title_activity_driverend">End Service</string>
+    <string name="title_activity_driverstart">Start Service</string>
+    <string name="title_activity_driverupdate">Update Profile</string>
+    <string name="title_activity_driverview">View Transaction History</string>
+    <string name="title_activity_findpassenger">Find Passenger</string>
+
 </resources>
