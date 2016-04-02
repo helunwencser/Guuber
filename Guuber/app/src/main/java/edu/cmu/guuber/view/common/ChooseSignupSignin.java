@@ -28,8 +28,7 @@ public class ChooseSignupSignin extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button signInButton = (Button)this.findViewById(R.id.signInButton);
-        Button signUpButton = (Button)this.findViewById(R.id.signUpButton);
+
     }
 
 }
