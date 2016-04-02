@@ -50,6 +50,26 @@
             android:name="edu.cmu.guuber.view.driver.FindPassenger"
             android:label="@string/title_activity_findpassenger"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.endService"
+            android:label="@string/title_activity_passengerend"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.startService"
+            android:label="@string/title_activity_passengerstart"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.updateProfile"
+            android:label="@string/title_activity_passengerupdate"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.viewHistory"
+            android:label="@string/title_activity_transactionview"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="edu.cmu.guuber.view.passenger.findDriver"
+            android:label="@string/title_activity_finddriver"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -24,4 +24,11 @@
     <string name="title_activity_driverview">View Transaction History</string>
     <string name="title_activity_findpassenger">Find Passenger</string>
 
+
+    <string name="title_activity_passengerend">End Service</string>
+    <string name="title_activity_passengerstart">Start Service</string>
+    <string name="title_activity_passengerupdate">Update Profile</string>
+    <string name="title_activity_transactionview">View Transaction History</string>
+    <string name="title_activity_finddriver">Find Driver</string>
+
 </resources>
