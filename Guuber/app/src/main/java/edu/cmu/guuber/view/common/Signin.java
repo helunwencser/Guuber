@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import edu.cmu.guuber.guuber.R;
+import edu.cmu.guuber.view.driver.FindPassenger;
+import edu.cmu.guuber.view.passenger.FindDriver;
 
 public class Signin extends AppCompatActivity {
 
@@ -19,8 +21,16 @@ public class Signin extends AppCompatActivity {
         /**
          * validate before start home page
          * */
-
-        Intent intent = new Intent(this, HomePage.class);
+        /**
+         * get user type from backend
+         * */
+        String userType = "";
+        Intent intent = null;
+        if(userType == "user") {
+            intent = new Intent(this, FindDriver.class);
+        } else {
+            intent = new Intent(this, FindPassenger.class);
+        }
         intent.putExtra("userName", userName);
         intent.putExtra("password", password);
         this.startActivity(intent);

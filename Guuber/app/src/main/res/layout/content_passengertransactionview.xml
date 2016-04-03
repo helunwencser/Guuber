@@ -12,40 +12,49 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="edu.cmu.guuber.view.passenger.viewHistory"
-    tools:showIn="@layout/activity_passengertransactionview">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/cancelButton"
-            android:onClick="cancel"
-            android:layout_gravity="center_horizontal" />
-        <TextView
-            android:layout_width="155dp"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Guuber"
-            android:gravity="center" />
-    </LinearLayout>
+    tools:showIn="@layout/activity_passengertransactionview"
+    android:gravity="center">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Click time to view details"
+        android:text="Guuber"
+        android:gravity="center"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Click to view details"
+            android:gravity="center" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:stackFromBottom="false" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Cancel"
+        android:id="@+id/cancelButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
         android:gravity="center" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:clickable="true"
-        android:textAlignment="center"
-        android:stackFromBottom="false" />
 </LinearLayout>

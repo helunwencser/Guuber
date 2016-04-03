@@ -12,34 +12,43 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="edu.cmu.guuber.view.driver.EndService"
-    tools:showIn="@layout/activity_driverend" android:weightSum="1">
+    tools:showIn="@layout/activity_driverend"
+    android:gravity="center">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Guuber"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:layout_weight="1"/>
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="In the Service"
-        android:gravity="center" />
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="5">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="In Service"
+            android:gravity="center" />
 
-    <ImageView
-        android:layout_width="352dp"
-        android:paddingTop="10dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@raw/map2"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:src="@raw/map2" />
+
+    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="End Service"
         android:id="@+id/endButton"
-        android:onClick="start"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"/>
 </LinearLayout>

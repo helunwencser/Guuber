@@ -12,38 +12,134 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="edu.cmu.guuber.view.passenger.detailedView"
-    tools:showIn="@layout/activity_passenger_detailed_view">
+    tools:showIn="@layout/activity_passenger_detailed_view"
+    android:gravity="center">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/cancelButton"
-            android:onClick="cancel"
-            android:layout_gravity="center_horizontal" />
-        <TextView
-            android:layout_width="155dp"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Guuber"
-            android:gravity="center" />
-    </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Drivers    Duration     Cost"
-        android:gravity="center" />
+        android:text="Guuber"
+        android:gravity="center"
+        android:layout_weight="1"/>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView2"
-        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Driver"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/transactionPassenger"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:hint="driver name"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Start Time"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/transactionStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:hint="start time"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="End Time"
+                android:gravity="center" />
+            <TextView
+                android:id="@+id/transactionEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:hint="end time"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Cost"
+                android:gravity="center" />
+            <TextView
+                android:id="@+id/transactionCost"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:hint="cost"
+                android:gravity="center" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Return"
+        android:id="@+id/returnButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"/>
 </LinearLayout>
