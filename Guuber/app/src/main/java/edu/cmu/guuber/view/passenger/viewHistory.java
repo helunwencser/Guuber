@@ -11,6 +11,8 @@ import edu.cmu.guuber.guuber.R;
 
 
 public class ViewHistory extends AppCompatActivity {
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,15 @@ public class ViewHistory extends AppCompatActivity {
 
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
+
+        listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(new ListViewAdapter());
+
+        listView.setOnItemClickListener(new OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                viewDetails(position);
+            }
+        });
     }
 
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
@@ -34,5 +45,12 @@ public class ViewHistory extends AppCompatActivity {
         Intent details = new Intent(ViewHistory.this, DetailedView.class);
         details.putExtra("transaction_id", transactionID);
         startActivity(details);
+    }
+
+
+
+
+    class ListViewAdapter extends BaseAdapter{
+
     }
 }
