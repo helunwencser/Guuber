@@ -133,12 +133,19 @@
 
     </LinearLayout>
 
-
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Return"
-        android:id="@+id/returnButton"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"/>
+        android:layout_weight="1">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Return"
+            android:id="@+id/returnButton"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
 </LinearLayout>

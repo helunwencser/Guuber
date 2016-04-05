@@ -36,7 +36,33 @@ public class UpdateProfile extends AppCompatActivity {
     View.OnClickListener saveButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            EditText userNameEditText = (EditText)findViewById(R.id.userName);
+            String userName = userNameEditText.getText().toString();
+
+            EditText passwordEditText = (EditText)findViewById(R.id.password);
+            String password = passwordEditText.getText().toString();
+
+            EditText retypePasswordEditText = (EditText)findViewById(R.id.retypePassword);
+            String retypePassword = retypePasswordEditText.getText().toString();
+
+            if(!password.equals(retypePassword)) {
+                return;
+            }
+
+            EditText emailEditText = (EditText)findViewById(R.id.email);
+            String email = emailEditText.getText().toString();
+
+
+            Spinner genderSpinner = (Spinner)findViewById(R.id.gender);
+            String gender = (String) genderSpinner.getSelectedItem();
+
+
+
             Intent saveChanged = new Intent(UpdateProfile.this, FindDriver.class);
+            saveChanged.putExtra("userName", userName);
+            saveChanged.putExtra("password", password);
+            saveChanged.putExtra("gender", gender);
+            saveChanged.putExtra("email", email);
             startActivity(saveChanged);
         }
     };

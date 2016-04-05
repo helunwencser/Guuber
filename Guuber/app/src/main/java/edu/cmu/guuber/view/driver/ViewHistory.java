@@ -33,6 +33,8 @@ public class ViewHistory extends AppCompatActivity {
         }
     };
 
+    // transactionID is based on user selection
+    // will add a click listener to get it in implementation stage
     public void viewDetails(int transactionID) {
         Intent details =
                 new Intent(ViewHistory.this, DetailedView.class);

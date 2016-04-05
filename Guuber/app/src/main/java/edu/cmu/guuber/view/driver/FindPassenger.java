@@ -20,6 +20,8 @@ public class FindPassenger extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Spinner dropSpinner = (Spinner)findViewById(R.id.drop_page);
+
         Button findButton =
                 (Button) findViewById(R.id.findButton);
         findButton.setOnClickListener(findButtonClicked);
@@ -35,6 +37,9 @@ public class FindPassenger extends AppCompatActivity {
         }
     };
 
+    // the following three methods are called based on user
+    // selection in the drop menu (Spinner)
+    // a click listener will be added to the Spinner during implementation phase
     public void updateProfile() {
         Intent update =
                 new Intent(FindPassenger.this, UpdateProfile.class);

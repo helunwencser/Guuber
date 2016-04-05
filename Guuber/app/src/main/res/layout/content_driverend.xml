@@ -44,11 +44,20 @@
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="End Service"
-        android:id="@+id/endButton"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Service"
+            android:id="@+id/endButton"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+
+    </LinearLayout>

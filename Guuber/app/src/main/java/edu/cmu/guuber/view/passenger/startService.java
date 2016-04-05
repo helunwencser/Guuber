@@ -18,8 +18,11 @@ public class StartService extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button cancelButton =
-                (Button) findViewById(R.id.cancelButton);
+                (Button) findViewById(R.id.cancel);
         cancelButton.setOnClickListener(cancelButtonClicked);
+
+        Button sendButton = (Button)findViewById(R.id.send);
+        sendButton.setOnClickListener(sendButtonClicked);
     }
 
 
@@ -30,4 +33,15 @@ public class StartService extends AppCompatActivity {
             startActivity(goFindDriverPage);
         }
     };
+
+    View.OnClickListener sendButtonClicked = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            EditText input = (EditText)findViewById(R.id.input);
+            String message = input.getText().toString();
+            TextView display = (TextView)findViewById(R.id.textView);
+            display.append(message);
+            input.setText("");
+        }
+    }
 }

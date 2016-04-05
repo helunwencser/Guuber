@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
 
@@ -25,6 +27,10 @@ public class StartService extends AppCompatActivity {
         Button cancelButton =
                 (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
+
+        Button sendButton =
+                (Button) findViewById(R.id.sendButton);
+        cancelButton.setOnClickListener(sendButtonClicked);
     }
 
 
@@ -45,6 +51,19 @@ public class StartService extends AppCompatActivity {
                     new Intent(StartService.this, FindPassenger.class);
 
             startActivity(goBack);
+        }
+    };
+
+    View.OnClickListener sendButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            EditText inputEditText = (EditText)findViewById(R.id.input);
+            String input = inputEditText.getText().toString();
+
+            TextView display = (TextView) findViewById(R.id.textView);
+            display.append(input); // append message to the chat screen
+
+            inputEditText.setText(""); // empty the input box
         }
     };
 }
