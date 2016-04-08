@@ -17,3 +17,4 @@ android:
     
 notifications:
   slack: guuber:5so8pzD4T3JEWdWcGKWQ61GK
+  email: false
