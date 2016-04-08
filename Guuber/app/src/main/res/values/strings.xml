@@ -29,5 +29,6 @@
     <string name="title_activity_passengerupdate">Update Profile</string>
     <string name="title_activity_transactionview">View Transaction History</string>
     <string name="title_activity_finddriver">Find Driver</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
 
 </resources>
