@@ -1,4 +1,4 @@
-# Guuber
+# Guuber [![Build Status](https://travis-ci.org/helunwencser/Guuber.svg?branch=master)](https://travis-ci.org/helunwencser/Guuber)
 
 Android Application for Drivers/Passengers to find Passengers/Drivers
 
