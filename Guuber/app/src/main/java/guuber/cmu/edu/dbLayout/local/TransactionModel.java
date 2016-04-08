@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 
 /**
- * This class defines the model of local database
+ * This class defines the model of transaction
  * */
 public class TransactionModel implements BaseColumns{
     public static String TABLE_NAME = "transaction_table";

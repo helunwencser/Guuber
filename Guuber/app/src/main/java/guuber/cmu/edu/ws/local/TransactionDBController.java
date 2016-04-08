@@ -54,13 +54,12 @@ public class TransactionDBController {
      *
      * @return the list of transaction
      * */
-    public List<Transaction> selectByDriver(String driver) {
+    public List<Transaction> selectTransactionsByDriver(String driver) {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
 
         String[] projection = {
-                TransactionModel._ID,
                 TransactionModel.DRIVER,
                 TransactionModel.PASSENGER,
                 TransactionModel.START_TIME,
@@ -106,7 +105,7 @@ public class TransactionDBController {
      *
      * @return the list of transaction
      * */
-    public List<Transaction> selectByPassenger(String passenger) {
+    public List<Transaction> selectTransactionsByPassenger(String passenger) {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();

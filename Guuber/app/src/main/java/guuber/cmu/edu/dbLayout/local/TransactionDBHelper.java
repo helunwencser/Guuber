@@ -5,11 +5,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import guuber.cmu.edu.dbLayout.DBConfig;
-import guuber.cmu.edu.entities.Transaction;
 
 /**
  * Created by lunwenh on 4/8/2016.
  */
+
+/**
+ * This class defines the table of transaction
+ * */
 public class TransactionDBHelper extends SQLiteOpenHelper {
 
     private static final String INT_TYPE = " INTEGER";
