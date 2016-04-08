@@ -14,3 +14,6 @@ android:
     # Support library
     - extra-android-support
     - extra-android-m2repository
+    
+notifications:
+  slack: guuber:5so8pzD4T3JEWdWcGKWQ61GK
