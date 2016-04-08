@@ -73,6 +73,14 @@
         <activity
             android:name="guuber.cmu.edu.activities.common.SignUpActivity"
             android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.FindPassengerActivity"
+            android:label="@string/title_activity_find_passenger"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.FindDriverActivity"
+            android:label="@string/title_activity_find_driver"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

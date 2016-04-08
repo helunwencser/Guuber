@@ -30,5 +30,7 @@
     <string name="title_activity_transactionview">View Transaction History</string>
     <string name="title_activity_finddriver">Find Driver</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_find_passenger">FindPassengerActivity</string>
+    <string name="title_activity_find_driver">FindDriverActivity</string>
 
 </resources>

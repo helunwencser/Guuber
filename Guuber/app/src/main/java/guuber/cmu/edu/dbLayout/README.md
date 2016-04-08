@@ -1,0 +1,1 @@
+This package contains all database related definition, like database table schema, database CRUD operations.
