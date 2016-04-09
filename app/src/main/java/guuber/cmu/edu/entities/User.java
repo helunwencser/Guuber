@@ -34,7 +34,7 @@ public class User implements Serializable{
     private String userType;
     private String emailAddress;
     private String gender;
-    private int carId;
+    private String carId;
 
 
 
@@ -61,7 +61,7 @@ public class User implements Serializable{
         }
     }
 
-    public User(int userID, String userName, String passWord, String userType, String emailAddress, String gender, int carId) throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
+    public User(int userID, String userName, String passWord, String userType, String emailAddress, String gender, String carId) throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         this.userID = userID;
         this.userName = userName;
         this.passWord = passWord;
@@ -144,11 +144,11 @@ public class User implements Serializable{
         this.gender = gender;
     }
 
-    public int getCarId() {
+    public String getCarId() {
         return carId;
     }
 
-    public void setCarId(int carId) {
+    public void setCarId(String carId) {
         this.carId = carId;
     }
 }

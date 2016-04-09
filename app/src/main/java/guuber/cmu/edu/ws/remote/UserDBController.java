@@ -103,7 +103,7 @@ public class UserDBController {
         return true;
     }
 
-    public User getInfo(String userName) {
+    public User getInfo(String userName) throws Exception {
         String query = "SELECT * FROM " + UserModel.TABLE_NAME + " WHERE " + UserModel.USERNAME
                 + " = '" + userName + "'";
         open();
@@ -117,7 +117,9 @@ public class UserDBController {
             String gender = cursor.getString(4);
             String email = cursor.getString(5);
             String carID = cursor.getString(6);
+
             user = new User(id, userName, password, userType, gender, email, carID);
+
         }
         return user;
     }
