@@ -7,10 +7,27 @@ package guuber.cmu.edu.entities;
  * This class defines one message
  * */
 public class Message {
+    private int messageID;
     private String sender;
     private String receiver;
     private String content;
     private String timeStamp;
+
+    public int getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(int messageID) {
+        this.messageID = messageID;
+    }
+
+    public Message(int messageID, String sender, String receiver, String content, String timeStamp) {
+        this.messageID = messageID;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.content = content;
+        this.timeStamp = timeStamp;
+    }
 
     public Message(
             String sender,
