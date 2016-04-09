@@ -19,82 +19,28 @@ public class User implements Serializable{
 
     private static final long serialVersionUID = 2016010101L;//cant find how to generate it in android studio
 
-
-
-    private static KeyGenerator keyGen;
-    private static SecretKey desKey;
-    private static Cipher cipher;
-
-
-
-    private int userID;
     private String userName;
     private transient String passWord;
-    private byte[] cipherByte;
     private String userType;
     private String emailAddress;
     private String gender;
     private String carId;
 
-
-
-    static {
-        desKey =  keyGen.generateKey();
-    }
-
-
-    static {
-        try {
-            keyGen = KeyGenerator.getInstance("DESede");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static {
-        try {
-             cipher = Cipher.getInstance("DESede");
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-        }
-    }
-
-    public User(int userID, String userName, String passWord, String userType, String emailAddress, String gender, String carId) throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
-        this.userID = userID;
+    public User(
+            String userName,
+            String passWord,
+            String userType,
+            String emailAddress,
+            String gender,
+            String carId
+    ) {
         this.userName = userName;
         this.passWord = passWord;
         this.userType = userType;
         this.emailAddress = emailAddress;
         this.gender = gender;
         this.carId = carId;
-        this.cipherByte = encrytor(passWord);
     }
-
-
-
-    private byte[] encrytor(String str) throws InvalidKeyException,
-            IllegalBlockSizeException, BadPaddingException {
-
-        cipher.init(Cipher.ENCRYPT_MODE, desKey);
-        byte[] src = str.getBytes();
-        cipherByte = cipher.doFinal(src);
-        return cipherByte;
-    }
-
-
-    private byte[] decryptor(byte[] buff) throws InvalidKeyException,
-            IllegalBlockSizeException, BadPaddingException {
-
-        cipher.init(Cipher.DECRYPT_MODE, desKey);
-        cipherByte = cipher.doFinal(buff);
-        return cipherByte;
-    }
-
-
-
-
 
     public int getUserID() {
         return userID;

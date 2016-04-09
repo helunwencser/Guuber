@@ -8,24 +8,6 @@ package guuber.cmu.edu.entities;
  * This class defines one transaction
  * */
 public class Transaction {
-    public Transaction(int transactionID, String driver, String passenger, String startTime, String endTime, String startLocation, String endLocation, int cost) {
-        this.transactionID = transactionID;
-        this.driver = driver;
-        this.passenger = passenger;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.cost = cost;
-    }
-
-    public int getTransactionID() {
-        return transactionID;
-    }
-
-    public void setTransactionID(int transactionID) {
-        this.transactionID = transactionID;
-    }
 
     private int transactionID;
     private String driver;
