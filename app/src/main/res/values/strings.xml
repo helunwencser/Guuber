@@ -17,6 +17,14 @@
         <item>Log out</item>
     </string-array>
 
+
+    <string name="SignIn">Sign In</string>
+    <string name="SignUp">Sign Up</string>
+
+
+
+
+
     <string name="title_activity_signin">Signin</string>
     <string name="title_activity_driverend">End Service</string>
     <string name="title_activity_driverstart">Start Service</string>

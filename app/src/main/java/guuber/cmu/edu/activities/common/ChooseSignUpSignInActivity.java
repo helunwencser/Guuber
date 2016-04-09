@@ -15,14 +15,14 @@ public class ChooseSignUpSignInActivity extends AppCompatActivity {
 
     public void chooseSignupSignin(View view) {
         Intent intent = null;
+        ChooseSignInSignUpIntent chooseSignInSignUpIntent = null;
         if(view == findViewById(R.id.signInButton)) {
-            ChooseSignInSignUpIntent chooseSignInSignUpIntent = new ChooseSignInSignUpIntent(0,this, SignUpActivity.class,SignInActivity.class);
-            intent = chooseSignInSignUpIntent.getIntent();
-        } else {
-            ChooseSignInSignUpIntent chooseSignInSignUpIntent = new ChooseSignInSignUpIntent(1,this, SignUpActivity.class,SignInActivity.class);
-            intent = chooseSignInSignUpIntent.getIntent();
-        }
+             chooseSignInSignUpIntent = new ChooseSignInSignUpIntent(0,this, SignUpActivity.class,SignInActivity.class);
 
+        } else {
+             chooseSignInSignUpIntent = new ChooseSignInSignUpIntent(1,this, SignUpActivity.class,SignInActivity.class);
+        }
+        intent = chooseSignInSignUpIntent.getIntent();
         this.startActivity(intent);
     }
 

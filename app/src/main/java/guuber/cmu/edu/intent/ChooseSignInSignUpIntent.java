@@ -28,10 +28,10 @@ public class ChooseSignInSignUpIntent  {
             intent = new Intent(from,to);
         }*/
         if(switches == 0){
-            Intent intent = new Intent(chooseSignUpSignInActivity,signUpActivityClass);
+             intent = new Intent(chooseSignUpSignInActivity,signUpActivityClass);
         }
         if(switches == 1){
-            Intent intent = new Intent(chooseSignUpSignInActivity,signInActivityClass);
+             intent = new Intent(chooseSignUpSignInActivity,signInActivityClass);
         }
 
     }
