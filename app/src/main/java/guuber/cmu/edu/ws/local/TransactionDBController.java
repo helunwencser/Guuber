@@ -54,7 +54,7 @@ public class TransactionDBController {
      *
      * @return the list of transaction
      * */
-    public List<Transaction> selectTransactionsByDriver(String driver) {
+    public Cursor selectTransactionsByDriver(String driver) {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
@@ -95,7 +95,7 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
-        return res;
+        return cursor;
     }
 
     /**
@@ -105,7 +105,7 @@ public class TransactionDBController {
      *
      * @return the list of transaction
      * */
-    public List<Transaction> selectTransactionsByPassenger(String passenger) {
+    public Cursor selectTransactionsByPassenger(String passenger) {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
@@ -147,6 +147,6 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
-        return res;
+        return cursor;
     }
 }

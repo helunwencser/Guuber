@@ -42,14 +42,6 @@ public class User implements Serializable{
         this.carId = carId;
     }
 
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
     public String getUserName() {
         return userName;
     }

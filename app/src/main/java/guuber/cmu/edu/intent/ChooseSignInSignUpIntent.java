@@ -14,29 +14,13 @@ public class ChooseSignInSignUpIntent  {
 
     private Intent intent;
     private final ChooseSignUpSignInActivity chooseSignUpSignInActivity;
-    private final Class<SignUpActivity> signUpActivityClass;
-    private final Class<SignInActivity> signInActivityClass;
 
-
-
-
-    public ChooseSignInSignUpIntent(int switches,ChooseSignUpSignInActivity chooseSignUpSignInActivity, Class<SignUpActivity> signUpActivityClass,Class<SignInActivity> signInActivityClass) {
+    public ChooseSignInSignUpIntent(ChooseSignUpSignInActivity chooseSignUpSignInActivity, Class signClass) {
         this.chooseSignUpSignInActivity = chooseSignUpSignInActivity;
-        this.signUpActivityClass = signUpActivityClass;
-        this.signInActivityClass = signInActivityClass;
-        /*if(from instanceof guuber.cmu.edu.activities.common.ChooseSignUpSignInActivity && to instanceof guuber.cmu.edu.activities.common.SignInActivity){
-            intent = new Intent(from,to);
-        }*/
-        if(switches == 0){
-             intent = new Intent(chooseSignUpSignInActivity,signUpActivityClass);
-        }
-        if(switches == 1){
-             intent = new Intent(chooseSignUpSignInActivity,signInActivityClass);
-        }
+
+        intent = new Intent(chooseSignUpSignInActivity,signClass);
 
     }
-
-
 
     public Intent getIntent() {
 

@@ -11,7 +11,7 @@
     android:background="@android:color/holo_blue_light"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.cmu.guuber.view.common.ChooseSignUpSignInActivity"
+    tools:context="guuber.cmu.edu.activities.common.ChooseSignUpSignInActivity"
     android:gravity="center">
 
     <TextView
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign In"
-            android:id="@+id/signInButton"
+            android:id="@+id/common_signInButton"
             android:onClick="chooseSignupSignin"/>
 
     </LinearLayout>
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Up"
-            android:id="@+id/signUpButton"
+            android:id="@+id/common_signUpButton"
             android:onClick="chooseSignupSignin"/>
 
     </LinearLayout>
