@@ -4,8 +4,8 @@
     <string name="title_activity_choose_signup_signin">ChooseSignupSignin</string>
     <string name="title_activity_signup">Signup</string>
     <string-array name="user_type">
-        <item>Driver</item>
-        <item>Passenger</item>
+        <item><string name="type_driver">Driver</string></item>
+        <item><string name="type_passenger">Passenger</string></item>
     </string-array>
     <string-array name="gender">
         <item>Male</item>

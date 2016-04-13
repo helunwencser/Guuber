@@ -13,29 +13,37 @@ import guuber.cmu.edu.intent.ChooseSignInSignUpIntent;
  */
 public class ChooseSignUpSignInActivity extends AppCompatActivity {
 
-    public void chooseSignupSignin(View view) {
-        Intent intent = null;
-        ChooseSignInSignUpIntent chooseSignInSignUpIntent = null;
-        if(view == findViewById(R.id.signInButton)) {
-             chooseSignInSignUpIntent = new ChooseSignInSignUpIntent(0,this, SignUpActivity.class,SignInActivity.class);
-
-        } else {
-             chooseSignInSignUpIntent = new ChooseSignInSignUpIntent(1,this, SignUpActivity.class,SignInActivity.class);
-        }
-        intent = chooseSignInSignUpIntent.getIntent();
-        this.startActivity(intent);
-    }
+    private ChooseSignInSignUpIntent intentWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_choose_signup_signin);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        Button signInButton =
+                (Button) findViewById(R.id.common_signInButton);
+        signInButton.setOnClickListener(signInButtonClicked);
+
+        Button signUpButton =
+                (Button) findViewById(R.id.common_signUpButton);
+        signUpButton.setOnClickListener(signUpButtonClicked);
 
     }
 
 
+    View.OnClickListener signInButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            intentWrapper = new ChooseSignInSignUpIntent(ChooseSignUpSignInActivity.this, SignInActivity.class);
+            startActivity(intentWrapper.getIntent());
+        }
+    };
 
+    View.OnClickListener signUpButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            intentWrapper = new ChooseSignInSignUpIntent(ChooseSignUpSignInActivity.this, SignUpActivity.class);
+            startActivity(intentWrapper.getIntent());
+        }
+    };
 }

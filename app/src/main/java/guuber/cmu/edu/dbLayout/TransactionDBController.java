@@ -1,4 +1,4 @@
-package guuber.cmu.edu.ws.local;
+package guuber.cmu.edu.dbLayout;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import guuber.cmu.edu.dbLayout.local.TransactionDBHelper;
-import guuber.cmu.edu.dbLayout.local.TransactionModel;
 import guuber.cmu.edu.entities.Transaction;
 
 /**
