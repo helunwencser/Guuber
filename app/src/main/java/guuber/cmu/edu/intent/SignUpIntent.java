@@ -2,49 +2,39 @@ package guuber.cmu.edu.intent;
 
 import android.content.Intent;
 
-import guuber.cmu.edu.activities.common.ChooseSignUpSignInActivity;
-import guuber.cmu.edu.activities.common.SignInActivity;
 import guuber.cmu.edu.activities.common.SignUpActivity;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 
 /**
- * Created by wangziming on 4/9/16.
+ * Created by Yanning on 4/9/16.
  */
-public class SignInIntent {
-
+public class SignUpIntent {
     private Intent intent;
-    private final SignInActivity signInActivity;
+    private final SignUpActivity signUpActivity;
     private final Class<FindDriverActivity> findDriverActivityClass;
     private final Class<FindPassengerActivity> findPassengerActivityClass;
 
-
-
-
-    public SignInIntent(int switches,SignInActivity signInActivity,
+    public SignUpIntent(int switches, SignUpActivity signUpActivity,
                         Class<FindDriverActivity> findDriverActivityClass,
                         Class<FindPassengerActivity> findPassengerActivityClass,
                         String userName) {
-        this.signInActivity = signInActivity;
+        this.signUpActivity = signUpActivity;
         this.findDriverActivityClass = findDriverActivityClass;
         this.findPassengerActivityClass = findPassengerActivityClass;
         /*if(from instanceof guuber.cmu.edu.activities.common.ChooseSignUpSignInActivity && to instanceof guuber.cmu.edu.activities.common.SignInActivity){
             intent = new Intent(from,to);
         }*/
         if(switches == 1){
-             intent = new Intent(signInActivity,findDriverActivityClass);
+            intent = new Intent(signUpActivity,findDriverActivityClass);
         }
         if(switches == 0){
-             intent = new Intent(signInActivity,findPassengerActivityClass);
+            intent = new Intent(signUpActivity,findPassengerActivityClass);
         }
         intent.putExtra("userName", userName);
-
     }
 
-
-
     public Intent getIntent() {
-
         return intent;
     }
 

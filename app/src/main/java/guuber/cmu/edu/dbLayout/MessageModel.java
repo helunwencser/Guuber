@@ -1,4 +1,4 @@
-package guuber.cmu.edu.dbLayout.local;
+package guuber.cmu.edu.dbLayout;
 
 import android.provider.BaseColumns;
 
