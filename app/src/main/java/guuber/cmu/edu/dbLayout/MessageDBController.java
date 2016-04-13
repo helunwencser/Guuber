@@ -1,4 +1,4 @@
-package guuber.cmu.edu.ws.local;
+package guuber.cmu.edu.dbLayout;
 
 /**
  * Created by lunwenh on 4/8/2016.
@@ -12,8 +12,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import guuber.cmu.edu.dbLayout.local.MessageDBHelper;
-import guuber.cmu.edu.dbLayout.local.MessageModel;
 import guuber.cmu.edu.entities.Message;
 
 /**

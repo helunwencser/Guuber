@@ -13,9 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.dbLayout.local.TransactionModel;
+import guuber.cmu.edu.dbLayout.TransactionModel;
 import guuber.cmu.edu.intent.PassengerViewHistoryIntent;
-import guuber.cmu.edu.ws.local.TransactionDBController;
+import guuber.cmu.edu.dbLayout.TransactionDBController;
 
 /**
  * Created by wangziming on 4/9/16.

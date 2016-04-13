@@ -1,4 +1,4 @@
-package guuber.cmu.edu.ws.local;
+package guuber.cmu.edu.dbLayout;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import guuber.cmu.edu.dbLayout.local.TransactionDBHelper;
-import guuber.cmu.edu.dbLayout.local.TransactionModel;
 import guuber.cmu.edu.entities.Transaction;
 
 /**
@@ -54,7 +52,7 @@ public class TransactionDBController {
      *
      * @return the list of transaction
      * */
-    public Cursor selectTransactionsByDriver(String driver) {
+    public List<Transaction> selectTransactionsByDriver(String driver) {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
@@ -95,7 +93,7 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
-        return cursor;
+        return res;
     }
 
     /**
@@ -105,7 +103,7 @@ public class TransactionDBController {
      *
      * @return the list of transaction
      * */
-    public Cursor selectTransactionsByPassenger(String passenger) {
+    public List<Transaction> selectTransactionsByPassenger(String passenger) {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
@@ -147,6 +145,6 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
-        return cursor;
+        return res;
     }
 }
