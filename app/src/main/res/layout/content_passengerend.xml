@@ -41,7 +41,7 @@
                 android:paddingTop="10dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView2"
-                android:src="@raw/map5"/>
+                android:src="@raw/Passenger_In_Service_Example_HDPI"/>
     </LinearLayout>
 
     <LinearLayout

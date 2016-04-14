@@ -19,17 +19,6 @@ public class Message {
         this.timeStamp = timeStamp;
     }
 
-    public Message(
-            String sender,
-            String receiver,
-            String content,
-            String timeStamp
-    ) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.content = content;
-        this.timeStamp = timeStamp;
-    }
 
     public String getSender() {
         return sender;
