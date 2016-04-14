@@ -1,4 +1,4 @@
-package guuber.cmu.edu.dbLayout.local;
+package guuber.cmu.edu.dbLayout;
 
 /**
  * Created by lunwenh on 4/8/2016.
@@ -7,8 +7,6 @@ package guuber.cmu.edu.dbLayout.local;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import guuber.cmu.edu.dbLayout.DBConfig;
 
 /**
  * This class defines the table of message

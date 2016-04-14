@@ -42,7 +42,10 @@ public class User implements Serializable{
         this.carId = carId;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f4be038ac09c7f4171862690675e10ccda0c8435
     public String getUserName() {
         return userName;
     }
