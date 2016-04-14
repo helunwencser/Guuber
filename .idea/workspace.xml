@@ -30,6 +30,8 @@
       <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/raw/map2.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi-1920*1080/Navagation_Example_HDPI.png" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/raw/map3.jpeg" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi-1920*1080/Driver_In_Service_Example_HDPI.jpeg" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/raw/map5.jpeg" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi-1920*1080/Passenger_In_Service_Example_HDPI.jpeg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Message.java" afterPath="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Message.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/User.java" afterPath="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_driverend.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_driverend.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_driverstart.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_driverstart.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_passengerend.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_passengerend.xml" />
@@ -57,13 +59,6 @@
     <leaf>
       <file leaf-file-name="Driver_In_Service_Example_MDPI.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi-1280*720/Driver_In_Service_Example_MDPI.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Driver_In_Service_Example_HDPI.jpeg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi-1920*1080/Driver_In_Service_Example_HDPI.jpeg">
           <provider selected="true" editor-type-id="images">
             <state />
           </provider>
@@ -97,10 +92,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Passenger_In_Service_Example_MDPI.png" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Passenger_In_Service_Example_MDPI.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi-1280*720/Passenger_In_Service_Example_MDPI.png">
           <provider selected="true" editor-type-id="images">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Message.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Message.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.41584158">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Transaction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Transaction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -1722,10 +1747,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/activities/common/SignInActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/ws/remote/UserDBController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/dbLayout/local/MessageModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Message.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Transaction.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/dbLayout/server/UserModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Message.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/User.java" />
       </list>
     </option>
   </component>
@@ -1747,7 +1772,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -1797,6 +1822,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="edu" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Guuber" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2371,6 +2418,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2035928">
           <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2387,27 +2435,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Transaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9328063">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03359684">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2511,6 +2538,30 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi-1280*720/Passenger_In_Service_Example_MDPI.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Transaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/guuber/cmu/edu/entities/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41584158">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
