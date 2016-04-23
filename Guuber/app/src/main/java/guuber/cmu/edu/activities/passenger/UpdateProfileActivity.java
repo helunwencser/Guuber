@@ -18,14 +18,12 @@ import guuber.cmu.edu.entities.User;
  * Created by wangziming on 4/9/16.
  */
 public class UpdateProfileActivity extends AppCompatActivity {
-
+/*
     private EditText userNameEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
     private Spinner genderSpinner;
     private EditText emailEditText;
-
-    private PassengerUpdateIntent intentWrapper;
 
     // password must contain 8 to 20 characters
     // it must contain at least one uppercase, one lowercase, one digit,
@@ -139,7 +137,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     };
 
     private void toHome() {
-        intentWrapper = new PassengerUpdateIntent(UpdateProfileActivity.this, FindDriverActivity.class);
-        this.startActivity(intentWrapper.getIntent());
-    }
+//        intentWrapper = new PassengerUpdateIntent(UpdateProfileActivity.this, FindDriverActivity.class);
+ //       this.startActivity(intentWrapper.getIntent());
+    }*/
 }

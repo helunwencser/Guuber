@@ -26,8 +26,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText carIDEditText;
 
-    private SignUpIntent intentWrapper;
-
     // password must contain 8 to 20 characters
     // it must contain at least one uppercase, one lowercase, one digit,
     // one special character (@#$%!)
@@ -50,10 +48,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         Button signUpButton =
                 (Button) findViewById(R.id.SignUp_signUpButton);
-        signUpButton.setOnClickListener(signUpButtonClicked);
+//        signUpButton.setOnClickListener(signUpButtonClicked);
     }
 
-    View.OnClickListener signUpButtonClicked = new View.OnClickListener() {
+/*    View.OnClickListener signUpButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (validateCompleteness()) {
@@ -149,5 +147,5 @@ public class SignUpActivity extends AppCompatActivity {
         builder.setMessage(message);
         builder.setPositiveButton(button, null);
         builder.show(); // display the Dialog
-    }
+    }*/
 }

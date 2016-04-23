@@ -19,7 +19,7 @@ import guuber.cmu.edu.entities.User;
  * Created by wangziming on 4/9/16.
  */
 public class UpdateProfileActivity extends AppCompatActivity {
-
+/*
     private EditText userNameEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
@@ -27,7 +27,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText carIDEditText;
 
-    private DriverUpdateIntent intentWrapper;
 
     // password must contain 8 to 20 characters
     // it must contain at least one uppercase, one lowercase, one digit,
@@ -143,7 +142,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     };
 
     private void toHome() {
-        intentWrapper = new DriverUpdateIntent(UpdateProfileActivity.this, FindPassengerActivity.class);
-        this.startActivity(intentWrapper.getIntent());
-    }
+    //    intentWrapper = new DriverUpdateIntent(UpdateProfileActivity.this, FindPassengerActivity.class);
+//        this.startActivity(intentWrapper.getIntent());
+    }*/
 }

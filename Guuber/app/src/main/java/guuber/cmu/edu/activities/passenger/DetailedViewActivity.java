@@ -12,8 +12,6 @@ import edu.cmu.guuber.guuber.R;
  */
 public class DetailedViewActivity extends AppCompatActivity {
 
-    private PassengerDetailedViewIntent intentWrapper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,10 +19,10 @@ public class DetailedViewActivity extends AppCompatActivity {
 
         Button returnButton =
                 (Button) findViewById(R.id.passenger_detailed_returnButton);
-        returnButton.setOnClickListener(returnButtonClicked);
+//        returnButton.setOnClickListener(returnButtonClicked);
     }
 
-    View.OnClickListener returnButtonClicked = new View.OnClickListener() {
+/*    View.OnClickListener returnButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             toHistory();
@@ -34,5 +32,5 @@ public class DetailedViewActivity extends AppCompatActivity {
     public void toHistory() {
         intentWrapper = new PassengerDetailedViewIntent(DetailedViewActivity.this, ViewHistoryActivity.class);
         this.startActivity(intentWrapper.getIntent());
-    }
+    }*/
 }

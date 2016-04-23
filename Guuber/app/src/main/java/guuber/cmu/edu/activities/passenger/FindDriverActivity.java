@@ -10,7 +10,6 @@ import edu.cmu.guuber.guuber.R;
 
 public class FindDriverActivity extends AppCompatActivity {
 
-    private FindDriverIntent intentWrapper;
     private Spinner userSpinner;
 
     @Override
@@ -18,20 +17,5 @@ public class FindDriverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.passenger_activity_find_driver);
 
-        userSpinner = (Spinner) findViewById(R.id.passenger_find_drop_page);
-
-        userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                intentWrapper = new FindDriverIntent(FindDriverActivity.this, position);
-                FindDriverActivity.this.startActivity(intentWrapper.getIntent());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
-
 }

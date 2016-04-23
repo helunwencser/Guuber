@@ -20,7 +20,6 @@ import guuber.cmu.edu.dbLayout.TransactionDBController;
  * Created by wangziming on 4/9/16.
  */
 public class ViewHistoryActivity extends AppCompatActivity {
-    private DriverViewHistoryIntent intentWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +32,16 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
         String driver = "";
 
-        MyAdapter adapter = new MyAdapter(this, db.selectTransactionsByDriver(driver));
+/*        MyAdapter adapter = new MyAdapter(this, db.selectTransactionsByDriver(driver));
 
         historyList.setAdapter(adapter);
 
         Button cancelButton =
                 (Button) findViewById(R.id.driver_view_cancelButton);
-        cancelButton.setOnClickListener(cancelButtonClicked);
+        cancelButton.setOnClickListener(cancelButtonClicked);*/
     }
 
-    View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
+    /*View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             toHome();
@@ -78,5 +77,5 @@ public class ViewHistoryActivity extends AppCompatActivity {
             start.setText(startLoc + "   ");
             end.setText(endLoc);
         }
-    }
+    }*/
 }
