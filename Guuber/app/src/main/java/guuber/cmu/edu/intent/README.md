@@ -1,1 +1,0 @@
-This package contains all customized exception classes for handling exceptions.

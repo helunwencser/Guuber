@@ -1,1 +1,0 @@
-This package contains classes for remote web services like interacting with backend server.
