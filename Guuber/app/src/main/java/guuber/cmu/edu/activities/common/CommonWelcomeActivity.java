@@ -43,7 +43,7 @@ public class CommonWelcomeActivity extends AppCompatActivity {
     private void reloadCarImage() {
         Message message = new Message();
         message.what = UPDATE_IMAGE;
-        handler.sendMessageDelayed(message, 3000);
+        handler.sendMessageDelayed(message, 1000);
     }
 
     @Override

@@ -15,7 +15,6 @@ import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
-import guuber.cmu.edu.intent.SignUpIntent;
 
 public class SignUpActivity extends AppCompatActivity {
 

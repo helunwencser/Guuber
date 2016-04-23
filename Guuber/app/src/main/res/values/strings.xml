@@ -41,5 +41,6 @@
     <string name="title_activity_find_passenger">FindPassengerActivity</string>
     <string name="title_activity_find_driver">FindDriverActivity</string>
     <string name="title_activity_common_welcome">CommonWelcomeActivity</string>
+    <string name="title_activity_common_sign_in_sign_up">CommonSignInSignUpActivity</string>
 
 </resources>

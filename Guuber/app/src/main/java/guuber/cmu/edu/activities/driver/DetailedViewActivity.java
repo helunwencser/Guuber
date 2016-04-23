@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.intent.DriverDetailedViewIntent;
 
 /**
  * Created by wangziming on 4/9/16.

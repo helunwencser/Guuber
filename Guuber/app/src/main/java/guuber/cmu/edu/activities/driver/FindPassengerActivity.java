@@ -1,16 +1,12 @@
 package guuber.cmu.edu.activities.driver;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.intent.FindPassengerIntent;
 
 public class FindPassengerActivity extends AppCompatActivity {
 

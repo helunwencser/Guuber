@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.entities.User;
-import guuber.cmu.edu.intent.DriverUpdateIntent;
 
 
 /**

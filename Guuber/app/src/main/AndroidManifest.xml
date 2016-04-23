@@ -9,10 +9,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="guuber.cmu.edu.activities.common.ChooseSignUpSignInActivity"
-            android:label="@string/title_activity_choose_signup_signin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name="guuber.cmu.edu.activities.common.SignUpActivity"
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -71,6 +67,10 @@
         <activity
             android:name="guuber.cmu.edu.activities.common.CommonWelcomeActivity"
             android:label="@string/title_activity_common_welcome"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.common.CommonSignInSignUpActivity"
+            android:label="@string/title_activity_common_sign_in_sign_up"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

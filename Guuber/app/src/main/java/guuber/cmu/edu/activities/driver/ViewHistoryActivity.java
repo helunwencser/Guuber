@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.dbLayout.TransactionModel;
-import guuber.cmu.edu.intent.DriverViewHistoryIntent;
 import guuber.cmu.edu.dbLayout.TransactionDBController;
 
 /**

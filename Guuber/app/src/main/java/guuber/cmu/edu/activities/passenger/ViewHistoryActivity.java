@@ -1,27 +1,12 @@
 package guuber.cmu.edu.activities.passenger;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CursorAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.dbLayout.TransactionModel;
-import guuber.cmu.edu.intent.PassengerViewHistoryIntent;
-import guuber.cmu.edu.dbLayout.TransactionDBController;
 
 /**
  * Created by wangziming on 4/9/16.
  */
 public class ViewHistoryActivity extends AppCompatActivity {
-
+/*
     private PassengerViewHistoryIntent intentWrapper;
 
     @Override
@@ -80,5 +65,5 @@ public class ViewHistoryActivity extends AppCompatActivity {
             start.setText(startLoc + "   ");
             end.setText(endLoc);
         }
-    }
+    }*/
 }
