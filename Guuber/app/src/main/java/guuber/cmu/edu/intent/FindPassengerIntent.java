@@ -2,6 +2,7 @@ package guuber.cmu.edu.intent;
 
 import android.content.Intent;
 
+import guuber.cmu.edu.activities.common.CommonWelcomeActivity;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.driver.UpdateProfileActivity;
 import guuber.cmu.edu.activities.driver.ViewHistoryActivity;
@@ -24,7 +25,7 @@ public class FindPassengerIntent {
                 intent = new Intent(findPassengerActivity, ViewHistoryActivity.class);
                 break;
             case 2: // Log out
-                intent = new Intent(findPassengerActivity, WelcomeActivity.class);
+                intent = new Intent(findPassengerActivity, CommonWelcomeActivity.class);
                 break;
         }
     }
