@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
 
@@ -21,20 +22,29 @@ public class CommonWelcomeActivity extends AppCompatActivity {
             R.drawable.start_background3
     };
 
-    int carIndex = -1;
+    String[] welcomeMessages = {
+            "Easier Travel",
+            "Cheaper Travel",
+            "Happier Travel"
+    };
+
+    int index = -1;
 
     private static final int UPDATE_IMAGE = 6000;
 
     LinearLayout linearLayout = null;
 
+    TextView textView = null;
+
     private Handler handler = new Handler() {
         public void handleMessage(Message message) {
             if (message.what == UPDATE_IMAGE) {
-                if (carIndex >= backgroundPictures.length - 1) {
-                    carIndex = -1;
+                if (index >= backgroundPictures.length - 1) {
+                    index = -1;
                 }
-                carIndex++;
-                linearLayout.setBackgroundResource(backgroundPictures[carIndex]);
+                index++;
+                linearLayout.setBackgroundResource(backgroundPictures[index]);
+                textView.setText(welcomeMessages[index]);
                 reloadCarImage();
             }
         }
@@ -43,7 +53,7 @@ public class CommonWelcomeActivity extends AppCompatActivity {
     private void reloadCarImage() {
         Message message = new Message();
         message.what = UPDATE_IMAGE;
-        handler.sendMessageDelayed(message, 1000);
+        handler.sendMessageDelayed(message, 2000);
     }
 
     @Override
@@ -54,6 +64,7 @@ public class CommonWelcomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         this.linearLayout = (LinearLayout)this.findViewById(R.id.welcome_root_linearLayout);
+        this.textView = (TextView)this.findViewById(R.id.common_welcome_textview);
         reloadCarImage();
 
         final Context context = this;
@@ -67,7 +78,7 @@ public class CommonWelcomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(context, CommonSignInSignUpActivity.class);
                 context.startActivity(intent);
             }
-        }, 3000);
+        }, 8000);
     }
 
 }

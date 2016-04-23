@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Guuber</string>
-    <string name="wecomle_to_guuber">Welcome to Guuber</string>
-
+    <string name="welcome_to_guuber">Welcome to Guuber</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_choose_signup_signin">ChooseSignupSignin</string>

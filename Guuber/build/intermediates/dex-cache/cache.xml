@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\jars\classes.jar"
+        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\libs\internal_impl-23.2.1.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="673d77a5bbddd766037f088e775df525c46407f0">
-        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.2.1_b57fd1aef3444c8aea528cc41f00e57b64fd06be.jar" />
-    </item>
-    <item
-        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
-        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.2.1_4185bb28608b1ea2130bedb493080d76e6fd63be.jar" />
-    </item>
-    <item
-        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
-        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.2.1_d492c04395286aabf5417b5cf1ee4d677f58d70a.jar" />
-    </item>
-    <item
-        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\design\23.2.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
-        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.2.1_16e7a028cb91a7cc3803f8930043fecab49b6dbc.jar" />
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\internal_impl-23.2.1_513601f6f81923258e054a6f5843fe401d89bb5b.jar" />
     </item>
     <item
         jar="F:\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.2.1\support-annotations-23.2.1.jar"
@@ -37,11 +16,11 @@
         <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\support-annotations-23.2.1_f7280b0bab466b7d351a94edc610020fc691e1d4.jar" />
     </item>
     <item
-        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\libs\internal_impl-23.2.1.jar"
+        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
-        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\internal_impl-23.2.1_513601f6f81923258e054a6f5843fe401d89bb5b.jar" />
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.2.1_d492c04395286aabf5417b5cf1ee4d677f58d70a.jar" />
     </item>
     <item
         jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.2.1\jars\classes.jar"
@@ -51,11 +30,32 @@
         <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.2.1_0574690528a7c7c475f597f46ce1afa4c3b5d7ad.jar" />
     </item>
     <item
+        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.2.1_4185bb28608b1ea2130bedb493080d76e6fd63be.jar" />
+    </item>
+    <item
         jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
         <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.2.1_8ef33b563a91af996c64dbf6ea5e95ca80999578.jar" />
+    </item>
+    <item
+        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.2.1_b57fd1aef3444c8aea528cc41f00e57b64fd06be.jar" />
+    </item>
+    <item
+        jar="D:\Guuber\Guuber\app\build\intermediates\exploded-aar\com.android.support\design\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
+        <dex dex="D:\Guuber\Guuber\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.2.1_16e7a028cb91a7cc3803f8930043fecab49b6dbc.jar" />
     </item>
 
 </items>
