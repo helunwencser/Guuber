@@ -1,0 +1,9 @@
+Server listening port: 8888
+
+Sign up:
+	receive: SIGN_UP, User() object
+	response: TRUE, FLASE // TRUE: valid user information; FALSE: invalid user information
+	
+Login: 
+	receive: LOG_IN, username##password
+	response: TRUE, FALSE // TRUE: valid username and password; FALSE: invalid username and password 

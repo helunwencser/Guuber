@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.cmu.guuber.guuber">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="guuber.cmu.edu.activities.common.ChooseSignUpSignInActivity"
+            android:label="@string/title_activity_choose_signup_signin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.common.SignUpActivity"
+            android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.common.SignInActivity"
+            android:label="@string/title_activity_signin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.EndServiceActivity"
+            android:label="@string/title_activity_driverend"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.StartServiceActivity"
+            android:label="@string/title_activity_driverstart"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.UpdateProfileActivity"
+            android:label="@string/title_activity_driverupdate"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.ViewHistoryActivity"
+            android:label="@string/title_activity_driverview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.FindPassengerActivity"
+            android:label="@string/title_activity_findpassenger"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.EndServiceActivity"
+            android:label="@string/title_activity_passengerend"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.StartServiceActivity"
+            android:label="@string/title_activity_passengerstart"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.UpdateProfileActivity"
+            android:label="@string/title_activity_passengerupdate"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.ViewHistoryActivity"
+            android:label="@string/title_activity_transactionview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.FindDriverActivity"
+            android:label="@string/title_activity_finddriver"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.DetailedViewActivity"
+            android:label="@string/title_activity_driverview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.DetailedViewActivity"
+            android:label="@string/title_activity_transactionview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.common.CommonWelcomeActivity"
+            android:label="@string/title_activity_common_welcome"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

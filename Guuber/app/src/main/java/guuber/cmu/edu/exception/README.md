@@ -1,0 +1,1 @@
+This package contains all self-defined exception classes.

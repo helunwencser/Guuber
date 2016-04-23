@@ -1,0 +1,1 @@
+This package contains classes for local web service like local database operations, Google API calls. etc.
