@@ -58,6 +58,7 @@ public class TransactionDBController {
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
 
         String[] projection = {
+                TransactionModel._ID,
                 TransactionModel.DRIVER,
                 TransactionModel.PASSENGER,
                 TransactionModel.START_TIME,
@@ -82,6 +83,7 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
+                                cursor.getInt(cursor.getColumnIndex("_ID")),
                                 cursor.getString(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
@@ -134,6 +136,54 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
+                                cursor.getInt(cursor.getColumnIndex("_ID")),
+                                cursor.getString(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getInt(6)
+                        )
+                );
+            } while(cursor.moveToNext());
+        }
+        return res;
+    }
+
+
+    public List<Transaction> selectTransactionsByTransactionID(int TransactionID) {
+        List<Transaction> res = new ArrayList<Transaction>();
+
+        SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
+
+        String[] projection = {
+                TransactionModel._ID,
+                TransactionModel.DRIVER,
+                TransactionModel.PASSENGER,
+                TransactionModel.START_TIME,
+                TransactionModel.END_TIME,
+                TransactionModel.START_LOCATION,
+                TransactionModel.END_LOCATION,
+                TransactionModel.COST
+        };
+
+        String sortOrder = TransactionModel._ID + " DESC";
+
+        Cursor cursor = sqLiteDatabase.query(
+                TransactionModel.TABLE_NAME,
+                projection,
+                TransactionModel._ID + "=?",
+                new String[]{String.valueOf(TransactionID)},
+                null,
+                null,
+                sortOrder
+        );
+        if(cursor.moveToFirst()) {
+            do {
+                res.add(
+                        new Transaction(
+                                cursor.getInt(cursor.getColumnIndex("_ID")),
                                 cursor.getString(0),
                                 cursor.getString(1),
                                 cursor.getString(2),

@@ -21,7 +21,6 @@
         android:text="Guuber"
         android:gravity="center"
         android:layout_weight="1"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -36,6 +35,30 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Click to view details"
             android:gravity="center" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="pTransactionID"
+                />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="driverName"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="StartTime"
+                />
+        </LinearLayout>
 
         <ListView
             android:layout_width="match_parent"
