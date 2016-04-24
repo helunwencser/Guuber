@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.driver.FindPassengerActivity;
+import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
 
 public class CommonSignUpActivity extends AppCompatActivity {
@@ -28,8 +30,6 @@ public class CommonSignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_up);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
     }
 

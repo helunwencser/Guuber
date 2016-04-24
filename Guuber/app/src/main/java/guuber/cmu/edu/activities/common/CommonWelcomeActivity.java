@@ -60,8 +60,6 @@ public class CommonWelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_welcome);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         this.linearLayout = (LinearLayout)this.findViewById(R.id.welcome_root_linearLayout);
         this.textView = (TextView)this.findViewById(R.id.common_welcome_textview);
