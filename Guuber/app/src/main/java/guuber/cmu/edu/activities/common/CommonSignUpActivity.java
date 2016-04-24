@@ -1,10 +1,10 @@
 package guuber.cmu.edu.activities.common;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.StringBuilderPrinter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,6 +33,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
 
     }
 
+    //sign up
     public void signUp(View view) {
         EditText userNameEditText = (EditText)this.findViewById(R.id.sign_up_username_editText);
         String username = userNameEditText.getText().toString();
@@ -86,15 +87,56 @@ public class CommonSignUpActivity extends AppCompatActivity {
         if(!validateWithServer(user)) {
             pop("Invalid information", "Please input valid information", "Back");
         }
-        
+        Intent intent;
+        if(userType.equals("Driver")) {
+            intent = new Intent(this, FindPassengerActivity.class);
+        } else {
+            intent = new Intent(this, FindDriverActivity.class);
+        }
+        putInfoIntoIntent(intent, user);
+        this.startActivity(intent);
+    }
+
+    /**
+     * Put user's information into intent
+     * @param  intent   intent used to store information
+     *
+     * @param user  user's information
+     * */
+    private void putInfoIntoIntent(Intent intent, User user) {
+        intent.putExtra("username", user.getUsername());
+        intent.putExtra("password", user.getPassWord());
+        intent.putExtra("userType", user.getUserType());
+        intent.putExtra("email", user.getEmail());
+        intent.putExtra("gender", user.getGender());
+        if(user.getCarId() == null) {
+            intent.putExtra("carId", user.getCarId());
+        } else {
+            intent.putExtra("carId", user.getCarId());
+        }
     }
 
     //TODO add logical for validating data with server
+    /**
+     * Validate user's information with server
+     * @param user  user information
+     *
+     * @return return true if user's information is valid;
+     *          otherwise, return false
+     * */
     private boolean validateWithServer(User user) {
         return true;
     }
 
-    //pop up message when input incorrect information
+
+    /**
+     * pop up message when input incorrect information
+     * @param title the title of pop up
+     *
+     * @param message message to show
+     *
+     * @param button operation
+     * */
     private void pop(String title, String message, String button) {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(CommonSignUpActivity.this);

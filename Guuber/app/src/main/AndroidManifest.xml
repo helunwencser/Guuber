@@ -59,16 +59,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="guuber.cmu.edu.activities.driver.FindPassengerActivity"
-            android:label="@string/title_activity_findpassenger"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="package.OtherActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name="guuber.cmu.edu.activities.passenger.EndServiceActivity"
             android:label="@string/title_activity_passengerend"
             android:theme="@style/AppTheme.NoActionBar">
@@ -109,16 +99,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="guuber.cmu.edu.activities.passenger.FindDriverActivity"
-            android:label="@string/title_activity_finddriver"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="package.OtherActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name="guuber.cmu.edu.activities.driver.DetailedViewActivity"
             android:label="@string/title_activity_driverview"
             android:theme="@style/AppTheme.NoActionBar">
@@ -151,6 +131,14 @@
         <activity
             android:name="guuber.cmu.edu.activities.common.CommonSignUpActivity"
             android:label="@string/title_activity_common_sign_up"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.FindPassengerActivity"
+            android:label="@string/title_activity_find_passenger"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.FindDriverActivity"
+            android:label="@string/title_activity_find_driver"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

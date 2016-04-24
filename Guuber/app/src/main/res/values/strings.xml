@@ -26,16 +26,19 @@
 
     <string name="submit_label">Submit</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_choose_signup_signin">ChooseSignupSignin</string>
-    <string name="title_activity_signup">Signup</string>
-
-
-    <string-array name="drop_page">
+    <string-array name="user_profile_page">
         <item>UserProfile</item>
         <item>Transactions</item>
         <item>Log out</item>
     </string-array>
+
+    <string name="find_passenger_label">Find Passenger</string>
+    <string name="find_driver_label">Find Driver</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_choose_signup_signin">ChooseSignupSignin</string>
+    <string name="title_activity_signup">Signup</string>
+
     <string name="title_activity_signin">Signin</string>
     <string name="title_activity_driverend">End Service</string>
     <string name="title_activity_driverstart">Start Service</string>
