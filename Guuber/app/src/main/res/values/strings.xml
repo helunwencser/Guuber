@@ -53,7 +53,11 @@
     <string name="title_activity_find_driver">FindDriverActivity</string>
     <string name="title_activity_common_welcome">CommonWelcomeActivity</string>
     <string name="title_activity_common_sign_in_sign_up">CommonSignInSignUpActivity</string>
+<<<<<<< Updated upstream
     <string name="title_activity_common_sign_up">CommonSignUpActivity</string>
     <string name="input_username_hint">input your username here</string>
+=======
+    <string name="title_activity_find">Gubber</string>
+>>>>>>> Stashed changes
 
 </resources>
