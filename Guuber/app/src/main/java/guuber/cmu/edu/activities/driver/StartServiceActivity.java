@@ -100,9 +100,5 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         } catch (SecurityException e) {
             e.printStackTrace();
         }
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(37, -122);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Mountain View"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
