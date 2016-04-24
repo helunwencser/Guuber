@@ -19,35 +19,35 @@ public class User implements Serializable{
 
     private static final long serialVersionUID = 2016010101L;//cant find how to generate it in android studio
 
-    private String userName;
+    private String username;
     private transient String passWord;
     private String userType;
-    private String emailAddress;
+    private String email;
     private String gender;
     private String carId;
 
     public User(
-            String userName,
+            String username,
             String passWord,
             String userType,
-            String emailAddress,
+            String email,
             String gender,
             String carId
     ) {
-        this.userName = userName;
+        this.username = username;
         this.passWord = passWord;
         this.userType = userType;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.gender = gender;
         this.carId = carId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassWord() {
@@ -66,12 +66,12 @@ public class User implements Serializable{
         this.userType = userType;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getGender() {

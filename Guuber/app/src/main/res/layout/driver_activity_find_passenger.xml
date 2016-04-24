@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:id="@+id/driver_find_drop_page"
-            android:entries="@array/drop_page"
+            android:entries="@array/user_profile_page"
             android:spinnerMode="dropdown"
             android:clickable="true"
             android:gravity="right" />

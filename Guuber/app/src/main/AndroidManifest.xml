@@ -2,45 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.cmu.guuber.guuber">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name="guuber.cmu.edu.activities.common.CommonWelcomeActivity"
             android:label="@string/title_activity_common_welcome"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="guuber.cmu.edu.activities.common.SignUpActivity"
-            android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="package.OtherActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="guuber.cmu.edu.activities.common.SignInActivity"
-            android:label="@string/title_activity_signin"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="package.OtherActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.driver.EndServiceActivity"
             android:label="@string/title_activity_driverend"
@@ -51,7 +42,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.driver.StartServiceActivity"
             android:label="@string/title_activity_driverstart"
@@ -62,7 +52,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.driver.UpdateProfileActivity"
             android:label="@string/title_activity_driverupdate"
@@ -73,7 +62,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.driver.ViewHistoryActivity"
             android:label="@string/title_activity_driverview"
@@ -84,18 +72,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="guuber.cmu.edu.activities.driver.FindPassengerActivity"
-            android:label="@string/title_activity_findpassenger"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="package.OtherActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.passenger.EndServiceActivity"
             android:label="@string/title_activity_passengerend"
@@ -106,7 +82,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.passenger.StartServiceActivity"
             android:label="@string/title_activity_passengerstart"
@@ -117,7 +92,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.passenger.UpdateProfileActivity"
             android:label="@string/title_activity_passengerupdate"
@@ -128,7 +102,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.passenger.ViewHistoryActivity"
             android:label="@string/title_activity_transactionview"
@@ -139,18 +112,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="guuber.cmu.edu.activities.passenger.FindDriverActivity"
-            android:label="@string/title_activity_finddriver"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="package.OtherActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.driver.DetailedViewActivity"
             android:label="@string/title_activity_driverview"
@@ -161,7 +122,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.passenger.DetailedViewActivity"
             android:label="@string/title_activity_transactionview"
@@ -172,7 +132,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="guuber.cmu.edu.activities.common.CommonSignInSignUpActivity"
             android:label="@string/title_activity_common_sign_in_sign_up"
@@ -183,6 +142,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="guuber.cmu.edu.activities.common.CommonSignUpActivity"
+            android:label="@string/title_activity_common_sign_up"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.driver.FindPassengerActivity"
+            android:label="@string/title_activity_find_passenger"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="guuber.cmu.edu.activities.passenger.FindDriverActivity"
+            android:label="@string/title_activity_find_driver"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
