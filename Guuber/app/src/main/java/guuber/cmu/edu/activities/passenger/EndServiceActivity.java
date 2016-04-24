@@ -86,6 +86,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+
         try {
             Location loc = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
             updateLocation(loc);
