@@ -64,7 +64,7 @@ public class ViewHistoryActivity extends AppCompatActivity implements android.vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_activity_view_history);
 
-        ListView listView = (ListView) this.findViewById(R.id.driver_view_listView);
+        ListView listView = (ListView) this.findViewById(android.R.id.list);
 
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();

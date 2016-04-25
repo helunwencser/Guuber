@@ -47,7 +47,7 @@ public class ViewHistoryActivity extends ListActivity implements android.view.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.passenger_activity_view_history);
 
-        ListView listView = (ListView) this.findViewById(R.id.passenger_view_listView);
+        ListView listView = (ListView) this.findViewById(android.R.id.list);
 
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();

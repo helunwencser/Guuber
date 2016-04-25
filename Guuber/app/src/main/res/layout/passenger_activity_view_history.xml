@@ -44,17 +44,17 @@
             <TextView
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:text="pTransactionID"
+                android:text="TransacID"
                 />
 
             <TextView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="driverName"
+                android:text="Name"
                 />
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="StartTime"
                 />
@@ -63,7 +63,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/passenger_view_listView"
+            android:id="@android:id/list"
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:textAlignment="center"
