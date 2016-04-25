@@ -16,9 +16,9 @@ public class CommonSignInSignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_in_sign_up);
-        Intent intent = new Intent(this,ViewHistoryActivity.class);
+        /*Intent intent = new Intent(this,ViewHistoryActivity.class);
         intent.putExtra("userName","Bob");
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     public void chooseSignInSignUp(View view) {
