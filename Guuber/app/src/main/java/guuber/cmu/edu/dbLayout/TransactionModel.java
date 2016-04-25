@@ -11,6 +11,7 @@ import android.provider.BaseColumns;
  * */
 public class TransactionModel implements BaseColumns{
     public static String TABLE_NAME = "transaction_table";
+
     public static String DRIVER = "driver";
     public static String PASSENGER = "passenger";
     public static String START_TIME = "startTime";

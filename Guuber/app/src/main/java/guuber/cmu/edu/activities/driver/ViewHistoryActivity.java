@@ -70,16 +70,17 @@ public class ViewHistoryActivity extends AppCompatActivity implements android.vi
         Intent intent = getIntent();
         //String userName = "Bob";
         String userName = intent.getStringExtra("userName");
-        List<Transaction> transactionList = tranController.selectTransactionsByDriver(userName);
+        List<Transaction> transactionList = tranController.selectTransactionsByDriver("Bob");
         List<HashMap<String, Object>> data = new ArrayList<HashMap<String,Object>>();
         for(Transaction transaction : transactionList){
             HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("transactionID", transaction.getTransaction_id());
+            item.put("transactionID", 1);
             item.put("passengerName", transaction.getPassenger());
             item.put("StartTime", transaction.getStartTime());
             data.add(item);
+            System.out.print("sdsdssdsdsds"+ data.size());
         }
-
+        System.out.print("sdsdssdsdsdsaaaa");
         if(data.size() != 0){
             ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.driver_view_transaction_entry,
                     new String[] { "id","driverName","startTime"},

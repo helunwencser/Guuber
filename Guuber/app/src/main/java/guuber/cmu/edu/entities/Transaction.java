@@ -9,7 +9,7 @@ package guuber.cmu.edu.entities;
  * */
 public class Transaction {
 
-    private int transaction_id;
+     // private int transaction_id;
     private String driver;
     private String passenger;
     private String startTime;
@@ -18,16 +18,16 @@ public class Transaction {
     private String endLocation;
     private int cost;
 
-    public int getTransaction_id() {
+   /* public int getTransaction_id() {
         return transaction_id;
-    }
+    }*/
 
     public void setTransaction_id(int transaction_id) {
-        this.transaction_id = transaction_id;
+       // this.transaction_id = transaction_id;
     }
 
     public Transaction(
-            int transaction_id,
+           // int transaction_id,
             String driver,
             String passenger,
             String startTime,
@@ -36,7 +36,7 @@ public class Transaction {
             String endLocation,
             int cost
     ) {
-        this.transaction_id = transaction_id;
+        //this.transaction_id = transaction_id;
         this.driver = driver;
         this.passenger = passenger;
         this.startTime = startTime;

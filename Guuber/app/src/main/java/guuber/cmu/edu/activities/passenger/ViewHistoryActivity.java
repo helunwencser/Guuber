@@ -57,9 +57,12 @@ public class ViewHistoryActivity extends ListActivity implements android.view.Vi
         List<HashMap<String, Object>> data = new ArrayList<HashMap<String,Object>>();
         for(Transaction transaction : transactionList){
             HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("transactionID", transaction.getTransaction_id());
+            /*item.put("transactionID", transaction.getTransaction_id());
             item.put("driverName", transaction.getDriver());
-            item.put("StartTime", transaction.getStartTime());
+            item.put("StartTime", transaction.getStartTime());*/
+            item.put("transactionID", "0");
+            item.put("driverName", "Bob");
+            item.put("StartTime", "2016");
             data.add(item);
         }
 
