@@ -24,6 +24,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.dbLayout.MessageDBController;
@@ -33,11 +35,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private GoogleMap mMap;
     private LocationManager locationManager;
-    private Marker marker;
+    private Marker myMarker;
     private EditText messageInput;
     private TextView messageHistory;
 
     private MessageDBController meassageDBController;
+
+    private Map<String, String> allMessages;
+    private Map<String, Marker> passengerMarkers;
+
+    private String currentPassenger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,19 +105,30 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
         meassageDBController = new MessageDBController(this);
 
+        allMessages = new HashMap<String, String>();
+        passengerMarkers = new HashMap<String, Marker>();
+
     }
 
     public void updateLocation(Location location) {
         if (location != null && mMap != null) {
-            if (marker != null) {
-                marker.remove();
+            if (myMarker != null) {
+                myMarker.remove();
             }
             double lon = location.getLongitude();
             double lat = location.getLatitude();
             LatLng sydney = new LatLng(lat, lon);
-            marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
-            //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+            myMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            addPassengerMarker("1", lon + 0.005, lat);
+            addPassengerMarker("2", lon, lat + 0.005);
+            addPassengerMarker("3", lon - 0.005, lat);
+            addPassengerMarker("4", lon, lat - 0.005);
+            addPassengerMarker("5", lon + 0.005, lat + 0.005);
+            addPassengerMarker("6", lon - 0.005, lat - 0.005);
+            addPassengerMarker("7", lon - 0.005, lat + 0.005);
+            addPassengerMarker("8", lon + 0.005, lat - 0.005);
         } else {
         }
 
@@ -134,6 +152,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+        mMap.setOnMarkerClickListener(this);
     }
 
     View.OnClickListener sendButtonClicked = new View.OnClickListener() {
@@ -146,20 +165,24 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             String current = messageInput.getText().toString();
             messageInput.setText("");
             messageHistory.setText(history + "\n" + "Me: " + current);
-            int scrollAmount = messageHistory.getLayout().getLineTop(messageHistory.getLineCount())
-                    - messageHistory.getHeight();
-            if (scrollAmount > 0) {
-                messageHistory.scrollTo(0, scrollAmount);
-            }
-            else {
-                messageHistory.scrollTo(0, 0);
-            }
+            scollToBottom();
             String senderid = "me";
             String receiverid = "other";
             Message message = new Message(senderid, receiverid, current, new Date().toString());
             meassageDBController.insertMessage(message);
         }
     };
+
+    private void scollToBottom() {
+        int scrollAmount = messageHistory.getLayout().getLineTop(messageHistory.getLineCount())
+                - messageHistory.getHeight();
+        if (scrollAmount > 0) {
+            messageHistory.scrollTo(0, scrollAmount);
+        }
+        else {
+            messageHistory.scrollTo(0, 0);
+        }
+    }
 
     View.OnClickListener startButtonClicked = new View.OnClickListener() {
         @Override
@@ -177,8 +200,35 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         }
     };
 
+    private void addPassengerMarker(String passengerID, double lon, double lat) {
+        if (passengerMarkers.get(passengerID) != null) {
+            passengerMarkers.get(passengerID).remove();
+        }
+        LatLng place = new LatLng(lat, lon);
+        Marker passengerMarker = mMap.addMarker(new MarkerOptions().position(place).title(passengerID + " position"));
+        passengerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        passengerMarkers.put(passengerID, passengerMarker);
+    }
+
     @Override
     public boolean onMarkerClick(Marker marker) {
+
+        for (String passenger : passengerMarkers.keySet()) {
+            if (passengerMarkers.get(passenger).equals(marker)) {
+                String history = messageHistory.getText().toString();
+                if (history.length() > 0 && currentPassenger != null) {
+                    allMessages.put(currentPassenger, history);
+                }
+                currentPassenger = passenger;
+                if (allMessages.get(passenger) != null) {
+                    messageHistory.setText(allMessages.get(passenger));
+                    scollToBottom();
+                } else {
+                    messageHistory.setText("Chatting with passenger " + passenger);
+                }
+                break;
+            }
+        }
         return false;
     }
 }

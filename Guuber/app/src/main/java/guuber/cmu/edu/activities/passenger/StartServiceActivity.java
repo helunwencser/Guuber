@@ -17,11 +17,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.cmu.guuber.guuber.R;
 
@@ -32,11 +35,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private GoogleMap mMap;
     private LocationManager locationManager;
-    private Marker marker;
+    private Marker myMarker;
     private EditText messageInput;
     private TextView messageHistory;
 
     private MessageDBController meassageDBController;
+
+    private Map<String, String> allMessages;
+    private Map<String, Marker> driverMarkers;
+
+    private String currentDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,22 +101,34 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         messageHistory.setMovementMethod(new ScrollingMovementMethod());
 
         meassageDBController = new MessageDBController(this);
+
+        allMessages = new HashMap<String, String>();
+        driverMarkers = new HashMap<String, Marker>();
+
     }
 
     public void updateLocation(Location location) {
         if (location != null && mMap != null) {
-            if (marker != null) {
-                marker.remove();
+            if (myMarker != null) {
+                myMarker.remove();
             }
             double lon = location.getLongitude();
             double lat = location.getLatitude();
             LatLng sydney = new LatLng(lat, lon);
-            marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
+            myMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
             //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            addDriverMarker("1", lon + 0.005, lat);
+            addDriverMarker("2", lon, lat + 0.005);
+            addDriverMarker("3", lon - 0.005, lat);
+            addDriverMarker("4", lon, lat - 0.005);
+            addDriverMarker("5", lon + 0.005, lat + 0.005);
+            addDriverMarker("6", lon - 0.005, lat - 0.005);
+            addDriverMarker("7", lon - 0.005, lat + 0.005);
+            addDriverMarker("8", lon + 0.005, lat - 0.005);
         } else {
         }
-
     }
 
     /**
@@ -131,6 +151,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+        mMap.setOnMarkerClickListener(this);
 
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(37, -122);
@@ -163,6 +184,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         }
     };
 
+    private void scollToBottom() {
+        int scrollAmount = messageHistory.getLayout().getLineTop(messageHistory.getLineCount())
+                - messageHistory.getHeight();
+        if (scrollAmount > 0) {
+            messageHistory.scrollTo(0, scrollAmount);
+        }
+        else {
+            messageHistory.scrollTo(0, 0);
+        }
+    }
 
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
@@ -172,8 +203,34 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         }
     };
 
+    private void addDriverMarker(String driverID, double lon, double lat) {
+        if (driverMarkers.get(driverID) != null) {
+            driverMarkers.get(driverID).remove();
+        }
+        LatLng place = new LatLng(lat, lon);
+        Marker driverMarker = mMap.addMarker(new MarkerOptions().position(place).title(driverID + " position"));
+        driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        driverMarkers.put(driverID, driverMarker);
+    }
+
     @Override
     public boolean onMarkerClick(Marker marker) {
+        for (String driver : driverMarkers.keySet()) {
+            if (driverMarkers.get(driver).equals(marker)) {
+                String history = messageHistory.getText().toString();
+                if (history.length() > 0 && currentDriver != null) {
+                    allMessages.put(currentDriver, history);
+                }
+                currentDriver = driver;
+                if (allMessages.get(driver) != null) {
+                    messageHistory.setText(allMessages.get(driver));
+                    scollToBottom();
+                } else {
+                    messageHistory.setText("Chatting with driver " + driver);
+                }
+                break;
+            }
+        }
         return false;
     }
 }
