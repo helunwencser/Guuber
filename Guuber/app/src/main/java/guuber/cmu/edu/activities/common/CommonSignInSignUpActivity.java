@@ -16,16 +16,16 @@ public class CommonSignInSignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_in_sign_up);
-        /*Intent intent = new Intent(this,ViewHistoryActivity.class);
-        intent.putExtra("userName","Bob");
-        startActivity(intent);*/
+        
     }
 
     public void chooseSignInSignUp(View view) {
+        Intent intent;
         if(view == this.findViewById(R.id.common_signInButton)) {
-            System.out.println("Sign in");
+            intent = new Intent(this, CommonSignInActivity.class);
         } else {
-            System.out.println("Sign up");
+            intent = new Intent(this, CommonSignUpActivity.class);
         }
+        this.startActivity(intent);
     }
 }

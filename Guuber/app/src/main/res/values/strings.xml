@@ -59,5 +59,6 @@
     <string name="title_activity_common_sign_up">CommonSignUpActivity</string>
     <string name="input_username_hint">input your username here</string>
     <string name="title_activity_find">Gubber</string>
+    <string name="title_activity_common_sign_in">CommonSignInActivity</string>
 
 </resources>
