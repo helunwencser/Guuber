@@ -24,9 +24,9 @@
             android:label="@string/title_activity_common_welcome"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="package.OtherActivity" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
         </activity>
@@ -45,9 +45,9 @@
             android:label="@string/title_activity_driverstart"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="package.OtherActivity" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
 
             </intent-filter>
         </activity>
@@ -148,11 +148,23 @@
         <activity
             android:name="guuber.cmu.edu.activities.driver.FindPassengerActivity"
             android:label="@string/title_activity_find_passenger"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="package.OtherActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="guuber.cmu.edu.activities.passenger.FindDriverActivity"
             android:label="@string/title_activity_find_driver"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="package.OtherActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="guuber.cmu.edu.activities.common.CommonSignInActivity"
             android:label="@string/title_activity_common_sign_in"

@@ -1,12 +1,15 @@
 package guuber.cmu.edu.activities.driver;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,9 +57,11 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
                     }
                 }
 
-                public void onProviderEnabled(String provider) {}
+                public void onProviderEnabled(String provider) {
+                }
 
-                public void onProviderDisabled(String provider) {}
+                public void onProviderDisabled(String provider) {
+                }
             };
 
             // Register the listener with the Location Manager to receive location updates
@@ -67,6 +72,10 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
+        Button endButton =
+                (Button) findViewById(R.id.driver_endButton);
+        endButton.setOnClickListener(endButtonClicked);
     }
 
     public void updateLocation(Location location) {
@@ -83,6 +92,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         }
 
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -94,4 +104,12 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             e.printStackTrace();
         }
     }
+
+    View.OnClickListener endButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(EndServiceActivity.this, FindPassengerActivity.class);
+            startActivity(intent);
+        }
+    };
 }
