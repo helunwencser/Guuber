@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Find Passenger"
-            android:id="@+id/findButton"
+            android:id="@+id/driver_findButton"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical" />
     </LinearLayout>

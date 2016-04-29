@@ -45,11 +45,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="Passenger A"
-            android:id="@+id/textView"
+            android:id="@+id/driver_start_history"
             android:layout_gravity="center_horizontal"
             android:layout_weight="2"/>
 
@@ -62,7 +63,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/input"
+                android:id="@+id/driver_start_input"
                 android:hint="Message Input"
                 android:layout_weight="2" />
 
@@ -70,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Send"
-                android:id="@+id/sendButton"
+                android:id="@+id/driver_start_sendButton"
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
@@ -87,7 +88,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Start"
-            android:id="@+id/startButton"
+            android:id="@+id/driver_start_startButton"
             android:onClick="start"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -95,7 +96,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Cancel"
-            android:id="@+id/cancelButton"
+            android:id="@+id/driver_start_cancelButton"
             android:onClick="cancel"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>

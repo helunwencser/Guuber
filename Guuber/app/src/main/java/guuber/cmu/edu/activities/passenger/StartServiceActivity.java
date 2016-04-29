@@ -1,11 +1,17 @@
 package guuber.cmu.edu.activities.passenger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,13 +21,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Date;
+
 import edu.cmu.guuber.guuber.R;
 
-public class StartServiceActivity extends FragmentActivity implements OnMapReadyCallback {
+import guuber.cmu.edu.dbLayout.MessageDBController;
+import guuber.cmu.edu.entities.Message;
+
+public class StartServiceActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Marker marker;
+    private EditText messageInput;
+    private TextView messageHistory;
+
+    private MessageDBController meassageDBController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +80,19 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
+        Button cancelButton =
+                (Button) findViewById(R.id.passenger_start_cancelButton);
+        cancelButton.setOnClickListener(cancelButtonClicked);
+
+        Button sendButton =
+                (Button) findViewById(R.id.passenger_start_sendButton);
+        sendButton.setOnClickListener(sendButtonClicked);
+        messageInput = (EditText) findViewById(R.id.passenger_start_input);
+        messageHistory = (TextView) findViewById(R.id.passenger_start_history);
+        messageHistory.setMovementMethod(new ScrollingMovementMethod());
+
+        meassageDBController = new MessageDBController(this);
     }
 
     public void updateLocation(Location location) {
@@ -76,6 +104,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             double lat = location.getLatitude();
             LatLng sydney = new LatLng(lat, lon);
             marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
+            //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         } else {
         }
@@ -107,5 +136,44 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         //LatLng sydney = new LatLng(37, -122);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Mountain View"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    View.OnClickListener sendButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (messageInput.getText().length() == 0) {
+                return;
+            }
+            String history = messageHistory.getText().toString();
+            String current = messageInput.getText().toString();
+            messageInput.setText("");
+            messageHistory.setText(history + "\n" + "Me: " + current);
+            int scrollAmount = messageHistory.getLayout().getLineTop(messageHistory.getLineCount())
+                    - messageHistory.getHeight();
+            if (scrollAmount > 0) {
+                messageHistory.scrollTo(0, scrollAmount);
+            }
+            else {
+                messageHistory.scrollTo(0, 0);
+            }
+            String senderid = "me";
+            String receiverid = "other";
+            Message message = new Message(senderid, receiverid, current, new Date().toString());
+            meassageDBController.insertMessage(message);
+        }
+    };
+
+
+    View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(StartServiceActivity.this, FindDriverActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }
