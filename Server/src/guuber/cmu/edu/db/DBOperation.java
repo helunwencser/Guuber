@@ -51,7 +51,7 @@ public class DBOperation {
 		try {
 			this.insertStatement.setString(1, user.getUsername());
 			this.insertStatement.setString(2, user.getPassword());
-			this.insertStatement.setString(3, user.getUsertype());
+			this.insertStatement.setString(3, user.getUserType());
 			this.insertStatement.setString(4, user.getGender());
 			this.insertStatement.setString(5, user.getEmail());
 			this.insertStatement.setString(6, user.getCarId());
@@ -77,12 +77,12 @@ public class DBOperation {
 			ResultSet resultSet = this.selectByUsernamePasswordStatement.executeQuery();
 			if(resultSet.next()) {
 				return new User(
-						resultSet.getString(1),
 						resultSet.getString(2),
 						resultSet.getString(3),
 						resultSet.getString(4),
 						resultSet.getString(5),
-						resultSet.getString(6)
+						resultSet.getString(6),
+						resultSet.getString(7)
 						);
 			}
 		} catch (SQLException e) {
@@ -105,12 +105,12 @@ public class DBOperation {
 			ResultSet resultSet = this.selectByUsernameStatement.executeQuery();
 			if(resultSet.next()) {
 				return new User(
-						resultSet.getString(1),
 						resultSet.getString(2),
 						resultSet.getString(3),
 						resultSet.getString(4),
 						resultSet.getString(5),
-						resultSet.getString(6)
+						resultSet.getString(6),
+						resultSet.getString(7)
 						);
 			}
 		} catch (SQLException e) {

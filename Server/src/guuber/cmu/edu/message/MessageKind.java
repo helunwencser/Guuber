@@ -7,4 +7,6 @@ public class MessageKind {
 	public static final String SIGNUP = "SIGNUP";
 	
 	public static final String SIGNIN = "SIGNIN";
+	
+	
 }

@@ -7,7 +7,6 @@ import java.io.Serializable;
 public class User implements Serializable {
 	
 	
-	
 	/**
 	 * 
 	 */
@@ -15,25 +14,25 @@ public class User implements Serializable {
 	
 	private String username;
 	private String password;
-	private String usertype;
+	private String userType;
 	private String gender;
 	private String email;
-	private String carid;
+	private String carId;
 	
 	public User(
 			String username,
 			String password,
-			String usertype,
+			String userType,
 			String gender,
 			String email,
-			String carid
+			String carId
 			) {
 		this.username = username;
 		this.password = password;
-		this.usertype = usertype;
+		this.userType = userType;
 		this.gender = gender;
 		this.email = email;
-		this.carid = carid;
+		this.carId = carId;
 	}
 	
 	public String getUsername() {
@@ -52,12 +51,12 @@ public class User implements Serializable {
 		this.password = password;
 	}
 	
-	public String getUsertype() {
-		return usertype;
+	public String getUserType() {
+		return userType;
 	}
 	
-	public void setUsertype(String usertype) {
-		this.usertype = usertype;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	
 	public String getGender() {
@@ -77,10 +76,23 @@ public class User implements Serializable {
 	}
 	
 	public String getCarId() {
-		return carid;
+		return carId;
 	}
 	
-	public void setCarId(String carid) {
-		this.carid = carid;
+	public void setCarId(String carId) {
+		this.carId = carId;
 	}
+	
+    /**
+     * Transfer the user to string which will be sent to server as a message
+     * by service
+     * */
+    public String toMessage() {
+        return this.username + ":" +
+                this.password + ":" +
+                this.userType + ":" +
+                this.email + ":" +
+                this.gender + ":" +
+                this.carId;
+    }
 }

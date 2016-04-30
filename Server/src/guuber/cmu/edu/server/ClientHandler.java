@@ -54,7 +54,23 @@ public class ClientHandler implements Runnable {
 						this.connection.getBufferedWriter().flush();
 					}
 					break;
+				/**
+				 * Message format:
+				 * SIGNIN:username:password
+				 * */
 				case MessageKind.SIGNIN:
+					User user = this.dbOperation.selectByUsernameAndPassword(elements[1], elements[2]);
+					if(user == null) {
+						System.out.println("Sign in denied");
+						this.connection.getBufferedWriter().write(MessageReply.SIGNINDENIED + "\n");
+						this.connection.getBufferedWriter().flush();
+					} else {
+						System.out.println("Sign in ok");
+						String response = MessageReply.SIGNINOK + ":" + user.toMessage() + "\n";
+						System.out.println(response);
+						this.connection.getBufferedWriter().write(response);
+						this.connection.getBufferedWriter().flush();
+					}
 					break;
 				default:
 					break;

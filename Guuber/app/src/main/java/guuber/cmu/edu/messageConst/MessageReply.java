@@ -5,10 +5,15 @@ package guuber.cmu.edu.messageConst;
  */
 /**
  * This class defines all message reply will be received from server
+ * This class should be the same as MessageReply class in server
  * */
 public class MessageReply {
     public static String SIGNUPOK = "SIGNUPOK";
 
     public static String SIGNUPDENIED = "SIGNUPDENIED";
+
+    public static String SIGNINOK = "SIGNINOK";
+
+    public static String SIGNINDENIED = "SIGNINDENIED";
 
 }

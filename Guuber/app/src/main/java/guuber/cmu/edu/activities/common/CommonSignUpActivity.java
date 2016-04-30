@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
 import guuber.cmu.edu.messageConst.MessageKind;
@@ -106,7 +107,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
                 gender,
                 carId
         );
-        ResultReceiver resultReceiver = new MyResultReceiver(null);
+        ResultReceiver resultReceiver = new SignUpResultReceiver(null);
         Intent intent = new Intent(this, GuuberService.class);
         intent.putExtra("operation", MessageKind.SENDMESSAGE);
         intent.putExtra("message", MessageKind.SIGNUP + ":" + user.toMessage());
@@ -128,19 +129,6 @@ public class CommonSignUpActivity extends AppCompatActivity {
         intent.putExtra("carId", carId);
     }
 
-    //TODO add logical for validating data with server
-    /**
-     * Validate user's information with server
-     * @param user  user information
-     *
-     * @return return true if user's information is valid;
-     *          otherwise, return false
-     * */
-    private boolean validateWithServer(User user) {
-        return true;
-    }
-
-
     /**
      * pop up message when input incorrect information
      * @param title the title of pop up
@@ -159,9 +147,9 @@ public class CommonSignUpActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ParcelCreator")
-    public class MyResultReceiver extends ResultReceiver {
+    public class SignUpResultReceiver extends ResultReceiver {
 
-        public MyResultReceiver(Handler handler) {
+        public SignUpResultReceiver(Handler handler) {
             super(handler);
         }
 
@@ -170,7 +158,12 @@ public class CommonSignUpActivity extends AppCompatActivity {
             if(resultCode == ResultCode.SIGNUP) {
                 String response = resultData.getString("response");
                 if(response.equals(MessageReply.SIGNUPOK)) {
-                    Intent intent = new Intent(context, FindDriverActivity.class);
+                    Intent intent = null;
+                    if(userType.equals("Driver")) {
+                        intent = new Intent(context, FindPassengerActivity.class);
+                    } else {
+                        intent = new Intent(context, FindDriverActivity.class);
+                    }
                     putInfoIntoIntent(intent);
                     startActivity(intent);
                 } else {
