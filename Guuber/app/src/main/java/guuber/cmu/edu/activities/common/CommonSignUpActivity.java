@@ -6,14 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
@@ -36,6 +33,14 @@ public class CommonSignUpActivity extends AppCompatActivity {
 
     private Context context;
 
+    /* the information provided by user */
+    private String username = "";
+    private String password = "";
+    private String userType = "";
+    private String email = "";
+    private String gender = "";
+    private String carId = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +51,13 @@ public class CommonSignUpActivity extends AppCompatActivity {
     //sign up
     public void signUp(View view) {
         EditText userNameEditText = (EditText)this.findViewById(R.id.sign_up_username_editText);
-        String username = userNameEditText.getText().toString();
+        username = userNameEditText.getText().toString();
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
             return;
         }
         EditText passwordEditText = (EditText)this.findViewById(R.id.sign_up_password_editText);
-        String password = passwordEditText.getText().toString();
+        password = passwordEditText.getText().toString();
         EditText rePasswordEditText = (EditText)this.findViewById(R.id.sign_up_retype_password_editText);
         String rePassword = rePasswordEditText.getText().toString();
         if(password == null || rePassword == null || !password.equals(rePassword)) {
@@ -70,25 +75,25 @@ public class CommonSignUpActivity extends AppCompatActivity {
             return;
         }
         Spinner userTypeSpinner = (Spinner)this.findViewById(R.id.sign_up_user_type_spinner);
-        String userType = (String)userTypeSpinner.getSelectedItem().toString();
+        userType = (String)userTypeSpinner.getSelectedItem().toString();
         if(userType == null) {
             pop("No user type selected", "Please select your user type", "Back");
             return;
         }
         Spinner genderTypeSpinner = (Spinner)this.findViewById(R.id.sign_up_gender_spinner);
-        String gender = (String)genderTypeSpinner.getSelectedItem();
+        gender = (String)genderTypeSpinner.getSelectedItem();
         if(gender == null) {
             pop("No gender selected", "Please select your gender", "Back");
             return;
         }
         EditText emailEditText = (EditText)this.findViewById(R.id.sign_up_email_editText);
-        String email = emailEditText.getText().toString();
+        email = emailEditText.getText().toString();
         if(email == null || !email.matches(EMAIL_PATTERN)) {
             pop("Invalid email", "Please input valid email address", "Back");
             return;
         }
         EditText carIdEditText = (EditText)this.findViewById(R.id.sign_up_car_id_editText);
-        String carId = carIdEditText.getText().toString();
+        carId = carIdEditText.getText().toString();
         if(userType.equals("Driver") && (carId == null || carId.length() < 6)) {
             pop("Invalid carId", "Please input valid carId", "Back");
             return;
@@ -113,20 +118,14 @@ public class CommonSignUpActivity extends AppCompatActivity {
     /**
      * Put user's information into intent
      * @param  intent   intent used to store information
-     *
-     * @param user  user's information
      * */
-    private void putInfoIntoIntent(Intent intent, User user) {
-        intent.putExtra("username", user.getUsername());
-        intent.putExtra("password", user.getPassword());
-        intent.putExtra("userType", user.getUserType());
-        intent.putExtra("email", user.getEmail());
-        intent.putExtra("gender", user.getGender());
-        if(user.getCarId() == null) {
-            intent.putExtra("carId", user.getCarId());
-        } else {
-            intent.putExtra("carId", user.getCarId());
-        }
+    private void putInfoIntoIntent(Intent intent) {
+        intent.putExtra("username", username);
+        intent.putExtra("password", password);
+        intent.putExtra("userType", userType);
+        intent.putExtra("email", email);
+        intent.putExtra("gender", gender);
+        intent.putExtra("carId", carId);
     }
 
     //TODO add logical for validating data with server
@@ -172,6 +171,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
                 String response = resultData.getString("response");
                 if(response.equals(MessageReply.SIGNUPOK)) {
                     Intent intent = new Intent(context, FindDriverActivity.class);
+                    putInfoIntoIntent(intent);
                     startActivity(intent);
                 } else {
                     runOnUiThread(new Runnable() {

@@ -101,8 +101,6 @@ public class GuuberService extends Service {
             ResultReceiver resultReceiver = intent.getParcelableExtra("receiver");
             String message = intent.getStringExtra("message");
             int resultCode = intent.getIntExtra("resultCode", 0);
-            System.out.println("message to be sent: " + message);
-            System.out.println("result code: " + resultCode);
             try {
                 bufferedWriter.write(message + "\n");
                 bufferedWriter.flush();
