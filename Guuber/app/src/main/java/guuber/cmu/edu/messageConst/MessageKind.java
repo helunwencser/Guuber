@@ -14,6 +14,18 @@ public class MessageKind {
     /* sign in message */
     public static String SIGNIN = "SIGNIN";
 
+    /* driver location message */
+    public static String DRIVERLOC = "DRIVERLOC";
+
+    /* passenger location message */
+    public static String PASSENGERLOC = "PASSENGERLOC";
+
+    /* driver location should be deleted */
+    public static String DRIVEREXIT = "DRIVEREXIT";
+
+    /* passenger location should be deleted */
+    public static String PASSENGEREXIT = "PASSENGEREXIT";
+
     /* Tell GuuberService to send message */
     public static String SENDMESSAGE = "SENDMESSAGE";
 

@@ -12,4 +12,12 @@ public class ResultCode {
     public static int SIGNUP = 100;
 
     public static int SIGNIN = 101;
+
+    public static int DRIVERLOC = 200;
+
+    public static int DRIVEREXIT = 201;
+
+    public static int PASSENGERLOC = 300;
+
+    public static int PASSENGEREXIT = 301;
 }

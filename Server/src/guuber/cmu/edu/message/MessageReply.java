@@ -15,4 +15,12 @@ public class MessageReply {
     public static String SIGNINOK = "SIGNINOK";
     
     public static String SIGNINDENIED = "SIGNINDENIED";
+    
+    public static String DRIVERLOCOK = "DRIVERLOCOK";
+
+    public static String PASSENGERLOCOK = "PASSENGERLOCOK";
+    
+    public static String DRIVEREXITOK = "DRIVEREXITOK";
+    
+    public static String PASSENGEREXITOK = "DRIVEREXITOK";
 }
