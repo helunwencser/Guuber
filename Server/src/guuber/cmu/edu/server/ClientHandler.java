@@ -94,8 +94,6 @@ public class ClientHandler implements Runnable {
 				 * DRIVERLOC:latitude:longtitude
 				 * */
 				case MessageKind.DRIVERLOC:
-					this.connection.getBufferedWriter().write(MessageReply.DRIVERLOCOK + "\n");
-					this.connection.getBufferedWriter().flush();
 					String driverLocationUpdate = elements[0] + ":" + this.connection.getUsername()
 												+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToPassengers(driverLocationUpdate);
@@ -104,8 +102,6 @@ public class ClientHandler implements Runnable {
 				 * PASSENGERLOC:latitude:longtitude
 				 * */
 				case MessageKind.PASSENGERLOC:
-					this.connection.getBufferedWriter().write(MessageReply.PASSENGERLOCOK + "\n");
-					this.connection.getBufferedWriter().flush();
 					String passengerLocationUpdate = elements[0] + ":" + this.connection.getUsername()
 													+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToDrivers(passengerLocationUpdate);
