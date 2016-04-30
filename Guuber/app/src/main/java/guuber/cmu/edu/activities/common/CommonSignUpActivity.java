@@ -15,6 +15,7 @@ import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
+import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.messageConst.MessageReply;
 import guuber.cmu.edu.resultCode.ResultCode;
@@ -113,7 +114,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
         intent.putExtra("message", MessageKind.SIGNUP + ":" + user.toMessage());
         intent.putExtra("receiver", resultReceiver);
         intent.putExtra("resultCode", ResultCode.SIGNUP);
-        intent.putExtra("activityName", "CommonSignUpActivity");
+        intent.putExtra("activityName", ActivityNames.COMMONSIGNUPACTIVITY);
         startService(intent);
     }
 

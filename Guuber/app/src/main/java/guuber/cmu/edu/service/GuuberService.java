@@ -18,6 +18,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.ws.remote.ServerConfig;
 
@@ -50,8 +51,41 @@ public class GuuberService extends Service {
         try {
             while((response = bufferedReader.readLine()) != null) {
                 String messageKind = response.substring(0, response.indexOf(":"));
+                Bundle bundle = new Bundle();
+                bundle.putString("response", response);
                 switch (messageKind) {
-
+                    case MessageKind.SIGNUP:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNUPACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).getResultReceiver().send(
+                                    resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).getResultCode(),
+                                    bundle
+                            );
+                        }
+                        break;
+                    case MessageKind.SIGNIN:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNINACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).getResultReceiver().send(
+                                    resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).getResultCode(),
+                                    bundle
+                            );
+                        }
+                        break;
+                    case MessageKind.DRIVERLOC:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).getResultReceiver().send(
+                                    resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).getResultCode(),
+                                    bundle
+                            );
+                        }
+                    case MessageKind.PASSENGERLOC:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).getResultReceiver().send(
+                                    resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).getResultCode(),
+                                    bundle
+                            );
+                        }
+                    default:
+                        break;
                 }
             }
         } catch (IOException e) {
@@ -72,6 +106,7 @@ public class GuuberService extends Service {
                             bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
                             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                             System.out.println("connected to server");
+                            receiveAndDispatchMessage();
                         } catch (UnknownHostException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
@@ -137,10 +172,6 @@ public class GuuberService extends Service {
             try {
                 bufferedWriter.write(message + "\n");
                 bufferedWriter.flush();
- /*               String response = bufferedReader.readLine();
-                Bundle bundle = new Bundle();
-                bundle.putString("response", response);
-                resultReceiver.send(resultCode, bundle);*/
             } catch (IOException e) {
                 e.printStackTrace();
             }

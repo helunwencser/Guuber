@@ -5,8 +5,13 @@ package guuber.cmu.edu.messageConst;
  */
 public class ActivityNames {
 
-    public static final String DRIVERSTART = "DriverStartServiceActivity";
+    public static final String DRIVERSTARTSERVICEACTIVITY = "DriverStartServiceActivity";
 
-    public static final String PASSENGERSTART = "PassengerStartServiceActivity";
+    public static final String PASSENGERSTARTSERVICEACTIVITY = "PassengerStartServiceActivity";
+
+    public static final String COMMONSIGNINACTIVITY = "CommonSignInActivity";
+
+    public static final String COMMONSIGNUPACTIVITY = "CommonSignUpActivity";
+
 
 }

@@ -17,6 +17,7 @@ import android.widget.EditText;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
+import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.messageConst.MessageReply;
 import guuber.cmu.edu.resultCode.ResultCode;
@@ -88,7 +89,7 @@ public class CommonSignInActivity extends AppCompatActivity {
         intent.putExtra("message", MessageKind.SIGNIN + ":" + username + ":" + password);
         intent.putExtra("receiver", resultReceiver);
         intent.putExtra("resultCode", ResultCode.SIGNIN);
-        intent.putExtra("activityName", "CommonSignInActivity");
+        intent.putExtra("activityName", ActivityNames.COMMONSIGNINACTIVITY);
         startService(intent);
     }
 

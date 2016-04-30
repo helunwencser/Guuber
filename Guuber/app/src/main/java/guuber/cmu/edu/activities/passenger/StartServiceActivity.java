@@ -161,7 +161,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.putExtra("operation", MessageKind.SENDMESSAGE);
             intent.putExtra("message", MessageKind.PASSENGERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
-            intent.putExtra("activityName", ActivityNames.PASSENGERSTART);
+            intent.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
             intent.putExtra("resultCode", ResultCode.PASSENGERLOC);
             startService(intent);
             /*
@@ -295,7 +295,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.PASSENGEREXIT);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", ActivityNames.PASSENGERSTART);
+            mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
             mess.putExtra("resultCode", ResultCode.PASSENGEREXIT);
             startService(mess);
 

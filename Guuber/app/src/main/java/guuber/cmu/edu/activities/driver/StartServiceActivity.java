@@ -148,7 +148,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.putExtra("operation", MessageKind.SENDMESSAGE);
             intent.putExtra("message", MessageKind.DRIVERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
-            intent.putExtra("activityName", ActivityNames.DRIVERSTART);
+            intent.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             intent.putExtra("resultCode", ResultCode.DRIVERLOC);
             startService(intent);
             /*
@@ -223,7 +223,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", ActivityNames.DRIVERSTART);
+            mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
@@ -231,7 +231,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess2.putExtra("operation", MessageKind.SENDMESSAGE);
             mess2.putExtra("message", MessageKind.STARTRIDE + ":" + currentPassenger);
             mess2.putExtra("receiver", resultReceiver);
-            mess2.putExtra("activityName", ActivityNames.DRIVERSTART);
+            mess2.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             mess2.putExtra("resultCode", ResultCode.STARTRIDE);
             startService(mess2);
 
@@ -250,7 +250,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", ActivityNames.DRIVERSTART);
+            mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
