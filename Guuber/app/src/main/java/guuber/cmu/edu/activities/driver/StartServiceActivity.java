@@ -207,7 +207,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.CHAT + ":" + receiverid + ":" + current);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", ActivityNames.DRIVERSTART);
+            mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             mess.putExtra("resultCode", ResultCode.CHAT);
             startService(mess);
 

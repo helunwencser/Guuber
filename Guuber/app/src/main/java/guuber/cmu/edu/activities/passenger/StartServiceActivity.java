@@ -226,7 +226,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.CHAT + ":" + receiverid + ":" + current);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", ActivityNames.PASSENGERSTART);
+            mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
             mess.putExtra("resultCode", ResultCode.CHAT);
             startService(mess);
 
@@ -394,7 +394,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         mess.putExtra("operation", MessageKind.SENDMESSAGE);
                         mess.putExtra("message", MessageKind.PASSENGERDEST + ":" + driver + ":" + destLon + ":" + destLat);
                         mess.putExtra("receiver", resultReceiver);
-                        mess.putExtra("activityName", ActivityNames.PASSENGERSTART);
+                        mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
                         mess.putExtra("resultCode", ResultCode.PASSENGERDEST);
                         startService(mess);
 
