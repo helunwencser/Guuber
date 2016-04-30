@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,68 +22,76 @@ import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.dbLayout.TransactionDBController;
 import guuber.cmu.edu.entities.Transaction;
 import java.util.List;
+import  android.widget.ArrayAdapter;
 
 /**
  * Created by wangziming on 4/9/16.
  */
-public class ViewHistoryActivity extends ListActivity implements android.view.View.OnClickListener{
-    private ListView obj;
+public class ViewHistoryActivity extends AppCompatActivity {
+    private ListView listView;
     Button cancel;
     //ArrayList transactionList = new ArrayList();
     //TextView transactionId ;
-
-    @Override
-    public void onClick(View view) {
-        if (view == findViewById(R.id.passenger_view_cancelButton)){
-            Intent intent = new Intent(this,FindDriverActivity.class);
-            startActivity(intent);
-        }else{
-
-        }
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.passenger_activity_view_history);
 
-        ListView listView = (ListView) this.findViewById(android.R.id.list);
+        listView = (ListView) this.findViewById(R.id.passenger_view_list);
+
+        View.OnClickListener onClickListener = new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewHistoryActivity.this,FindDriverActivity.class);
+                startActivity(intent);
+            }
+        };
+        cancel = (Button)this.findViewById(R.id.passenger_view_cancelButton);
+        cancel.setOnClickListener(onClickListener);
 
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
-        //String userName = "Bob";
         String userName = intent.getStringExtra("userName");
-        List<Transaction> transactionList = tranController.selectTransactionsByPassenger(userName);
-        List<HashMap<String, Object>> data = new ArrayList<HashMap<String,Object>>();
-        for(Transaction transaction : transactionList){
-            HashMap<String, Object> item = new HashMap<String, Object>();
-            /*item.put("transactionID", transaction.getTransaction_id());
-            item.put("driverName", transaction.getDriver());
-            item.put("StartTime", transaction.getStartTime());*/
-            item.put("transactionID", "0");
-            item.put("driverName", "Bob");
-            item.put("StartTime", "2016");
-            data.add(item);
-        }
+        Log.d("userName", userName);
+        final List<Transaction> transactionList = tranController.selectTransactionsByDriver(userName);
+        Log.d("transaction", transactionList.get(0).toString());
 
-        if(data.size() != 0){
-            ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.passenger_view_transaction_entry,
+
+        int transactionSize = transactionList.size();
+        if(transactionSize != 0){
+            String[] res = new String[transactionSize];
+            for(int i = 0; i< transactionSize; i++){
+
+                StringBuilder sam = new StringBuilder();
+                sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
+                sam.append(transactionList.get(i).getDriver()+"\t");
+                sam.append(transactionList.get(i).getStartTime());
+                res[i] = sam.toString();
+                Log.d("res[i]",res[i]);
+            }
+
+
+            listView.setAdapter(new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, res));
+
+
+            /*ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.passenger_view_transaction_entry,
                     new String[] { "id","drivername","startTime"},
                     new int[] {R.id.pTransactionID, R.id.driver_name,R.id.pStartTime});
-            setListAdapter(adapter);
+            setListAdapter(adapter);*/
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListView listView = (ListView) parent;
-                    HashMap<String, Object> data = (HashMap<String, Object>) listView.getItemAtPosition(position);
-                    String transactionID = data.get("transactionID").toString();
-                    //Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_SHORT).show();
+                public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
+                                        long arg3) {
+                    String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
                     Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
                     Indent.putExtra("transactionID", transactionID);
                     startActivity(Indent);
                 }
             });
+
         }else{
             Toast.makeText(this,"No Related Transactions",Toast.LENGTH_SHORT).show();
         }
@@ -91,14 +100,4 @@ public class ViewHistoryActivity extends ListActivity implements android.view.Vi
     }
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

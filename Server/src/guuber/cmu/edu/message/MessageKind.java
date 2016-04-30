@@ -15,4 +15,10 @@ public class MessageKind {
 
     /* passenger location update message */
     public static final String PASSENGERLOC = "PASSENGERLOC";
+
+    /* driver location should be deleted */
+    public static final String DRIVEREXIT = "DRIVEREXIT";
+    
+    /* passenger location should be deleted */
+    public static final String PASSENGEREXIT = "PASSENGEREXIT";
 }

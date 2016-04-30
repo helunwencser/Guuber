@@ -21,6 +21,12 @@
         android:text="Guuber"
         android:gravity="center"
         android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Click to view details"
+        android:gravity="center" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -28,13 +34,6 @@
         android:layout_weight="5"
         android:layout_gravity="center_horizontal"
         android:gravity="center">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Click to view details"
-            android:gravity="center" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -63,7 +62,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@android:id/list"
+            android:id="@+id/passenger_view_list"
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:textAlignment="center"

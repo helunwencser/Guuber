@@ -216,6 +216,14 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     View.OnClickListener startButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", MessageKind.SENDMESSAGE);
+            mess.putExtra("message", MessageKind.DRIVEREXIT);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
+            startService(mess);
+
             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -226,6 +234,14 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", MessageKind.SENDMESSAGE);
+            mess.putExtra("message", MessageKind.DRIVEREXIT);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
+            startService(mess);
+
             Intent intent = new Intent(StartServiceActivity.this, FindPassengerActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -23,9 +24,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.passenger.DetailedViewActivity;
 import guuber.cmu.edu.dbLayout.TransactionDBController;
 import guuber.cmu.edu.entities.Transaction;
 import java.util.List;
+import android.util.Log;
 
 
 
@@ -42,82 +45,76 @@ import guuber.cmu.edu.entities.Transaction;
 /**
  * Created by wangziming on 4/9/16.
  */
-public class ViewHistoryActivity extends AppCompatActivity implements android.view.View.OnClickListener{
-    private ListView obj;
+public class ViewHistoryActivity extends AppCompatActivity {
+    private ListView listView;
     Button cancel;
     //ArrayList transactionList = new ArrayList();
     //TextView transactionId ;
-
-    @Override
-    public void onClick(View view) {
-        if (view == findViewById(R.id.driver_view_cancelButton)){
-            Intent intent = new Intent(this,FindPassengerActivity.class);
-            startActivity(intent);
-        }else{
-
-        }
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_activity_view_history);
 
-        ListView listView = (ListView) this.findViewById(android.R.id.list);
+        listView = (ListView) this.findViewById(R.id.driversss_view_list);
+
+        View.OnClickListener onClickListener = new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewHistoryActivity.this,FindPassengerActivity.class);
+                startActivity(intent);
+            }
+        };
+        cancel = (Button)this.findViewById(R.id.driver_view_cancelButton);
+        cancel.setOnClickListener(onClickListener);
 
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
-        //String userName = "Bob";
         String userName = intent.getStringExtra("userName");
-        List<Transaction> transactionList = tranController.selectTransactionsByDriver("Bob");
-        List<HashMap<String, Object>> data = new ArrayList<HashMap<String,Object>>();
-        for(Transaction transaction : transactionList){
-            HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("transactionID", 1);
-            item.put("passengerName", transaction.getPassenger());
-            item.put("StartTime", transaction.getStartTime());
-            data.add(item);
-            System.out.print("sdsdssdsdsds"+ data.size());
-        }
-        System.out.print("sdsdssdsdsdsaaaa");
-        if(data.size() != 0){
-            ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.driver_view_transaction_entry,
-                    new String[] { "id","driverName","startTime"},
-                    new int[] {R.id.pTransactionID, R.id.passenger_name,R.id.pStartTime});
-            listView.setAdapter(adapter);
+        Log.d("userName", userName);
+        final List<Transaction> transactionList = tranController.selectTransactionsByPassenger(userName);
+        Log.d("transaction", transactionList.get(0).toString());
+
+
+        int transactionSize = transactionList.size();
+        if(transactionSize != 0){
+            String[] res = new String[transactionSize];
+            for(int i = 0; i< transactionSize; i++){
+
+                StringBuilder sam = new StringBuilder();
+                sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
+                sam.append(transactionList.get(i).getDriver()+"\t");
+                sam.append(transactionList.get(i).getStartTime());
+                res[i] = sam.toString();
+                Log.d("res[i]",res[i]);
+            }
+
+
+            listView.setAdapter(new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, res));
+
+
+            /*ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.passenger_view_transaction_entry,
+                    new String[] { "id","drivername","startTime"},
+                    new int[] {R.id.pTransactionID, R.id.driver_name,R.id.pStartTime});
+            setListAdapter(adapter);*/
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    ListView listView = (ListView) parent;
-                    HashMap<String, Object> data = (HashMap<String, Object>) listView.getItemAtPosition(position);
-                    String transactionID = data.get("transactionID").toString();
-                    //Toast.makeText(getApplicationContext(), userID, Toast.LENGTH_SHORT).show();
-                    Intent Indent = new Intent(getApplicationContext(), guuber.cmu.edu.activities.driver.DetailedViewActivity.class);
+                public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
+                                        long arg3) {
+                    String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
+                    Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
                     Indent.putExtra("transactionID", transactionID);
                     startActivity(Indent);
                 }
             });
+
         }else{
-            Toast.makeText(this, "No Related Transactions", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"No Related Transactions",Toast.LENGTH_SHORT).show();
         }
 
 
     }
-
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
 
 }

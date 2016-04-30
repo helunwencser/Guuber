@@ -19,4 +19,8 @@ public class MessageReply {
     public static String DRIVERLOCOK = "DRIVERLOCOK";
 
     public static String PASSENGERLOCOK = "PASSENGERLOCOK";
+    
+    public static String DRIVEREXITOK = "DRIVEREXITOK";
+    
+    public static String PASSENGEREXITOK = "DRIVEREXITOK";
 }

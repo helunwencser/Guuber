@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.driver.FindPassengerActivity;
+import guuber.cmu.edu.activities.driver.UpdateProfileActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.activities.passenger.ViewHistoryActivity;
 
@@ -16,7 +18,7 @@ public class CommonSignInSignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_in_sign_up);
-        
+
     }
 
     public void chooseSignInSignUp(View view) {

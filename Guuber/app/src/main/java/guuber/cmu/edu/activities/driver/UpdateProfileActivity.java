@@ -13,13 +13,13 @@ import java.util.regex.Pattern;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.entities.User;
-
+import android.content.Intent;
 
 /**
  * Created by wangziming on 4/9/16.
  */
 public class UpdateProfileActivity extends AppCompatActivity {
-/*
+
     private EditText userNameEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
@@ -99,7 +99,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String carID = carIDEditText.getText().toString();
-        String userType = getResources().getString(R.string.type_driver);
+        //String userType = getResources().getString(R.string.type_driver);
+        String userType = "Driver";
         String gender = genderSpinner.getSelectedItem().toString();
 
         User user = new User(userName, password, userType, email, gender, carID);
@@ -116,7 +117,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 if (validatePasswordMatch()) {
                     if (validatePasswordComplexity()) {
                         if (sendUser()) {
-                            toHome();
                             pop("Congratulations", "You have successfully updated profile!", "Continue");
                         } else {
                             pop("Update Error", "UserName already exist", "Back");
@@ -137,12 +137,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            toHome();
+            Intent intent = new Intent(UpdateProfileActivity.this,FindPassengerActivity.class);
+            startActivity(intent);
         }
     };
 
-    private void toHome() {
-    //    intentWrapper = new DriverUpdateIntent(UpdateProfileActivity.this, FindPassengerActivity.class);
-//        this.startActivity(intentWrapper.getIntent());
-    }*/
+
 }

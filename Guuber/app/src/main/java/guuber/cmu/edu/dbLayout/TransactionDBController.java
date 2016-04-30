@@ -58,7 +58,7 @@ public class TransactionDBController {
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
 
         String[] projection = {
-               // TransactionModel._ID,
+                TransactionModel._ID,
                 TransactionModel.DRIVER,
                 TransactionModel.PASSENGER,
                 TransactionModel.START_TIME,
@@ -83,13 +83,14 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
-                                cursor.getString(0),
+                                cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
                                 cursor.getString(5),
-                                cursor.getInt(6)
+                                cursor.getString(6),
+                                cursor.getInt(7)
                         )
                 );
             } while(cursor.moveToNext());
@@ -110,7 +111,7 @@ public class TransactionDBController {
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
 
         String[] projection = {
-               // TransactionModel._ID,
+                TransactionModel._ID,
                 TransactionModel.DRIVER,
                 TransactionModel.PASSENGER,
                 TransactionModel.START_TIME,
@@ -135,14 +136,14 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
-
-                                cursor.getString(0),
+                                cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
                                 cursor.getString(5),
-                                cursor.getInt(6)
+                                cursor.getString(6),
+                                cursor.getInt(7)
                         )
                 );
             } while(cursor.moveToNext());
@@ -157,7 +158,7 @@ public class TransactionDBController {
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
 
         String[] projection = {
-               // TransactionModel._ID,
+                TransactionModel._ID,
                 TransactionModel.DRIVER,
                 TransactionModel.PASSENGER,
                 TransactionModel.START_TIME,
@@ -182,13 +183,14 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
-                                cursor.getString(0),
+                                cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
                                 cursor.getString(5),
-                                cursor.getInt(6)
+                                cursor.getString(6),
+                                cursor.getInt(7)
                         )
                 );
             } while(cursor.moveToNext());
