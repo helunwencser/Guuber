@@ -30,11 +30,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import edu.cmu.guuber.guuber.R;
 
@@ -290,6 +288,14 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", MessageKind.SENDMESSAGE);
+            mess.putExtra("message", MessageKind.PASSENGEREXIT);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("resultCode", ResultCode.PASSENGEREXIT);
+            startService(mess);
+
             Intent intent = new Intent(StartServiceActivity.this, FindDriverActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
