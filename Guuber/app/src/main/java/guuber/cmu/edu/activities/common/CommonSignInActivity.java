@@ -15,6 +15,9 @@ import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.messageConst.ActivityNames;
+import guuber.cmu.edu.messageConst.ClientMessageKind;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.service.GuuberService;
 
 public class CommonSignInActivity extends AppCompatActivity {
@@ -79,8 +82,8 @@ public class CommonSignInActivity extends AppCompatActivity {
         }
         ResultReceiver resultReceiver = new SignInResultReceiver(null);
         Intent intent = new Intent(this, GuuberService.class);
-        intent.putExtra("operation", MessageKind.SENDMESSAGE);
-        intent.putExtra("message", MessageKind.SIGNIN + ":" + username + ":" + password);
+        intent.putExtra("operation", Operation.SENDMESSAGE);
+        intent.putExtra("message", ServerMessageKind.SIGNIN + ":" + username + ":" + password);
         intent.putExtra("receiver", resultReceiver);
         intent.putExtra("activityName", ActivityNames.COMMONSIGNINACTIVITY);
         startService(intent);
@@ -117,7 +120,7 @@ public class CommonSignInActivity extends AppCompatActivity {
              * SIGNINDENIED
              * */
             String[] elements = response.split(":");
-            if (elements[0].equals(MessageReply.SIGNINOK)) {
+            if (elements[0].equals(ClientMessageKind.SIGNINOK)) {
                 username = elements[1];
                 password = elements[2];
                 userType = elements[3];

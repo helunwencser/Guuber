@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import guuber.cmu.edu.db.DBOperation;
 import guuber.cmu.edu.db.User;
-import guuber.cmu.edu.message.MessageKind;
-import guuber.cmu.edu.message.MessageReply;
+import guuber.cmu.edu.message.ClientMessageKind;
+import guuber.cmu.edu.message.ServerMessageKind;
 
 /**
  * This class defines a new thread for listening
@@ -35,9 +35,9 @@ public class ClientHandler implements Runnable {
 				 * Message format:
 				 * SIGNUP:username:password:userType:email:gender:carId
 				 * */
-				case MessageKind.SIGNUP: 
+				case ServerMessageKind.SIGNUP: 
 					if(this.dbOperation.selectByUsername(elements[1]) == null) {
-						this.connection.getBufferedWriter().write(MessageReply.SIGNUPOK + "\n");
+						this.connection.getBufferedWriter().write(ClientMessageKind.SIGNUPOK + "\n");
 						this.connection.getBufferedWriter().flush();
 						this.connection.setUsername(elements[1]);
 						this.connection.setUserType(elements[3]);
@@ -67,7 +67,7 @@ public class ClientHandler implements Runnable {
 									);
 						}
 					} else {
-						this.connection.getBufferedWriter().write(MessageReply.SIGNUPDENIED + "\n");
+						this.connection.getBufferedWriter().write(ClientMessageKind.SIGNUPDENIED + "\n");
 						this.connection.getBufferedWriter().flush();
 					}
 					break;
@@ -75,15 +75,15 @@ public class ClientHandler implements Runnable {
 				 * Message format:
 				 * SIGNIN:username:password
 				 * */
-				case MessageKind.SIGNIN:
+				case ServerMessageKind.SIGNIN:
 					User user = this.dbOperation.selectByUsernameAndPassword(elements[1], elements[2]);
 					if(user == null) {
 						System.out.println("Sign in denied");
-						this.connection.getBufferedWriter().write(MessageReply.SIGNINDENIED + "\n");
+						this.connection.getBufferedWriter().write(ClientMessageKind.SIGNINDENIED + "\n");
 						this.connection.getBufferedWriter().flush();
 					} else {
 						System.out.println("Sign in ok");
-						String response = MessageReply.SIGNINOK + ":" + user.toMessage() + "\n";
+						String response = ClientMessageKind.SIGNINOK + ":" + user.toMessage() + "\n";
 						System.out.println(response);
 						this.connection.getBufferedWriter().write(response);
 						this.connection.getBufferedWriter().flush();
@@ -93,7 +93,7 @@ public class ClientHandler implements Runnable {
 				 * Message format:
 				 * DRIVERLOC:latitude:longtitude
 				 * */
-				case MessageKind.DRIVERLOC:
+				case ServerMessageKind.DRIVERLOC:
 					String driverLocationUpdate = elements[0] + ":" + this.connection.getUsername()
 												+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToPassengers(driverLocationUpdate);
@@ -101,7 +101,7 @@ public class ClientHandler implements Runnable {
 				 * Message format:
 				 * PASSENGERLOC:latitude:longtitude
 				 * */
-				case MessageKind.PASSENGERLOC:
+				case ServerMessageKind.PASSENGERLOC:
 					String passengerLocationUpdate = elements[0] + ":" + this.connection.getUsername()
 													+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToDrivers(passengerLocationUpdate);

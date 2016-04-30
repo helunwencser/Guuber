@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import guuber.cmu.edu.messageConst.ActivityNames;
+import guuber.cmu.edu.messageConst.ClientMessageKind;
+import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.ws.remote.ServerConfig;
 
@@ -55,8 +57,8 @@ public class GuuberService extends Service {
                 Bundle bundle = new Bundle();
                 bundle.putString("response", response);
                 switch (messageKind) {
-                    case MessageReply.SIGNUPDENIED:
-                    case MessageReply.SIGNUPOK:
+                    case ClientMessageKind.SIGNUPDENIED:
+                    case ClientMessageKind.SIGNUPOK:
                         if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNUPACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).send(
                                     ResultCode.RESULTCODE,
@@ -64,8 +66,8 @@ public class GuuberService extends Service {
                             );
                         }
                         break;
-                    case MessageReply.SIGNINDENIED:
-                    case MessageReply.SIGNINOK:
+                    case ClientMessageKind.SIGNINDENIED:
+                    case ClientMessageKind.SIGNINOK:
                         if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNINACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).send(
                                     ResultCode.RESULTCODE,
@@ -73,14 +75,14 @@ public class GuuberService extends Service {
                             );
                         }
                         break;
-                    case MessageKind.DRIVERLOC:
+                    case ClientMessageKind.DRIVERLOC:
                         if(resultReceiverMap.keySet().contains(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
                                     ResultCode.RESULTCODE,
                                     bundle
                             );
                         }
-                    case MessageKind.PASSENGERLOC:
+                    case ClientMessageKind.PASSENGERLOC:
                         if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
                                     ResultCode.RESULTCODE,
@@ -123,7 +125,7 @@ public class GuuberService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String operation = intent.getStringExtra("operation");
-        if(operation.equals(MessageKind.SENDMESSAGE)) {
+        if(operation.equals(Operation.SENDMESSAGE)) {
             new Thread(
                     new MessageHandler(intent)
             ).start();

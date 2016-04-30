@@ -16,6 +16,9 @@ import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
 import guuber.cmu.edu.messageConst.ActivityNames;
+import guuber.cmu.edu.messageConst.ClientMessageKind;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.service.GuuberService;
 
 public class CommonSignUpActivity extends AppCompatActivity {
@@ -107,8 +110,8 @@ public class CommonSignUpActivity extends AppCompatActivity {
         );
         ResultReceiver resultReceiver = new SignUpResultReceiver(null);
         Intent intent = new Intent(this, GuuberService.class);
-        intent.putExtra("operation", MessageKind.SENDMESSAGE);
-        intent.putExtra("message", MessageKind.SIGNUP + ":" + user.toMessage());
+        intent.putExtra("operation", Operation.SENDMESSAGE);
+        intent.putExtra("message", ServerMessageKind.SIGNUP + ":" + user.toMessage());
         intent.putExtra("receiver", resultReceiver);
         intent.putExtra("activityName", ActivityNames.COMMONSIGNUPACTIVITY);
         startService(intent);
@@ -154,7 +157,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
-            if(response.equals(MessageReply.SIGNUPOK)) {
+            if(response.equals(ClientMessageKind.SIGNUPOK)) {
                 Intent intent = null;
                 if(userType.equals("Driver")) {
                     intent = new Intent(context, FindPassengerActivity.class);

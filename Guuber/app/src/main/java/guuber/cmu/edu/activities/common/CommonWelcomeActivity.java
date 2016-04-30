@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.service.GuuberService;
 
 
@@ -67,7 +68,7 @@ public class CommonWelcomeActivity extends AppCompatActivity {
 
         /* start backend service */
         Intent intent = new Intent(this, GuuberService.class);
-        intent.putExtra("operation", MessageKind.STARTSERVICE);
+        intent.putExtra("operation", Operation.STARTBACKGROUNDSERVICE);
         startService(intent);
 
         final Context context = this;
