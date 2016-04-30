@@ -22,4 +22,9 @@ public class ResultCode {
     public static int PASSENGERLOC = 300;
 
     public static int PASSENGEREXIT = 301;
+
+    public static int PASSENGERDEST = 302;
+
+    public static int CHAT = 102;
+
 }

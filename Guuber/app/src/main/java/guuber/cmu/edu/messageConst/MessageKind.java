@@ -26,8 +26,14 @@ public class MessageKind {
     /* passenger location should be deleted */
     public static final String PASSENGEREXIT = "PASSENGEREXIT";
 
+    /* passenger's destination */
+    public static final String PASSENGERDEST = "PASSENGERDEST";
+
     /* driver start the ride */
     public static final String STARTRIDE = "STARTRIDE";
+
+    /* chatting */
+    public static final String CHAT = "CHAT";
 
     /* Tell GuuberService to send message */
     public static final String SENDMESSAGE = "SENDMESSAGE";

@@ -24,4 +24,10 @@ public class MessageKind {
     
     /* driver start the ride */
     public static final String STARTRIDE = "STARTRIDE";
+    
+    /* passenger's destination */
+    public static final String PASSENGERDEST = "PASSENGERDEST";
+    
+    /* chatting */
+    public static final String CHAT = "CHAT";
 }

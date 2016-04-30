@@ -1,6 +1,7 @@
 package guuber.cmu.edu.activities.passenger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,6 +26,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Marker marker;
+
+    private String driver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
+        Intent intent = getIntent();
+        driver = intent.getStringExtra("driver");
     }
 
     public void updateLocation(Location location) {

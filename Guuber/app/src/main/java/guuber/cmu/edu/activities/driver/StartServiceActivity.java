@@ -46,8 +46,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     private EditText messageInput;
     private TextView messageHistory;
 
-    Double currLat;
-    Double currLon;
+    private Double currLat;
+    private Double currLon;
 
     private MessageDBController meassageDBController;
 
@@ -58,6 +58,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private ResultReceiver resultReceiver;
 
+    private boolean serviceStarted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        serviceStarted = false;
 
         try {
             // Acquire a reference to the system Location Manager
@@ -198,7 +201,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             messageHistory.setText(history + "\n" + "Me: " + current);
             scollToBottom();
             String senderid = "me";
-            String receiverid = "other";
+            String receiverid = currentPassenger;
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", MessageKind.SENDMESSAGE);
+            mess.putExtra("message", MessageKind.CHAT + ":" + receiverid + ":" + current);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", ActivityNames.DRIVERSTART);
+            mess.putExtra("resultCode", ResultCode.CHAT);
+            startService(mess);
+
             Message message = new Message(senderid, receiverid, current, new Date().toString());
             meassageDBController.insertMessage(message);
         }
@@ -219,6 +231,10 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         public void onClick(View v) {
 
+            if (serviceStarted) {
+                return;
+            }
+            serviceStarted = true;
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
@@ -234,11 +250,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess2.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             mess2.putExtra("resultCode", ResultCode.STARTRIDE);
             startService(mess2);
-
-            Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
         }
     };
 
@@ -280,7 +291,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-
+        if (serviceStarted) {
+            return false;
+        }
         for (String passenger : passengerMarkers.keySet()) {
             if (passengerMarkers.get(passenger).equals(marker)) {
                 String history = messageHistory.getText().toString();
@@ -329,6 +342,44 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     @Override
                     public void run() {
                         removePassengerMarker(passenger);
+                    }
+                });
+            } else if (resultCode == ResultCode.PASSENGERDEST) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final Double lon = Double.parseDouble(splits[1]);
+                final Double lat = Double.parseDouble(splits[2]);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("passenger", currentPassenger);
+                        intent.putExtra("destLon", lon);
+                        intent.putExtra("destLat", lat);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+            } else if (resultCode == ResultCode.CHAT) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String passenger = splits[1];
+                final String content = splits[2];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (passenger.equals(currentPassenger)) {
+                            String history = messageHistory.getText().toString();
+                            messageHistory.setText(history + "\n" + passenger + ": " + content);
+                        } else {
+                            String history = allMessages.get(passenger);
+                            if (history == null) {
+                                history = "";
+                            }
+                            String result = history + "\n" + passenger + ": " + content;
+                            allMessages.put(passenger, result);
+                        }
                     }
                 });
             }

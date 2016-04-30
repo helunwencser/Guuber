@@ -45,6 +45,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private Routing routing;
 
+    private String passenger;
+
     private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
     @Override
@@ -96,8 +98,10 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
                 (Button) findViewById(R.id.driver_endButton);
         endButton.setOnClickListener(endButtonClicked);
 
-        destLon = -122.0;
-        destLat = 37.0;
+        Intent intent = getIntent();
+        destLon = Double.parseDouble(intent.getStringExtra("destLon"));
+        destLat = Double.parseDouble(intent.getStringExtra("destLat"));
+        passenger = intent.getStringExtra("passenger");
     }
 
     public void updateLocation(Location location) {
