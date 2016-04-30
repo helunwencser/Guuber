@@ -147,6 +147,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.putExtra("operation", MessageKind.SENDMESSAGE);
             intent.putExtra("message", MessageKind.DRIVERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
+            intent.putExtra("activityName", "StartServiceActivity");
             intent.putExtra("resultCode", ResultCode.DRIVERLOC);
             startService(intent);
             /*
@@ -221,6 +222,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", "StartServiceActivity");
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
@@ -239,6 +241,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", "StartServiceActivity");
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
