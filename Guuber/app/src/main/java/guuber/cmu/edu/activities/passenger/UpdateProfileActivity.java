@@ -1,6 +1,7 @@
 package guuber.cmu.edu.activities.passenger;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,14 +19,14 @@ import guuber.cmu.edu.entities.User;
  * Created by wangziming on 4/9/16.
  */
 public class UpdateProfileActivity extends AppCompatActivity {
-/*
+
     private EditText userNameEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
     private Spinner genderSpinner;
     private EditText emailEditText;
 
-    // password must contain 8 to 20 characters
+    //password must contain 8 to 20 characters
     // it must contain at least one uppercase, one lowercase, one digit,
     // one special character (@#$%!)
     // reference: http://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
@@ -95,7 +96,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String carID = "null";
-        String userType = getResources().getString(R.string.type_passenger);
+        // String userType = getResources().getString(R.string.type_passenger);
+        String userType = "Passenger";
         String gender = genderSpinner.getSelectedItem().toString();
 
         User user = new User(userName, password, userType, email, gender, carID);
@@ -112,7 +114,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 if (validatePasswordMatch()) {
                     if (validatePasswordComplexity()) {
                         if (sendUser()) {
-                            toHome();
                             pop("Congratulations", "You have successfully updated profile!", "Continue");
                         } else {
                             pop("Update Error", "UserName already exist", "Back");
@@ -132,12 +133,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            toHome();
+            Intent intent = new Intent(UpdateProfileActivity.this,FindDriverActivity.class);
+            startActivity(intent);
         }
     };
 
-    private void toHome() {
-//        intentWrapper = new PassengerUpdateIntent(UpdateProfileActivity.this, FindDriverActivity.class);
- //       this.startActivity(intentWrapper.getIntent());
-    }*/
 }
