@@ -53,8 +53,11 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     private EditText messageInput;
     private TextView messageHistory;
 
-    Double currLat;
-    Double currLon;
+    private Double currLat;
+    private Double currLon;
+
+    private Double destLat;
+    private Double destLon;
 
     private EditText destinationInput;
 
@@ -277,6 +280,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             }
                         }
                         LatLng dest = new LatLng(lat, lon);
+                        destLon = lon;
+                        destLat = lat;
                         destMarker = mMap.addMarker(new MarkerOptions().position(dest).title("Destination"));
                         destMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     }
@@ -382,7 +387,17 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
+                        Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+                        mess.putExtra("operation", MessageKind.SENDMESSAGE);
+                        mess.putExtra("message", MessageKind.PASSENGERDEST + ":" + driver + ":" + destLon + ":" + destLat);
+                        mess.putExtra("receiver", resultReceiver);
+                        mess.putExtra("activityName", ActivityNames.PASSENGERSTART);
+                        mess.putExtra("resultCode", ResultCode.PASSENGERDEST);
+                        startService(mess);
+
                         Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
+                        intent.putExtra("driver", driver);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
