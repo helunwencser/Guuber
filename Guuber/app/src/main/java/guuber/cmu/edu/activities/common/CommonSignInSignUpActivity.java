@@ -24,9 +24,9 @@ public class CommonSignInSignUpActivity extends AppCompatActivity {
     public void chooseSignInSignUp(View view) {
         Intent intent;
         if(view == this.findViewById(R.id.common_signInButton)) {
-            intent = new Intent(this, FindDriverActivity.class);
+            intent = new Intent(this, CommonSignInActivity.class);
         } else {
-            intent = new Intent(this, FindPassengerActivity.class);
+            intent = new Intent(this, CommonSignUpActivity.class);
         }
         this.startActivity(intent);
     }
