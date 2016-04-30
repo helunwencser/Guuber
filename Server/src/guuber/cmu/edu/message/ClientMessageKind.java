@@ -31,5 +31,10 @@ public class ClientMessageKind {
     
     /* chatting */
     public static final String CHAT = "CHAT";
+
+    /*update user profile*/
+    public static final String UPDATEUSERPROFILEOKAY = "UPDATEUSERPROFILEOKAY";
+
+    public static final String UPDATEUSERPROFILEDENIED = "UPDATEUSERPROFILEDENIED";
     
 }
