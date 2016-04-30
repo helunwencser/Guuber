@@ -50,26 +50,27 @@ public class FindDriverActivity extends AppCompatActivity  {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spin.setAdapter(adapter);
+        spin.setSelection(0, false);
         spin.setOnItemSelectedListener(new OnItemSelectedListener() {
-
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
-                if (arg2 == 0) {
-                    Log.d("sdsd0", "sdsd0");
-                    Intent intent = new Intent(FindDriverActivity.this, UpdateProfileActivity.class);
-                    intent.putExtra("userName", "Bob");
-                    startActivity(intent);
+                    if (arg2 == 1) {
+                        Log.d("sdsd0", "sdsd0");
+                        Intent intent = new Intent(FindDriverActivity.this, UpdateProfileActivity.class);
+                        intent.putExtra("userName", "Bob");
+                        startActivity(intent);
 
-                } else if (arg2 == 1) {
-                    Log.d("sdsd1", "sdsd1");
-                    Intent intent = new Intent(FindDriverActivity.this, ViewHistoryActivity.class);
-                    intent.putExtra("userName", "Bob");
-                    startActivity(intent);
-                } else if(arg2 == 2){
-                    Log.d("sdsd2", "sdsd2");
-                    Intent intent = new Intent(FindDriverActivity.this, CommonSignInSignUpActivity.class);
-                    startActivity(intent);
-                }
+                    } else if (arg2 == 2) {
+                        Log.d("sdsd1", "sdsd1");
+                        Intent intent = new Intent(FindDriverActivity.this, ViewHistoryActivity.class);
+                        intent.putExtra("userName", "Bob");
+                        startActivity(intent);
+
+                    } else if(arg2 == 3){
+                        Log.d("sdsd2", "sdsd2");
+                        Intent intent = new Intent(FindDriverActivity.this, CommonSignInSignUpActivity.class);
+                        startActivity(intent);
+                    }
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {

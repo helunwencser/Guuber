@@ -27,6 +27,7 @@
     <string name="submit_label">Submit</string>
 
     <string-array name="user_profile_page">
+        <item>Guuber</item>
         <item>UserProfile</item>
         <item>Transactions</item>
         <item>Log out</item>

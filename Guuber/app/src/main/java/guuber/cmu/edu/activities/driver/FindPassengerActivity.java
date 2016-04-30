@@ -53,34 +53,41 @@ public class FindPassengerActivity extends AppCompatActivity {
 
         // Apply the adapter to the spinner
         spin.setAdapter(adapter);
-        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spin.setSelection(0, false);
+        spin.setOnItemSelectedListener(new SpinnerListener() {});
 
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+    }
+    public void findDriver(View view) {
 
-                if (arg2 == 0) {
+    }
+
+
+    public class SpinnerListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+                if (arg2 == 1) {
                     Log.d("sdsd0", "sdsd0");
                     Intent intent = new Intent(FindPassengerActivity.this, UpdateProfileActivity.class);
                     intent.putExtra("userName", "Bob");
                     startActivity(intent);
 
-                } else if (arg2 == 1) {
+                } else if (arg2 == 2) {
                     Log.d("sdsd1", "sdsd1");
                     Intent intent = new Intent(FindPassengerActivity.this, ViewHistoryActivity.class);
                     intent.putExtra("userName", "Bob");
                     startActivity(intent);
-                } else if(arg2 == 2) {
+
+                } else if(arg2 == 3) {
                     Log.d("sdsd2", "sdsd2");
                     Intent intent = new Intent(FindPassengerActivity.this, CommonSignInSignUpActivity.class);
                     startActivity(intent);
                 }
-            }
 
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
 
-    }
-    public void findDriver(View view) {
+        }
 
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
     }
 }
