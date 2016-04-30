@@ -33,6 +33,7 @@ import java.util.Map;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.dbLayout.MessageDBController;
 import guuber.cmu.edu.entities.Message;
+import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
@@ -147,7 +148,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.putExtra("operation", MessageKind.SENDMESSAGE);
             intent.putExtra("message", MessageKind.DRIVERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
-            intent.putExtra("activityName", "StartServiceActivity");
+            intent.putExtra("activityName", ActivityNames.DRIVERSTART);
             intent.putExtra("resultCode", ResultCode.DRIVERLOC);
             startService(intent);
             /*
@@ -222,9 +223,17 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", "StartServiceActivity");
+            mess.putExtra("activityName", ActivityNames.DRIVERSTART);
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
+
+            Intent mess2 = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess2.putExtra("operation", MessageKind.SENDMESSAGE);
+            mess2.putExtra("message", MessageKind.STARTRIDE + ":" + currentPassenger);
+            mess2.putExtra("receiver", resultReceiver);
+            mess2.putExtra("activityName", ActivityNames.DRIVERSTART);
+            mess2.putExtra("resultCode", ResultCode.STARTRIDE);
+            startService(mess2);
 
             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -241,7 +250,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", "StartServiceActivity");
+            mess.putExtra("activityName", ActivityNames.DRIVERSTART);
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 

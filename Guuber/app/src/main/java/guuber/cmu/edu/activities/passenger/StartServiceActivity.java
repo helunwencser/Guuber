@@ -38,6 +38,7 @@ import edu.cmu.guuber.guuber.R;
 
 import guuber.cmu.edu.dbLayout.MessageDBController;
 import guuber.cmu.edu.entities.Message;
+import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
@@ -160,7 +161,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.putExtra("operation", MessageKind.SENDMESSAGE);
             intent.putExtra("message", MessageKind.PASSENGERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
-            intent.putExtra("activityName", "StartServiceActivity");
+            intent.putExtra("activityName", ActivityNames.PASSENGERSTART);
             intent.putExtra("resultCode", ResultCode.PASSENGERLOC);
             startService(intent);
             /*
@@ -294,7 +295,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.PASSENGEREXIT);
             mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", "StartServiceActivity");
+            mess.putExtra("activityName", ActivityNames.PASSENGERSTART);
             mess.putExtra("resultCode", ResultCode.PASSENGEREXIT);
             startService(mess);
 
@@ -372,6 +373,19 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     @Override
                     public void run() {
                         removeDriverMarker(driver);
+                    }
+                });
+            } else if (resultCode == ResultCode.STARTRIDE) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String driver = splits[1];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
                     }
                 });
             }

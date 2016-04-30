@@ -17,6 +17,8 @@ public class ResultCode {
 
     public static int DRIVEREXIT = 201;
 
+    public static int STARTRIDE = 202;
+
     public static int PASSENGERLOC = 300;
 
     public static int PASSENGEREXIT = 301;
