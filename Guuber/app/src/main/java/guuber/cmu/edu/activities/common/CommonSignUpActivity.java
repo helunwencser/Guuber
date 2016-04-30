@@ -6,18 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
-import guuber.cmu.edu.messageKind.MessageKind;
+import guuber.cmu.edu.messageConst.MessageKind;
+import guuber.cmu.edu.messageConst.MessageReply;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
 
@@ -117,7 +118,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
      * */
     private void putInfoIntoIntent(Intent intent, User user) {
         intent.putExtra("username", user.getUsername());
-        intent.putExtra("password", user.getPassWord());
+        intent.putExtra("password", user.getPassword());
         intent.putExtra("userType", user.getUserType());
         intent.putExtra("email", user.getEmail());
         intent.putExtra("gender", user.getGender());
@@ -169,9 +170,21 @@ public class CommonSignUpActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             if(resultCode == ResultCode.SIGNUP) {
                 String response = resultData.getString("response");
-                if(response.equals("OK")) {
+                if(response.equals(MessageReply.SIGNUPOK)) {
                     Intent intent = new Intent(context, FindDriverActivity.class);
                     startActivity(intent);
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pop(
+                                    "Username has been used",
+                                    "Please select another username",
+                                    "Back"
+                            );
+                        }
+                    });
+                    return;
                 }
             }
         }

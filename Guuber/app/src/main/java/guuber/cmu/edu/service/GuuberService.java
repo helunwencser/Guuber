@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ResultReceiver;
-import android.os.SystemClock;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -17,7 +16,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import guuber.cmu.edu.messageKind.MessageKind;
+import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.ws.remote.ServerConfig;
 
 /**

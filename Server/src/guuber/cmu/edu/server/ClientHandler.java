@@ -3,6 +3,9 @@ package guuber.cmu.edu.server;
 import java.io.IOException;
 
 import guuber.cmu.edu.db.DBOperation;
+import guuber.cmu.edu.db.User;
+import guuber.cmu.edu.message.MessageKind;
+import guuber.cmu.edu.message.MessageReply;
 
 /**
  * This class defines a new thread for listening
@@ -28,9 +31,28 @@ public class ClientHandler implements Runnable {
 				System.out.println("Received message: " + message);
 				String[] elements = message.split(":");
 				switch(elements[0]) {
+				/**
+				 * Message format:
+				 * SIGNUP:username:password:userType:email:gender:carId
+				 * */
 				case MessageKind.SIGNUP: 
-					this.connection.getBufferedWriter().write("OK" + "\n");
-					this.connection.getBufferedWriter().flush();
+					if(this.dbOperation.selectByUsername(elements[1]) == null) {
+						this.connection.getBufferedWriter().write(MessageReply.SIGNUPOK + "\n");
+						this.connection.getBufferedWriter().flush();
+						this.dbOperation.insertUser(
+								new User(
+										elements[1],
+										elements[2],
+										elements[3],
+										elements[4],
+										elements[5],
+										elements[6]
+										)
+								);
+					} else{
+						this.connection.getBufferedWriter().write(MessageReply.SIGNUPDENIED + "\n");
+						this.connection.getBufferedWriter().flush();
+					}
 					break;
 				case MessageKind.SIGNIN:
 					break;
@@ -42,5 +64,6 @@ public class ClientHandler implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		dbOperation.closeResources();
 	}
 }

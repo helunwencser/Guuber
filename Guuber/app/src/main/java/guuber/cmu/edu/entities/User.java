@@ -20,7 +20,7 @@ public class User implements Serializable{
     private static final long serialVersionUID = 2016010101L;//can't find how to generate it in android studio
 
     private String username = "";
-    private String passWord = "";
+    private String password = "";
     private String userType = "";
     private String email = "";
     private String gender = "";
@@ -28,14 +28,14 @@ public class User implements Serializable{
 
     public User(
             String username,
-            String passWord,
+            String password,
             String userType,
             String email,
             String gender,
             String carId
     ) {
         this.username = username;
-        this.passWord = passWord;
+        this.password = password;
         this.userType = userType;
         this.email = email;
         this.gender = gender;
@@ -50,12 +50,12 @@ public class User implements Serializable{
         this.username = username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserType() {
@@ -96,7 +96,7 @@ public class User implements Serializable{
      * */
     public String toMessage() {
         return this.username + ":" +
-                this.passWord + ":" +
+                this.password + ":" +
                 this.userType + ":" +
                 this.email + ":" +
                 this.gender + ":" +

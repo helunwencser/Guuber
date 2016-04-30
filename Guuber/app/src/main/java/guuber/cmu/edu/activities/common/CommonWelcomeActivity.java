@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.messageKind.MessageKind;
-import guuber.cmu.edu.resultCode.ResultCode;
+import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.service.GuuberService;
 
 
