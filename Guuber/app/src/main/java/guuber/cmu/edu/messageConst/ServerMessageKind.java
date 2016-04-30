@@ -30,4 +30,7 @@ public class ServerMessageKind {
 
     /* chatting */
     public static final String CHAT = "CHAT";
+
+    /*update user profile*/
+    public static final String UPDATEUSERPROFILE = "UPDATEUSERPROFILE";
 }
