@@ -1,13 +1,9 @@
 package guuber.cmu.edu.messageConst;
 
 /**
- * Created by helunwen on 4/29/16.
+ * Created by helunwen on 4/30/16.
  */
-
-/**
- * This class defines all kinds of messages will be used in Guuber
- * */
-public class MessageKind {
+public class ServerMessageKind {
     /* sign up message */
     public static final String SIGNUP = "SIGNUP";
 

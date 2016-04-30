@@ -19,8 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import guuber.cmu.edu.messageConst.ActivityNames;
-import guuber.cmu.edu.messageConst.MessageKind;
-import guuber.cmu.edu.messageConst.MessageReply;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.ws.remote.ServerConfig;
 

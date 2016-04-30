@@ -39,7 +39,6 @@ import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.dbLayout.MessageDBController;
 import guuber.cmu.edu.entities.Message;
 import guuber.cmu.edu.messageConst.ActivityNames;
-import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
 

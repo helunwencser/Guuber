@@ -16,9 +16,6 @@ import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
 import guuber.cmu.edu.messageConst.ActivityNames;
-import guuber.cmu.edu.messageConst.MessageKind;
-import guuber.cmu.edu.messageConst.MessageReply;
-import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
 
 public class CommonSignUpActivity extends AppCompatActivity {
