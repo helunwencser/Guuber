@@ -160,6 +160,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.putExtra("operation", MessageKind.SENDMESSAGE);
             intent.putExtra("message", MessageKind.PASSENGERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
+            intent.putExtra("activityName", "StartServiceActivity");
             intent.putExtra("resultCode", ResultCode.PASSENGERLOC);
             startService(intent);
             /*
@@ -293,6 +294,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.PASSENGEREXIT);
             mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", "StartServiceActivity");
             mess.putExtra("resultCode", ResultCode.PASSENGEREXIT);
             startService(mess);
 
@@ -311,6 +313,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         Marker driverMarker = mMap.addMarker(new MarkerOptions().position(place).title(driverID + " position"));
         driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         driverMarkers.put(driverID, driverMarker);
+    }
+
+    private void removeDriverMarker(String driverID) {
+        if (driverMarkers.get(driverID) != null) {
+            driverMarkers.get(driverID).remove();
+        }
+        driverMarkers.remove(driverID);
     }
 
     @Override
@@ -343,7 +352,29 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-
+            if(resultCode == ResultCode.DRIVERLOC) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String driver = splits[1];
+                final Double lon = Double.parseDouble(splits[2]);
+                final Double lat = Double.parseDouble(splits[3]);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        addDriverMarker(driver, lon, lat);
+                    }
+                });
+            } else if (resultCode == ResultCode.DRIVEREXIT) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String driver = splits[1];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        removeDriverMarker(driver);
+                    }
+                });
+            }
         }
     }
 }

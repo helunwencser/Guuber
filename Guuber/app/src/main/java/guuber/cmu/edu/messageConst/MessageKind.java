@@ -14,10 +14,10 @@ public class MessageKind {
     /* sign in message */
     public static String SIGNIN = "SIGNIN";
 
-    /* driver location message */
+    /* driver location udpate message */
     public static String DRIVERLOC = "DRIVERLOC";
 
-    /* passenger location message */
+    /* passenger location update message */
     public static String PASSENGERLOC = "PASSENGERLOC";
 
     /* driver location should be deleted */

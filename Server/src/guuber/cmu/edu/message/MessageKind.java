@@ -10,15 +10,15 @@ public class MessageKind {
     /* sign in message */
 	public static final String SIGNIN = "SIGNIN";
 	
-    /* driver location message */
-    public static String DRIVERLOC = "DRIVERLOC";
+    /* driver location update message */
+    public static final String DRIVERLOC = "DRIVERLOC";
 
-    /* passenger location message */
-    public static String PASSENGERLOC = "PASSENGERLOC";
-    
+    /* passenger location update message */
+    public static final String PASSENGERLOC = "PASSENGERLOC";
+
     /* driver location should be deleted */
-    public static String DRIVEREXIT = "DRIVEREXIT";
+    public static final String DRIVEREXIT = "DRIVEREXIT";
     
     /* passenger location should be deleted */
-    public static String PASSENGEREXIT = "PASSENGEREXIT";
+    public static final String PASSENGEREXIT = "PASSENGEREXIT";
 }

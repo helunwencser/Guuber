@@ -1,5 +1,6 @@
 package guuber.cmu.edu.server;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -91,5 +92,86 @@ public class Connections {
 
 	public static Map<String, Connection> getDriverConnections() {
 		return driverConnections;
+	}
+	
+	/**
+	 * broadcast message to drivers
+	 * @param	message	message to be broadcast
+	 * */
+	public static void broadcastMessageToDrivers(String message) {
+		Set<String> keys = driverConnections.keySet();
+		for(String key : keys) {
+			Connection connection = driverConnections.get(key);
+			try {
+				connection.getBufferedWriter().write(message + "\n");
+				connection.getBufferedWriter().flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("broadcast message: " + message + " to " + connection.getUsername() + " fails");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * send message to driver directly
+	 * @param username	the name of driver
+	 * 
+	 * @param	message	message to be sent
+	 * */
+	public static void sendMessageToDriver(String username, String message) {
+		if(driverConnections.containsKey(username)) {
+			try {
+				driverConnections.get(username).getBufferedWriter().write(message + "\n");
+				driverConnections.get(username).getBufferedWriter().flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("send message: " + message + " to " + username + " fails");
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("There is no driver named " + username + " or he is not online");
+		}
+	}
+	
+	/**
+	 * broadcast message to passengers
+	 * @param	message	message to be broadcast
+	 * */
+	public static void broadcastMessageToPassengers(String message) {
+		Set<String> keys = passengerConnections.keySet();
+		for(String key : keys) {
+			Connection connection = passengerConnections.get(key);
+			try {
+				connection.getBufferedWriter().write(message + "\n");
+				connection.getBufferedWriter().flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("broadcast message: " + message + " to " + connection.getUsername() + " fails");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	/**
+	 * send message to passenger directly
+	 * @param username	the name of passenger
+	 * 
+	 * @param	message	message to be sent
+	 * */
+	public static void sendMessageToPassenger(String username, String message) {
+		if(passengerConnections.containsKey(username)) {
+			try {
+				passengerConnections.get(username).getBufferedWriter().write(message + "\n");
+				passengerConnections.get(username).getBufferedWriter().flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("send message: " + message + " to " + username + " fails");
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("There is no passenger named " + username + " or he is not online");
+		}
 	}
 }

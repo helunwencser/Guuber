@@ -66,7 +66,7 @@ public class ClientHandler implements Runnable {
 											)
 									);
 						}
-					} else{
+					} else {
 						this.connection.getBufferedWriter().write(MessageReply.SIGNUPDENIED + "\n");
 						this.connection.getBufferedWriter().flush();
 					}
@@ -88,6 +88,27 @@ public class ClientHandler implements Runnable {
 						this.connection.getBufferedWriter().write(response);
 						this.connection.getBufferedWriter().flush();
 					}
+					break;
+				/**
+				 * Message format:
+				 * DRIVERLOC:latitude:longtitude
+				 * */
+				case MessageKind.DRIVERLOC:
+					this.connection.getBufferedWriter().write(MessageReply.DRIVERLOCOK + "\n");
+					this.connection.getBufferedWriter().flush();
+					String driverLocationUpdate = elements[0] + ":" + this.connection.getUsername()
+												+ message.substring(message.indexOf(":"));
+					Connections.broadcastMessageToPassengers(driverLocationUpdate);
+				/**
+				 * Message format:
+				 * PASSENGERLOC:latitude:longtitude
+				 * */
+				case MessageKind.PASSENGERLOC:
+					this.connection.getBufferedWriter().write(MessageReply.PASSENGERLOCOK + "\n");
+					this.connection.getBufferedWriter().flush();
+					String passengerLocationUpdate = elements[0] + ":" + this.connection.getUsername()
+													+ message.substring(message.indexOf(":"));
+					Connections.broadcastMessageToDrivers(passengerLocationUpdate);
 					break;
 				default:
 					break;

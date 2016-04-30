@@ -147,6 +147,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.putExtra("operation", MessageKind.SENDMESSAGE);
             intent.putExtra("message", MessageKind.DRIVERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
+            intent.putExtra("activityName", "StartServiceActivity");
             intent.putExtra("resultCode", ResultCode.DRIVERLOC);
             startService(intent);
             /*
@@ -221,6 +222,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", "StartServiceActivity");
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
@@ -239,6 +241,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess.putExtra("operation", MessageKind.SENDMESSAGE);
             mess.putExtra("message", MessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", "StartServiceActivity");
             mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
@@ -257,6 +260,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         Marker passengerMarker = mMap.addMarker(new MarkerOptions().position(place).title(passengerID + " position"));
         passengerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         passengerMarkers.put(passengerID, passengerMarker);
+    }
+
+    private void removePassengerMarker(String passengerID) {
+        if (passengerMarkers.get(passengerID) != null) {
+            passengerMarkers.get(passengerID).remove();
+        }
+        passengerMarkers.remove(passengerID);
     }
 
     @Override
@@ -290,7 +300,29 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-
+            if(resultCode == ResultCode.PASSENGERLOC) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String passenger = splits[1];
+                final Double lon = Double.parseDouble(splits[2]);
+                final Double lat = Double.parseDouble(splits[3]);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        addPassengerMarker(passenger, lon, lat);
+                    }
+                });
+            } else if (resultCode == ResultCode.PASSENGEREXIT) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String passenger = splits[1];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        removePassengerMarker(passenger);
+                    }
+                });
+            }
         }
     }
 }
