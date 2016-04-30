@@ -30,10 +30,4 @@ public class ServerMessageKind {
 
     /* chatting */
     public static final String CHAT = "CHAT";
-
-    /* Tell GuuberService to send message */
-    public static final String SENDMESSAGE = "SENDMESSAGE";
-
-    /* Tell GuuberService to start service */
-    public static final String STARTSERVICE = "STARTSERVICE";
 }

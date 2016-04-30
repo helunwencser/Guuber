@@ -33,6 +33,9 @@ import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.dbLayout.MessageDBController;
 import guuber.cmu.edu.entities.Message;
 import guuber.cmu.edu.messageConst.ActivityNames;
+import guuber.cmu.edu.messageConst.ClientMessageKind;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
 
@@ -146,11 +149,10 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
             Intent intent = new Intent(this, GuuberService.class);
-            intent.putExtra("operation", MessageKind.SENDMESSAGE);
-            intent.putExtra("message", MessageKind.DRIVERLOC + ":" + lon + ":" + lat);
+            intent.putExtra("operation", Operation.SENDMESSAGE);
+            intent.putExtra("message", ServerMessageKind.DRIVERLOC + ":" + lon + ":" + lat);
             intent.putExtra("receiver", resultReceiver);
             intent.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
-            intent.putExtra("resultCode", ResultCode.DRIVERLOC);
             startService(intent);
             /*
             addPassengerMarker("1", lon + 0.005, lat);
@@ -202,11 +204,10 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             String receiverid = currentPassenger;
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
-            mess.putExtra("operation", MessageKind.SENDMESSAGE);
-            mess.putExtra("message", MessageKind.CHAT + ":" + receiverid + ":" + current);
+            mess.putExtra("operation", Operation.SENDMESSAGE);
+            mess.putExtra("message", ServerMessageKind.CHAT + ":" + receiverid + ":" + current);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
-            mess.putExtra("resultCode", ResultCode.CHAT);
             startService(mess);
 
             Message message = new Message(senderid, receiverid, current, new Date().toString());
@@ -234,19 +235,17 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             }
             serviceStarted = true;
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
-            mess.putExtra("operation", MessageKind.SENDMESSAGE);
-            mess.putExtra("message", MessageKind.DRIVEREXIT);
+            mess.putExtra("operation", Operation.SENDMESSAGE);
+            mess.putExtra("message", ServerMessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
-            mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
             Intent mess2 = new Intent(StartServiceActivity.this, GuuberService.class);
-            mess2.putExtra("operation", MessageKind.SENDMESSAGE);
-            mess2.putExtra("message", MessageKind.STARTRIDE + ":" + currentPassenger);
+            mess2.putExtra("operation", Operation.SENDMESSAGE);
+            mess2.putExtra("message", ServerMessageKind.STARTRIDE + ":" + currentPassenger);
             mess2.putExtra("receiver", resultReceiver);
             mess2.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
-            mess2.putExtra("resultCode", ResultCode.STARTRIDE);
             startService(mess2);
         }
     };
@@ -256,11 +255,10 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         public void onClick(View v) {
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
-            mess.putExtra("operation", MessageKind.SENDMESSAGE);
-            mess.putExtra("message", MessageKind.DRIVEREXIT);
+            mess.putExtra("operation", Operation.SENDMESSAGE);
+            mess.putExtra("message", ServerMessageKind.DRIVEREXIT);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
-            mess.putExtra("resultCode", ResultCode.DRIVEREXIT);
             startService(mess);
 
             Intent intent = new Intent(StartServiceActivity.this, FindPassengerActivity.class);
@@ -320,9 +318,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if(resultCode == ResultCode.PASSENGERLOC) {
-                String response = resultData.getString("response");
-                String[] splits = response.split(":");
+            String response = resultData.getString("response");
+            if (response == null || response.length() == 0) {
+                return;
+            }
+            String[] splits = response.split(":");
+            String type = splits[0];
+            if(type.equals(ClientMessageKind.PASSENGERLOC)) {
                 final String passenger = splits[1];
                 final Double lon = Double.parseDouble(splits[2]);
                 final Double lat = Double.parseDouble(splits[3]);
@@ -332,9 +334,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         addPassengerMarker(passenger, lon, lat);
                     }
                 });
-            } else if (resultCode == ResultCode.PASSENGEREXIT) {
-                String response = resultData.getString("response");
-                String[] splits = response.split(":");
+            } else if (type.equals(ClientMessageKind.PASSENGEREXIT)) {
                 final String passenger = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override
@@ -342,9 +342,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         removePassengerMarker(passenger);
                     }
                 });
-            } else if (resultCode == ResultCode.PASSENGERDEST) {
-                String response = resultData.getString("response");
-                String[] splits = response.split(":");
+            } else if (type.equals(ClientMessageKind.PASSENGERDEST)) {
                 final Double lon = Double.parseDouble(splits[1]);
                 final Double lat = Double.parseDouble(splits[2]);
                 runOnUiThread(new Runnable() {
@@ -359,9 +357,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         finish();
                     }
                 });
-            } else if (resultCode == ResultCode.CHAT) {
-                String response = resultData.getString("response");
-                String[] splits = response.split(":");
+            } else if (type.equals(ClientMessageKind.CHAT)) {
                 final String passenger = splits[1];
                 final String content = splits[2];
                 runOnUiThread(new Runnable() {

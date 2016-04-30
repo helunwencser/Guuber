@@ -41,6 +41,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     private Double destLon;
     private Double destLat;
 
+    private Double startLon;
+    private Double startLat;
+
     private List<Polyline> routeLines;
 
     private Routing routing;
@@ -115,14 +118,19 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-                LatLng start = new LatLng(lat, lon);
-                LatLng end = new LatLng(destLat, destLon);
-                routing = new Routing.Builder()
-                        .travelMode(Routing.TravelMode.WALKING)
-                        .withListener(this)
-                        .waypoints(start, end)
-                        .build();
-                routing.execute();
+            LatLng start = new LatLng(lat, lon);
+            LatLng end = new LatLng(destLat, destLon);
+            routing = new Routing.Builder()
+                    .travelMode(Routing.TravelMode.WALKING)
+                    .withListener(this)
+                    .waypoints(start, end)
+                    .build();
+            routing.execute();
+
+            if (startLon == null) {
+                startLon = lon;
+                startLat = lat;
+            }
 
         } else {
         }
@@ -177,6 +185,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             polyOptions.color(getResources().getColor(R.color.colorPrimary));
             polyOptions.addAll(arrayList.get(i).getPoints());
             Polyline line = mMap.addPolyline(polyOptions);
+
             routeLines.add(line);
         }
     }
