@@ -10,7 +10,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,16 +23,30 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.cmu.guuber.guuber.R;
 
 /**
  * Created by wangziming on 4/9/16.
  */
-public class EndServiceActivity extends FragmentActivity implements OnMapReadyCallback {
+public class EndServiceActivity extends FragmentActivity implements OnMapReadyCallback, RoutingListener {
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Marker marker;
+
+    private Double destLon;
+    private Double destLat;
+
+    private List<Polyline> routeLines;
+
+    private Routing routing;
+
+    private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +56,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.driver_end_map);
         mapFragment.getMapAsync(this);
+
 
         try {
             // Acquire a reference to the system Location Manager
@@ -76,6 +96,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         Button endButton =
                 (Button) findViewById(R.id.driver_endButton);
         endButton.setOnClickListener(endButtonClicked);
+
+        destLon = -122.0;
+        destLat = 37.0;
     }
 
     public void updateLocation(Location location) {
@@ -88,6 +111,16 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             LatLng sydney = new LatLng(lat, lon);
             marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+                LatLng start = new LatLng(lat, lon);
+                LatLng end = new LatLng(destLat, destLon);
+                routing = new Routing.Builder()
+                        .travelMode(Routing.TravelMode.WALKING)
+                        .withListener(this)
+                        .waypoints(start, end)
+                        .build();
+                routing.execute();
+
         } else {
         }
 
@@ -96,9 +129,10 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(18));
         try {
             Location loc = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
+
             updateLocation(loc);
         } catch (SecurityException e) {
             e.printStackTrace();
@@ -112,4 +146,40 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             startActivity(intent);
         }
     };
+
+    @Override
+    public void onRoutingFailure(RouteException e) {
+
+    }
+
+    @Override
+    public void onRoutingStart() {
+
+    }
+
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> arrayList, int index) {
+
+        if(routeLines != null) {
+            for (Polyline line : routeLines) {
+                line.remove();
+            }
+        }
+
+        routeLines = new ArrayList<>();
+
+        for (int i = 0; i <arrayList.size(); i++) {
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(R.color.colorPrimary));
+            polyOptions.addAll(arrayList.get(i).getPoints());
+            Polyline line = mMap.addPolyline(polyOptions);
+            routeLines.add(line);
+        }
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+
+    }
 }
