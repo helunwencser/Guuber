@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -20,7 +17,6 @@ import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.messageConst.MessageReply;
-import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
 
 public class CommonSignInActivity extends AppCompatActivity {
@@ -88,7 +84,6 @@ public class CommonSignInActivity extends AppCompatActivity {
         intent.putExtra("operation", MessageKind.SENDMESSAGE);
         intent.putExtra("message", MessageKind.SIGNIN + ":" + username + ":" + password);
         intent.putExtra("receiver", resultReceiver);
-        intent.putExtra("resultCode", ResultCode.SIGNIN);
         intent.putExtra("activityName", ActivityNames.COMMONSIGNINACTIVITY);
         startService(intent);
     }
@@ -115,44 +110,42 @@ public class CommonSignInActivity extends AppCompatActivity {
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if (resultCode == ResultCode.SIGNIN) {
-                String response = resultData.getString("response");
-                System.out.println("response: " + response);
-                /**
-                 * Message format:
-                 * SIGNINOK:username:password:userType:email:gender:carId
-                 * or
-                 * SIGNINDENIED
-                 * */
-                String[] elements = response.split(":");
-                if (elements[0].equals(MessageReply.SIGNINOK)) {
-                    username = elements[1];
-                    password = elements[2];
-                    userType = elements[3];
-                    email = elements[4];
-                    gender = elements[5];
-                    carId = elements[6];
-                    Intent intent = null;
-                    if(userType.equals("Driver")) {
-                        intent = new Intent(context, FindPassengerActivity.class);
-                    } else {
-                        intent = new Intent(context, FindDriverActivity.class);
-                    }
-                    putInfoIntoIntent(intent);
-                    startActivity(intent);
+            String response = resultData.getString("response");
+            System.out.println("response: " + response);
+            /**
+             * Message format:
+             * SIGNINOK:username:password:userType:email:gender:carId
+             * or
+             * SIGNINDENIED
+             * */
+            String[] elements = response.split(":");
+            if (elements[0].equals(MessageReply.SIGNINOK)) {
+                username = elements[1];
+                password = elements[2];
+                userType = elements[3];
+                email = elements[4];
+                gender = elements[5];
+                carId = elements[6];
+                Intent intent = null;
+                if(userType.equals("Driver")) {
+                    intent = new Intent(context, FindPassengerActivity.class);
                 } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            pop(
-                                    "Username and password not match",
-                                    "Please input your correct username and password or sign up",
-                                    "Back"
-                            );
-                        }
-                    });
-                    return;
+                    intent = new Intent(context, FindDriverActivity.class);
                 }
+                putInfoIntoIntent(intent);
+                startActivity(intent);
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pop(
+                                "Username and password not match",
+                                "Please input your correct username and password or sign up",
+                                "Back"
+                        );
+                    }
+                });
+                return;
             }
         }
     }

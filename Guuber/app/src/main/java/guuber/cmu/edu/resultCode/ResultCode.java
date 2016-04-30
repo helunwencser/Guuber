@@ -5,26 +5,8 @@ package guuber.cmu.edu.resultCode;
  */
 
 /**
- * This class defines all result code which will be used by service
- * to send message back to activity
+ * This class defines result code which will be used by service
  * */
 public class ResultCode {
-    public static int SIGNUP = 100;
-
-    public static int SIGNIN = 101;
-
-    public static int DRIVERLOC = 200;
-
-    public static int DRIVEREXIT = 201;
-
-    public static int STARTRIDE = 202;
-
-    public static int PASSENGERLOC = 300;
-
-    public static int PASSENGEREXIT = 301;
-
-    public static int PASSENGERDEST = 302;
-
-    public static int CHAT = 102;
-
+    public static int RESULTCODE = 100;
 }

@@ -113,7 +113,6 @@ public class CommonSignUpActivity extends AppCompatActivity {
         intent.putExtra("operation", MessageKind.SENDMESSAGE);
         intent.putExtra("message", MessageKind.SIGNUP + ":" + user.toMessage());
         intent.putExtra("receiver", resultReceiver);
-        intent.putExtra("resultCode", ResultCode.SIGNUP);
         intent.putExtra("activityName", ActivityNames.COMMONSIGNUPACTIVITY);
         startService(intent);
     }
@@ -157,30 +156,28 @@ public class CommonSignUpActivity extends AppCompatActivity {
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if(resultCode == ResultCode.SIGNUP) {
-                String response = resultData.getString("response");
-                if(response.equals(MessageReply.SIGNUPOK)) {
-                    Intent intent = null;
-                    if(userType.equals("Driver")) {
-                        intent = new Intent(context, FindPassengerActivity.class);
-                    } else {
-                        intent = new Intent(context, FindDriverActivity.class);
-                    }
-                    putInfoIntoIntent(intent);
-                    startActivity(intent);
+            String response = resultData.getString("response");
+            if(response.equals(MessageReply.SIGNUPOK)) {
+                Intent intent = null;
+                if(userType.equals("Driver")) {
+                    intent = new Intent(context, FindPassengerActivity.class);
                 } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            pop(
-                                    "Username has been used",
-                                    "Please select another username",
-                                    "Back"
-                            );
-                        }
-                    });
-                    return;
+                    intent = new Intent(context, FindDriverActivity.class);
                 }
+                putInfoIntoIntent(intent);
+                startActivity(intent);
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pop(
+                                "Username has been used",
+                                "Please select another username",
+                                "Back"
+                        );
+                    }
+                });
+                return;
             }
         }
     }

@@ -21,6 +21,7 @@ import java.util.Map;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.messageConst.MessageReply;
+import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.ws.remote.ServerConfig;
 
 /**
@@ -37,7 +38,7 @@ public class GuuberService extends Service {
     /**
      * Store all ResultReceivers for all activities
      * */
-    private Map<String, GuuberResultReceiver> resultReceiverMap = new HashMap<String, GuuberResultReceiver>();
+    private Map<String, ResultReceiver> resultReceiverMap = new HashMap<String, ResultReceiver>();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -59,8 +60,8 @@ public class GuuberService extends Service {
                     case MessageReply.SIGNUPDENIED:
                     case MessageReply.SIGNUPOK:
                         if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNUPACTIVITY)) {
-                            resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).getResultReceiver().send(
-                                    resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).getResultCode(),
+                            resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).send(
+                                    ResultCode.RESULTCODE,
                                     bundle
                             );
                         }
@@ -68,23 +69,23 @@ public class GuuberService extends Service {
                     case MessageReply.SIGNINDENIED:
                     case MessageReply.SIGNINOK:
                         if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNINACTIVITY)) {
-                            resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).getResultReceiver().send(
-                                    resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).getResultCode(),
+                            resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).send(
+                                    ResultCode.RESULTCODE,
                                     bundle
                             );
                         }
                         break;
                     case MessageKind.DRIVERLOC:
                         if(resultReceiverMap.keySet().contains(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
-                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).getResultReceiver().send(
-                                    resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).getResultCode(),
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
                                     bundle
                             );
                         }
                     case MessageKind.PASSENGERLOC:
                         if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
-                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).getResultReceiver().send(
-                                    resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).getResultCode(),
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
                                     bundle
                             );
                         }
@@ -164,15 +165,8 @@ public class GuuberService extends Service {
         public void run() {
             ResultReceiver resultReceiver = intent.getParcelableExtra("receiver");
             String message = intent.getStringExtra("message");
-            int resultCode = intent.getIntExtra("resultCode", 0);
             String activityName = intent.getStringExtra("activityName");
-            resultReceiverMap.put(
-                    activityName,
-                    new GuuberResultReceiver(
-                            resultReceiver,
-                            resultCode
-                    )
-                    );
+            resultReceiverMap.put(activityName, resultReceiver);
             try {
                 bufferedWriter.write(message + "\n");
                 bufferedWriter.flush();
