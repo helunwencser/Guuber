@@ -2,6 +2,8 @@ package guuber.cmu.edu.activities.passenger;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,9 +24,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import edu.cmu.guuber.guuber.R;
 
@@ -36,8 +43,12 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Marker myMarker;
+    private Marker destMarker;
+
     private EditText messageInput;
     private TextView messageHistory;
+
+    private EditText destinationInput;
 
     private MessageDBController meassageDBController;
 
@@ -96,7 +107,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         Button sendButton =
                 (Button) findViewById(R.id.passenger_start_sendButton);
         sendButton.setOnClickListener(sendButtonClicked);
+
+        Button submitButton =
+                (Button) findViewById(R.id.passenger_start_submitButton);
+        submitButton.setOnClickListener(submitButtonClicked);
+
         messageInput = (EditText) findViewById(R.id.passenger_start_input);
+        destinationInput = (EditText) findViewById(R.id.passenger_destination);
         messageHistory = (TextView) findViewById(R.id.passenger_start_history);
         messageHistory.setMovementMethod(new ScrollingMovementMethod());
 
@@ -194,6 +211,52 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             messageHistory.scrollTo(0, 0);
         }
     }
+
+    View.OnClickListener submitButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (destinationInput.getText().length() > 0) {
+                try {
+                    Double myLat = myMarker.getPosition().latitude;
+                    Double myLon = myMarker.getPosition().longitude;
+
+                    Geocoder geoCoder = new Geocoder(StartServiceActivity.this, Locale.getDefault());
+                    String addr = destinationInput.getText().toString();
+                    List<Address> addresses = geoCoder.getFromLocationName(addr, Integer.MAX_VALUE,
+                                            myLat - 20, myLon - 20, myLat + 20, myLon + 20);
+
+                    if (addresses.size() > 0) {
+                        Double lat = null;
+                        Double lon = null;
+
+                        if (destMarker != null) {
+                            destMarker.remove();
+                        }
+
+                        Double minDist = null;
+                        for (int i = 0; i < addresses.size(); i++) {
+                            Double currLat = addresses.get(i).getLatitude();
+                            Double currLon = addresses.get(i).getLongitude();
+
+                            double dist = Math.sqrt(Math.pow((currLat - myLat), 2)
+                                                + Math.pow((currLon - myLon), 2));
+
+                            if (minDist == null || dist < minDist) {
+                                lat = currLat;
+                                lon = currLon;
+                                minDist = dist;
+                            }
+                        }
+                        LatLng dest = new LatLng(lat, lon);
+                        destMarker = mMap.addMarker(new MarkerOptions().position(dest).title("Destination"));
+                        destMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();;
+                }
+            }
+        }
+    };
 
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
