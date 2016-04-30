@@ -10,9 +10,9 @@ public class MessageKind {
     /* sign in message */
 	public static final String SIGNIN = "SIGNIN";
 	
-    /* driver location message */
-    public static String DRIVERLOC = "DRIVERLOC";
+    /* driver location update message */
+    public static final String DRIVERLOC = "DRIVERLOC";
 
-    /* passenger location message */
-    public static String PASSENGERLOC = "PASSENGERLOC";
+    /* passenger location update message */
+    public static final String PASSENGERLOC = "PASSENGERLOC";
 }
