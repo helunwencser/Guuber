@@ -259,6 +259,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         passengerMarkers.put(passengerID, passengerMarker);
     }
 
+    private void removePassengerMarker(String passengerID) {
+        if (passengerMarkers.get(passengerID) != null) {
+            passengerMarkers.get(passengerID).remove();
+        }
+        passengerMarkers.remove(passengerID);
+    }
+
     @Override
     public boolean onMarkerClick(Marker marker) {
 
@@ -290,7 +297,29 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-
+            if(resultCode == ResultCode.PASSENGERLOC) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String passenger = splits[1];
+                final Double lon = Double.parseDouble(splits[2]);
+                final Double lat = Double.parseDouble(splits[3]);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        addPassengerMarker(passenger, lon, lat);
+                    }
+                });
+            } else if (resultCode == ResultCode.PASSENGEREXIT) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String passenger = splits[1];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        removePassengerMarker(passenger);
+                    }
+                });
+            }
         }
     }
 }

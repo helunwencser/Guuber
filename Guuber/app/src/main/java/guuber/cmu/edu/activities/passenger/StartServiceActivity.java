@@ -313,6 +313,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         driverMarkers.put(driverID, driverMarker);
     }
 
+    private void removeDriverMarker(String driverID) {
+        if (driverMarkers.get(driverID) != null) {
+            driverMarkers.get(driverID).remove();
+        }
+        driverMarkers.remove(driverID);
+    }
+
     @Override
     public boolean onMarkerClick(Marker marker) {
         for (String driver : driverMarkers.keySet()) {
@@ -343,7 +350,29 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-
+            if(resultCode == ResultCode.DRIVERLOC) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String driver = splits[1];
+                final Double lon = Double.parseDouble(splits[2]);
+                final Double lat = Double.parseDouble(splits[3]);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        addDriverMarker(driver, lon, lat);
+                    }
+                });
+            } else if (resultCode == ResultCode.DRIVEREXIT) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String driver = splits[1];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        removeDriverMarker(driver);
+                    }
+                });
+            }
         }
     }
 }
