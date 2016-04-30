@@ -39,16 +39,33 @@ public class ClientHandler implements Runnable {
 					if(this.dbOperation.selectByUsername(elements[1]) == null) {
 						this.connection.getBufferedWriter().write(MessageReply.SIGNUPOK + "\n");
 						this.connection.getBufferedWriter().flush();
-						this.dbOperation.insertUser(
-								new User(
-										elements[1],
-										elements[2],
-										elements[3],
-										elements[4],
-										elements[5],
-										elements[6]
-										)
-								);
+						this.connection.setUsername(elements[1]);
+						this.connection.setUserType(elements[3]);
+						if(elements[3].equals("Driver")) {
+							Connections.addDriverConnection(elements[1], connection);
+							this.dbOperation.insertUser(
+									new User(
+											elements[1],
+											elements[2],
+											elements[3],
+											elements[4],
+											elements[5],
+											elements[6]
+											)
+									);
+						} else {
+							Connections.addPassengerConnection(elements[1], connection);
+							this.dbOperation.insertUser(
+									new User(
+											elements[1],
+											elements[2],
+											elements[3],
+											elements[4],
+											elements[5],
+											""
+											)
+									);
+						}
 					} else{
 						this.connection.getBufferedWriter().write(MessageReply.SIGNUPDENIED + "\n");
 						this.connection.getBufferedWriter().flush();
