@@ -20,6 +20,7 @@ import java.util.Map;
 
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.MessageKind;
+import guuber.cmu.edu.messageConst.MessageReply;
 import guuber.cmu.edu.ws.remote.ServerConfig;
 
 /**
@@ -50,11 +51,13 @@ public class GuuberService extends Service {
         String response = null;
         try {
             while((response = bufferedReader.readLine()) != null) {
+                System.out.println("received message from server: " + response);
                 String messageKind = response.substring(0, response.indexOf(":"));
                 Bundle bundle = new Bundle();
                 bundle.putString("response", response);
                 switch (messageKind) {
-                    case MessageKind.SIGNUP:
+                    case MessageReply.SIGNUPDENIED:
+                    case MessageReply.SIGNUPOK:
                         if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNUPACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).getResultReceiver().send(
                                     resultReceiverMap.get(ActivityNames.COMMONSIGNUPACTIVITY).getResultCode(),
@@ -62,7 +65,8 @@ public class GuuberService extends Service {
                             );
                         }
                         break;
-                    case MessageKind.SIGNIN:
+                    case MessageReply.SIGNINDENIED:
+                    case MessageReply.SIGNINOK:
                         if(resultReceiverMap.keySet().contains(ActivityNames.COMMONSIGNINACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).getResultReceiver().send(
                                     resultReceiverMap.get(ActivityNames.COMMONSIGNINACTIVITY).getResultCode(),

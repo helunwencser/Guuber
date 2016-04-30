@@ -8,21 +8,17 @@ package guuber.cmu.edu.messageConst;
  * This class should be the same as MessageReply class in server
  * */
 public class MessageReply {
-    public static String SIGNUPOK = "SIGNUPOK";
+    public static final String SIGNUPOK = "SIGNUPOK";
 
-    public static String SIGNUPDENIED = "SIGNUPDENIED";
+    public static final String SIGNUPDENIED = "SIGNUPDENIED";
 
-    public static String SIGNINOK = "SIGNINOK";
+    public static final String SIGNINOK = "SIGNINOK";
 
-    public static String SIGNINDENIED = "SIGNINDENIED";
+    public static final String SIGNINDENIED = "SIGNINDENIED";
 
-    public static String DRIVERLOCOK = "DRIVERLOCOK";
+    public static final String DRIVEREXITOK = "DRIVEREXITOK";
 
-    public static String PASSENGERLOCOK = "PASSENGERLOCOK";
+    public static final String PASSENGEREXITOK = "DRIVEREXITOK";
 
-    public static String DRIVEREXITOK = "DRIVEREXITOK";
-
-    public static String PASSENGEREXITOK = "DRIVEREXITOK";
-
-    public static String STARTRIDEOK = "STARTRIDEOK";
+    public static final String STARTRIDEOK = "STARTRIDEOK";
 }
