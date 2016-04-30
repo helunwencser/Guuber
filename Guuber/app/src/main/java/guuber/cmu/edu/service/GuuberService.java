@@ -53,7 +53,12 @@ public class GuuberService extends Service {
         try {
             while((response = bufferedReader.readLine()) != null) {
                 System.out.println("received message from server: " + response);
-                String messageKind = response.substring(0, response.indexOf(":"));
+                String messageKind = "";
+                if(response.contains(":")) {
+                    messageKind = response.substring(0, response.indexOf(":"));
+                } else {
+                    messageKind = response;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("response", response);
                 switch (messageKind) {
