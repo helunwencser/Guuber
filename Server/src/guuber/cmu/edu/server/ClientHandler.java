@@ -22,15 +22,22 @@ public class ClientHandler implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		Object message = null;
+		String message = null;
 		try {
-			while((message = this.connection.getObjectInputStream().readObject()) != null) {
-				//TODO: add logic for different kinds of message
-				
+			while((message = this.connection.getBufferedReader().readLine()) != null) {
+				System.out.println("Received message: " + message);
+				String[] elements = message.split(":");
+				switch(elements[0]) {
+				case MessageKind.SIGNUP: 
+					this.connection.getBufferedWriter().write("OK" + "\n");
+					this.connection.getBufferedWriter().flush();
+					break;
+				case MessageKind.SIGNIN:
+					break;
+				default:
+					break;
+				}
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

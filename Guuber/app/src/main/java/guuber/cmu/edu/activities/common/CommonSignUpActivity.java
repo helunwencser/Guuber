@@ -1,8 +1,12 @@
 package guuber.cmu.edu.activities.common;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,6 +17,9 @@ import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
+import guuber.cmu.edu.messageKind.MessageKind;
+import guuber.cmu.edu.resultCode.ResultCode;
+import guuber.cmu.edu.service.GuuberService;
 
 public class CommonSignUpActivity extends AppCompatActivity {
 
@@ -26,11 +33,13 @@ public class CommonSignUpActivity extends AppCompatActivity {
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_up);
-
+        this.context = this;
     }
 
     //sign up
@@ -39,6 +48,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
         String username = userNameEditText.getText().toString();
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
+            return;
         }
         EditText passwordEditText = (EditText)this.findViewById(R.id.sign_up_password_editText);
         String password = passwordEditText.getText().toString();
@@ -46,6 +56,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
         String rePassword = rePasswordEditText.getText().toString();
         if(password == null || rePassword == null || !password.equals(rePassword)) {
             pop("Invalide password", "Password and retyped password must be same", "Back");
+            return;
         }
         if(!password.matches(PASSWORD_RESTRICT)) {
             pop(
@@ -55,26 +66,31 @@ public class CommonSignUpActivity extends AppCompatActivity {
                     "one special character (@#$%!)",
                     "Back"
             );
+            return;
         }
         Spinner userTypeSpinner = (Spinner)this.findViewById(R.id.sign_up_user_type_spinner);
-        String userType = (String)userTypeSpinner.getSelectedItem();
+        String userType = (String)userTypeSpinner.getSelectedItem().toString();
         if(userType == null) {
             pop("No user type selected", "Please select your user type", "Back");
+            return;
         }
         Spinner genderTypeSpinner = (Spinner)this.findViewById(R.id.sign_up_gender_spinner);
         String gender = (String)genderTypeSpinner.getSelectedItem();
         if(gender == null) {
             pop("No gender selected", "Please select your gender", "Back");
+            return;
         }
         EditText emailEditText = (EditText)this.findViewById(R.id.sign_up_email_editText);
         String email = emailEditText.getText().toString();
-        if(email == null || email.matches(EMAIL_PATTERN)) {
+        if(email == null || !email.matches(EMAIL_PATTERN)) {
             pop("Invalid email", "Please input valid email address", "Back");
+            return;
         }
         EditText carIdEditText = (EditText)this.findViewById(R.id.sign_up_car_id_editText);
         String carId = carIdEditText.getText().toString();
-        if(carId == null || carId.length() < 6) {
+        if(userType.equals("Driver") && (carId == null || carId.length() < 6)) {
             pop("Invalid carId", "Please input valid carId", "Back");
+            return;
         }
         User user = new User(
                 username,
@@ -84,17 +100,13 @@ public class CommonSignUpActivity extends AppCompatActivity {
                 gender,
                 carId
         );
-        if(!validateWithServer(user)) {
-            pop("Invalid information", "Please input valid information", "Back");
-        }
-        Intent intent;
-        if(userType.equals("Driver")) {
-            intent = new Intent(this, FindPassengerActivity.class);
-        } else {
-            intent = new Intent(this, FindDriverActivity.class);
-        }
-        putInfoIntoIntent(intent, user);
-        this.startActivity(intent);
+        ResultReceiver resultReceiver = new MyResultReceiver(null);
+        Intent intent = new Intent(this, GuuberService.class);
+        intent.putExtra("operation", MessageKind.SENDMESSAGE);
+        intent.putExtra("message", MessageKind.SIGNUP + ":" + user.toMessage());
+        intent.putExtra("receiver", resultReceiver);
+        intent.putExtra("resultCode", ResultCode.SIGNUP);
+        startService(intent);
     }
 
     /**
@@ -144,5 +156,24 @@ public class CommonSignUpActivity extends AppCompatActivity {
         builder.setMessage(message);
         builder.setPositiveButton(button, null);
         builder.show();
+    }
+
+    @SuppressLint("ParcelCreator")
+    public class MyResultReceiver extends ResultReceiver {
+
+        public MyResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            if(resultCode == ResultCode.SIGNUP) {
+                String response = resultData.getString("response");
+                if(response.equals("OK")) {
+                    Intent intent = new Intent(context, FindDriverActivity.class);
+                    startActivity(intent);
+                }
+            }
+        }
     }
 }

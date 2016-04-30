@@ -13,13 +13,15 @@ public class DBOperation {
 	private static final String DB_URL = "jdbc:mysql://localhost/guuber";
 	
 	private static String USER = "root";
-	private static String PASS = "helunwen";
+	private static String PASS = "root";
 	
 	private Connection conn = null;
 	
 	private PreparedStatement insertStatement = null;
 	
-	private PreparedStatement selectStatement = null;
+	private PreparedStatement selectByUsernamePasswordStatement = null;
+	
+	private PreparedStatement selectByUsernameStatement = null;
 	
 	/**
 	 * setup database connection and prepare statements
@@ -29,7 +31,8 @@ public class DBOperation {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			insertStatement = conn.prepareStatement(MySQLStatement.INSERT);
-			selectStatement = conn.prepareStatement(MySQLStatement.SELECT_BY_USERNAME_PASSWORD);
+			selectByUsernamePasswordStatement = conn.prepareStatement(MySQLStatement.SELECT_BY_USERNAME_PASSWORD);
+			selectByUsernameStatement = conn.prepareStatement(MySQLStatement.SELECT_BY_USERNAME);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,7 +47,7 @@ public class DBOperation {
 	 * @param user	
 	 * 		  the user to be inserted
 	 * */
-	public void insertAuthor(User user) {
+	public void insertUser(User user) {
 		try {
 			this.insertStatement.setString(1, user.getUsername());
 			this.insertStatement.setString(2, user.getPassword());
@@ -69,9 +72,37 @@ public class DBOperation {
 	 * */
 	public User selectByUsernameAndPassword(String username, String password) {
 		try {
-			this.selectStatement.setString(1, username);
-			this.selectStatement.setString(2, password);
-			ResultSet resultSet = this.selectStatement.executeQuery();
+			this.selectByUsernamePasswordStatement.setString(1, username);
+			this.selectByUsernamePasswordStatement.setString(2, password);
+			ResultSet resultSet = this.selectByUsernamePasswordStatement.executeQuery();
+			if(resultSet.next()) {
+				return new User(
+						resultSet.getString(1),
+						resultSet.getString(2),
+						resultSet.getString(3),
+						resultSet.getString(4),
+						resultSet.getString(5),
+						resultSet.getString(6)
+						);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Select user from database by username
+	 * @param username - the name of user
+	 * 
+	 * @return if there is a record in database, return the user;
+	 * 			otherwise, return null
+	 * */
+	public User selectByUsername(String username) {
+		try {
+			this.selectByUsernameStatement.setString(1, username);
+			ResultSet resultSet = this.selectByUsernameStatement.executeQuery();
 			if(resultSet.next()) {
 				return new User(
 						resultSet.getString(1),
@@ -98,8 +129,8 @@ public class DBOperation {
 			if(this.insertStatement != null) {
 				this.insertStatement.close();	
 			}
-			if(this.selectStatement != null) {
-				this.selectStatement.close();
+			if(this.selectByUsernamePasswordStatement != null) {
+				this.selectByUsernamePasswordStatement.close();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

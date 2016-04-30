@@ -12,5 +12,8 @@ public class MySQLStatement {
 	
 	/* select user by username and password */
 	public static String SELECT_BY_USERNAME_PASSWORD = "select * from user_table where username = ? and password = ?";
+	
+	/* select user by username */
+	public static String SELECT_BY_USERNAME = "select * from user_table where username = ?";
 
 }

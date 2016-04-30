@@ -154,7 +154,12 @@
         <activity
             android:name="guuber.cmu.edu.activities.common.CommonSignInActivity"
             android:label="@string/title_activity_common_sign_in"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name="guuber.cmu.edu.service.GuuberService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

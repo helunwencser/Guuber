@@ -1,3 +1,7 @@
+create database if not exists guuber;
+
+use guuber;
+
 create table if not exists user_table (
 	id int not null auto_increment,
 	username char(32),

@@ -6,10 +6,12 @@ import java.io.Serializable;
  * */
 public class User implements Serializable {
 	
+	
+	
 	/**
-	 * TODO: this should be the same as in client
+	 * 
 	 */
-	private static final long serialVersionUID = -7638071369434868330L;
+	private static final long serialVersionUID = 1L;
 	
 	private String username;
 	private String password;

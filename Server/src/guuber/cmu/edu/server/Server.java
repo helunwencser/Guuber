@@ -21,7 +21,8 @@ public class Server {
 	public static void broadCast(String message) {
 		try {
 			for(Connection connection : connections) {
-				connection.getObjectOutputStream().writeObject(message);	
+				connection.getBufferedWriter().write(message + "\n");
+				connection.getBufferedWriter().flush();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -29,12 +30,15 @@ public class Server {
 		}
 	}
 	
+	private static int PORTNUMBER = 55555;
+	
 	public static void main(String[] args) {
-		
+		System.out.println("Starting server...");
 		try {
-			serverSocket = new ServerSocket(8888);
+			serverSocket = new ServerSocket(PORTNUMBER);
 			while(true) {
 				Socket socket = serverSocket.accept();
+				System.out.println("received connection from: " + socket.getRemoteSocketAddress().toString());
 				Connection connection = new Connection(socket.getInputStream(), socket.getOutputStream()); 
 				connections.add(connection);
 				new Thread(new ClientHandler(connection)).start();

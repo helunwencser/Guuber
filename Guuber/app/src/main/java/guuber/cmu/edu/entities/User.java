@@ -17,14 +17,14 @@ import javax.crypto.SecretKey;
  */
 public class User implements Serializable{
 
-    private static final long serialVersionUID = 2016010101L;//cant find how to generate it in android studio
+    private static final long serialVersionUID = 2016010101L;//can't find how to generate it in android studio
 
-    private String username;
-    private transient String passWord;
-    private String userType;
-    private String email;
-    private String gender;
-    private String carId;
+    private String username = "";
+    private String passWord = "";
+    private String userType = "";
+    private String email = "";
+    private String gender = "";
+    private String carId = "";
 
     public User(
             String username,
@@ -88,5 +88,18 @@ public class User implements Serializable{
 
     public void setCarId(String carId) {
         this.carId = carId;
+    }
+
+    /**
+     * Transfer the user to string which will be sent to server as a message
+     * by service
+     * */
+    public String toMessage() {
+        return this.username + ":" +
+                this.passWord + ":" +
+                this.userType + ":" +
+                this.email + ":" +
+                this.gender + ":" +
+                this.carId;
     }
 }

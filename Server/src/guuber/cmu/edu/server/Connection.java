@@ -1,42 +1,38 @@
 package guuber.cmu.edu.server;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  * This class defines the connection to one client.
  * It includes inputStream and outputStream.
  * */
 public class Connection {
-	private ObjectInputStream objectInputStream;
-	private ObjectOutputStream objectOutputStream;
+    private BufferedWriter bufferedWriter;
+    private BufferedReader bufferedReader;
 	
 	public Connection(InputStream inputStream, OutputStream outputStream) {
-		try {
-			this.objectInputStream = new ObjectInputStream(inputStream);
-			this.objectOutputStream = new ObjectOutputStream(outputStream);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.bufferedReader = new BufferedReader(new BufferedReader(new InputStreamReader(inputStream)));
+		this.bufferedWriter = new BufferedWriter(new BufferedWriter(new OutputStreamWriter(outputStream)));
 	}
 
-	public ObjectInputStream getObjectInputStream() {
-		return objectInputStream;
+	public BufferedWriter getBufferedWriter() {
+		return bufferedWriter;
 	}
 
-	public void setObjectInputStream(ObjectInputStream objectInputStream) {
-		this.objectInputStream = objectInputStream;
+	public void setBufferedWriter(BufferedWriter bufferedWriter) {
+		this.bufferedWriter = bufferedWriter;
 	}
 
-	public ObjectOutputStream getObjectOutputStream() {
-		return objectOutputStream;
+	public BufferedReader getBufferedReader() {
+		return bufferedReader;
 	}
 
-	public void setObjectOutputStream(ObjectOutputStream objectOutputStream) {
-		this.objectOutputStream = objectOutputStream;
+	public void setBufferedReader(BufferedReader bufferedReader) {
+		this.bufferedReader = bufferedReader;
 	}
 }

@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.messageKind.MessageKind;
+import guuber.cmu.edu.resultCode.ResultCode;
+import guuber.cmu.edu.service.GuuberService;
 
 
 public class CommonWelcomeActivity extends AppCompatActivity {
@@ -64,6 +67,11 @@ public class CommonWelcomeActivity extends AppCompatActivity {
         this.linearLayout = (LinearLayout)this.findViewById(R.id.welcome_root_linearLayout);
         this.textView = (TextView)this.findViewById(R.id.common_welcome_textview);
         reloadCarImage();
+
+        /* start backend service */
+        Intent intent = new Intent(this, GuuberService.class);
+        intent.putExtra("operation", MessageKind.STARTSERVICE);
+        startService(intent);
 
         final Context context = this;
 
