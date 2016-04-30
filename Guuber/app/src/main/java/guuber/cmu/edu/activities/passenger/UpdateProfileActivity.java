@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.entities.User;
+import android.util.Log;
 
 /**
  * Created by wangziming on 4/9/16.
@@ -133,7 +134,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Log.d("cacncelButton","cacacaca");
             Intent intent = new Intent(UpdateProfileActivity.this,FindDriverActivity.class);
+            Log.d("cacncelButton","cacacacaca");
             startActivity(intent);
         }
     };
