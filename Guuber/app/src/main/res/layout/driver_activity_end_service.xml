@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="End Service"
-            android:id="@+id/endButton"
+            android:id="@+id/driver_endButton"
             android:layout_gravity="center_horizontal"
             />
     </LinearLayout>

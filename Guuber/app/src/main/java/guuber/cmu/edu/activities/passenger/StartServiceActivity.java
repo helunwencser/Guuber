@@ -1,27 +1,50 @@
 package guuber.cmu.edu.activities.passenger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.cmu.guuber.guuber.R;
 
-public class StartServiceActivity extends FragmentActivity implements OnMapReadyCallback {
+import guuber.cmu.edu.dbLayout.MessageDBController;
+import guuber.cmu.edu.entities.Message;
+
+public class StartServiceActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
-    private Marker marker;
+    private Marker myMarker;
+    private EditText messageInput;
+    private TextView messageHistory;
+
+    private MessageDBController meassageDBController;
+
+    private Map<String, String> allMessages;
+    private Map<String, Marker> driverMarkers;
+
+    private String currentDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,21 +88,47 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
+        Button cancelButton =
+                (Button) findViewById(R.id.passenger_start_cancelButton);
+        cancelButton.setOnClickListener(cancelButtonClicked);
+
+        Button sendButton =
+                (Button) findViewById(R.id.passenger_start_sendButton);
+        sendButton.setOnClickListener(sendButtonClicked);
+        messageInput = (EditText) findViewById(R.id.passenger_start_input);
+        messageHistory = (TextView) findViewById(R.id.passenger_start_history);
+        messageHistory.setMovementMethod(new ScrollingMovementMethod());
+
+        meassageDBController = new MessageDBController(this);
+
+        allMessages = new HashMap<String, String>();
+        driverMarkers = new HashMap<String, Marker>();
+
     }
 
     public void updateLocation(Location location) {
         if (location != null && mMap != null) {
-            if (marker != null) {
-                marker.remove();
+            if (myMarker != null) {
+                myMarker.remove();
             }
             double lon = location.getLongitude();
             double lat = location.getLatitude();
             LatLng sydney = new LatLng(lat, lon);
-            marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
+            myMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
+            //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            addDriverMarker("1", lon + 0.005, lat);
+            addDriverMarker("2", lon, lat + 0.005);
+            addDriverMarker("3", lon - 0.005, lat);
+            addDriverMarker("4", lon, lat - 0.005);
+            addDriverMarker("5", lon + 0.005, lat + 0.005);
+            addDriverMarker("6", lon - 0.005, lat - 0.005);
+            addDriverMarker("7", lon - 0.005, lat + 0.005);
+            addDriverMarker("8", lon + 0.005, lat - 0.005);
         } else {
         }
-
     }
 
     /**
@@ -102,10 +151,86 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+        mMap.setOnMarkerClickListener(this);
 
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(37, -122);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Mountain View"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    View.OnClickListener sendButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (messageInput.getText().length() == 0) {
+                return;
+            }
+            String history = messageHistory.getText().toString();
+            String current = messageInput.getText().toString();
+            messageInput.setText("");
+            messageHistory.setText(history + "\n" + "Me: " + current);
+            int scrollAmount = messageHistory.getLayout().getLineTop(messageHistory.getLineCount())
+                    - messageHistory.getHeight();
+            if (scrollAmount > 0) {
+                messageHistory.scrollTo(0, scrollAmount);
+            }
+            else {
+                messageHistory.scrollTo(0, 0);
+            }
+            String senderid = "me";
+            String receiverid = "other";
+            Message message = new Message(senderid, receiverid, current, new Date().toString());
+            meassageDBController.insertMessage(message);
+        }
+    };
+
+    private void scollToBottom() {
+        int scrollAmount = messageHistory.getLayout().getLineTop(messageHistory.getLineCount())
+                - messageHistory.getHeight();
+        if (scrollAmount > 0) {
+            messageHistory.scrollTo(0, scrollAmount);
+        }
+        else {
+            messageHistory.scrollTo(0, 0);
+        }
+    }
+
+    View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(StartServiceActivity.this, FindDriverActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    private void addDriverMarker(String driverID, double lon, double lat) {
+        if (driverMarkers.get(driverID) != null) {
+            driverMarkers.get(driverID).remove();
+        }
+        LatLng place = new LatLng(lat, lon);
+        Marker driverMarker = mMap.addMarker(new MarkerOptions().position(place).title(driverID + " position"));
+        driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        driverMarkers.put(driverID, driverMarker);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        for (String driver : driverMarkers.keySet()) {
+            if (driverMarkers.get(driver).equals(marker)) {
+                String history = messageHistory.getText().toString();
+                if (history.length() > 0 && currentDriver != null) {
+                    allMessages.put(currentDriver, history);
+                }
+                currentDriver = driver;
+                if (allMessages.get(driver) != null) {
+                    messageHistory.setText(allMessages.get(driver));
+                    scollToBottom();
+                } else {
+                    messageHistory.setText("Chatting with driver " + driver);
+                }
+                break;
+            }
+        }
+        return false;
     }
 }
