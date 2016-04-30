@@ -218,16 +218,18 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             String current = messageInput.getText().toString();
             messageInput.setText("");
             messageHistory.setText(history + "\n" + "Me: " + current);
-            int scrollAmount = messageHistory.getLayout().getLineTop(messageHistory.getLineCount())
-                    - messageHistory.getHeight();
-            if (scrollAmount > 0) {
-                messageHistory.scrollTo(0, scrollAmount);
-            }
-            else {
-                messageHistory.scrollTo(0, 0);
-            }
+            scollToBottom();
             String senderid = "me";
-            String receiverid = "other";
+            String receiverid = currentDriver;
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", MessageKind.SENDMESSAGE);
+            mess.putExtra("message", MessageKind.CHAT + ":" + receiverid + ":" + current);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", ActivityNames.PASSENGERSTART);
+            mess.putExtra("resultCode", ResultCode.CHAT);
+            startService(mess);
+
             Message message = new Message(senderid, receiverid, current, new Date().toString());
             meassageDBController.insertMessage(message);
         }
@@ -401,6 +403,27 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
+                    }
+                });
+            } else if (resultCode == ResultCode.CHAT) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String driver = splits[1];
+                final String content = splits[2];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (driver.equals(currentDriver)) {
+                            String history = messageHistory.getText().toString();
+                            messageHistory.setText(history + "\n" + driver + ": " + content);
+                        } else {
+                            String history = allMessages.get(driver);
+                            if (history == null) {
+                                history = "";
+                            }
+                            String result = history + "\n" + driver + ": " + content;
+                            allMessages.put(driver, result);
+                        }
                     }
                 });
             }

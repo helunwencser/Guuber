@@ -201,7 +201,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             messageHistory.setText(history + "\n" + "Me: " + current);
             scollToBottom();
             String senderid = "me";
-            String receiverid = "other";
+            String receiverid = currentPassenger;
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", MessageKind.SENDMESSAGE);
+            mess.putExtra("message", MessageKind.CHAT + ":" + receiverid + ":" + current);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", ActivityNames.DRIVERSTART);
+            mess.putExtra("resultCode", ResultCode.CHAT);
+            startService(mess);
+
             Message message = new Message(senderid, receiverid, current, new Date().toString());
             meassageDBController.insertMessage(message);
         }
@@ -350,6 +359,27 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         intent.putExtra("destLat", lat);
                         startActivity(intent);
                         finish();
+                    }
+                });
+            } else if (resultCode == ResultCode.CHAT) {
+                String response = resultData.getString("response");
+                String[] splits = response.split(":");
+                final String passenger = splits[1];
+                final String content = splits[2];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (passenger.equals(currentPassenger)) {
+                            String history = messageHistory.getText().toString();
+                            messageHistory.setText(history + "\n" + passenger + ": " + content);
+                        } else {
+                            String history = allMessages.get(passenger);
+                            if (history == null) {
+                                history = "";
+                            }
+                            String result = history + "\n" + passenger + ": " + content;
+                            allMessages.put(passenger, result);
+                        }
                     }
                 });
             }
