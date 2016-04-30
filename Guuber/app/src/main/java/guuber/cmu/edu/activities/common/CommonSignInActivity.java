@@ -88,6 +88,7 @@ public class CommonSignInActivity extends AppCompatActivity {
         intent.putExtra("message", MessageKind.SIGNIN + ":" + username + ":" + password);
         intent.putExtra("receiver", resultReceiver);
         intent.putExtra("resultCode", ResultCode.SIGNIN);
+        intent.putExtra("activityName", "CommonSignInActivity");
         startService(intent);
     }
 

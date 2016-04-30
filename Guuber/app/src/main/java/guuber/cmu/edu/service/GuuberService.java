@@ -15,6 +15,8 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 import guuber.cmu.edu.messageConst.MessageKind;
 import guuber.cmu.edu.ws.remote.ServerConfig;
@@ -30,9 +32,32 @@ public class GuuberService extends Service {
     private BufferedWriter bufferedWriter;
     private BufferedReader bufferedReader;
 
+    /**
+     * Store all ResultReceivers for all activities
+     * */
+    private Map<String, GuuberResultReceiver> resultReceiverMap = new HashMap<String, GuuberResultReceiver>();
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    /**
+     * receive messages from socket and dispatch message to activities
+     * */
+    private void receiveAndDispatchMessage() {
+        String response = null;
+        try {
+            while((response = bufferedReader.readLine()) != null) {
+                String messageKind = response.substring(0, response.indexOf(":"));
+                switch (messageKind) {
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -101,13 +126,21 @@ public class GuuberService extends Service {
             ResultReceiver resultReceiver = intent.getParcelableExtra("receiver");
             String message = intent.getStringExtra("message");
             int resultCode = intent.getIntExtra("resultCode", 0);
+            String activityName = intent.getStringExtra("activityName");
+            resultReceiverMap.put(
+                    activityName,
+                    new GuuberResultReceiver(
+                            resultReceiver,
+                            resultCode
+                    )
+                    );
             try {
                 bufferedWriter.write(message + "\n");
                 bufferedWriter.flush();
-                String response = bufferedReader.readLine();
+ /*               String response = bufferedReader.readLine();
                 Bundle bundle = new Bundle();
                 bundle.putString("response", response);
-                resultReceiver.send(resultCode, bundle);
+                resultReceiver.send(resultCode, bundle);*/
             } catch (IOException e) {
                 e.printStackTrace();
             }

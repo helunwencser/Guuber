@@ -113,6 +113,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
         intent.putExtra("message", MessageKind.SIGNUP + ":" + user.toMessage());
         intent.putExtra("receiver", resultReceiver);
         intent.putExtra("resultCode", ResultCode.SIGNUP);
+        intent.putExtra("activityName", "CommonSignUpActivity");
         startService(intent);
     }
 

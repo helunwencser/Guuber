@@ -9,26 +9,26 @@ package guuber.cmu.edu.messageConst;
  * */
 public class MessageKind {
     /* sign up message */
-    public static String SIGNUP = "SIGNUP";
+    public static final String SIGNUP = "SIGNUP";
 
     /* sign in message */
-    public static String SIGNIN = "SIGNIN";
+    public static final String SIGNIN = "SIGNIN";
 
     /* driver location udpate message */
-    public static String DRIVERLOC = "DRIVERLOC";
+    public static final String DRIVERLOC = "DRIVERLOC";
 
     /* passenger location update message */
-    public static String PASSENGERLOC = "PASSENGERLOC";
+    public static final String PASSENGERLOC = "PASSENGERLOC";
 
     /* driver location should be deleted */
-    public static String DRIVEREXIT = "DRIVEREXIT";
+    public static final String DRIVEREXIT = "DRIVEREXIT";
 
     /* passenger location should be deleted */
-    public static String PASSENGEREXIT = "PASSENGEREXIT";
+    public static final String PASSENGEREXIT = "PASSENGEREXIT";
 
     /* Tell GuuberService to send message */
-    public static String SENDMESSAGE = "SENDMESSAGE";
+    public static final String SENDMESSAGE = "SENDMESSAGE";
 
     /* Tell GuuberService to start service */
-    public static String STARTSERVICE = "STARTSERVICE";
+    public static final String STARTSERVICE = "STARTSERVICE";
 }
