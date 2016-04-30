@@ -1,5 +1,6 @@
 package guuber.cmu.edu.activities.passenger;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -7,6 +8,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -37,6 +40,9 @@ import edu.cmu.guuber.guuber.R;
 
 import guuber.cmu.edu.dbLayout.MessageDBController;
 import guuber.cmu.edu.entities.Message;
+import guuber.cmu.edu.messageConst.MessageKind;
+import guuber.cmu.edu.resultCode.ResultCode;
+import guuber.cmu.edu.service.GuuberService;
 
 public class StartServiceActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -48,6 +54,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     private EditText messageInput;
     private TextView messageHistory;
 
+    Double currLat;
+    Double currLon;
+
     private EditText destinationInput;
 
     private MessageDBController meassageDBController;
@@ -56,6 +65,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     private Map<String, Marker> driverMarkers;
 
     private String currentDriver;
+
+    private ResultReceiver resultReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,20 +133,38 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         allMessages = new HashMap<String, String>();
         driverMarkers = new HashMap<String, Marker>();
 
+        resultReceiver = new PassengerStartResultReceiver(null);
     }
 
     public void updateLocation(Location location) {
         if (location != null && mMap != null) {
+            double lon = location.getLongitude();
+            double lat = location.getLatitude();
+
+            if (currLat != null && Math.abs(currLat - lat) < 0.00001
+                        && Math.abs(lon - currLon) < 0.00001){
+                return;
+            } else {
+                currLat = lat;
+                currLon = lon;
+            }
+
             if (myMarker != null) {
                 myMarker.remove();
             }
-            double lon = location.getLongitude();
-            double lat = location.getLatitude();
+
             LatLng sydney = new LatLng(lat, lon);
             myMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
             //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
+            Intent intent = new Intent(this, GuuberService.class);
+            intent.putExtra("operation", MessageKind.SENDMESSAGE);
+            intent.putExtra("message", MessageKind.PASSENGERLOC + ":" + lon + ":" + lat);
+            intent.putExtra("receiver", resultReceiver);
+            intent.putExtra("resultCode", ResultCode.PASSENGERLOC);
+            startService(intent);
+            /*
             addDriverMarker("1", lon + 0.005, lat);
             addDriverMarker("2", lon, lat + 0.005);
             addDriverMarker("3", lon - 0.005, lat);
@@ -143,7 +172,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             addDriverMarker("5", lon + 0.005, lat + 0.005);
             addDriverMarker("6", lon - 0.005, lat - 0.005);
             addDriverMarker("7", lon - 0.005, lat + 0.005);
-            addDriverMarker("8", lon + 0.005, lat - 0.005);
+            addDriverMarker("8", lon + 0.005, lat - 0.005);*/
         } else {
         }
     }
@@ -262,7 +291,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(StartServiceActivity.this, FindDriverActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         }
     };
 
@@ -295,5 +326,18 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             }
         }
         return false;
+    }
+
+    @SuppressLint("ParcelCreator")
+    public class PassengerStartResultReceiver extends ResultReceiver {
+
+        public PassengerStartResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+
+        }
     }
 }
