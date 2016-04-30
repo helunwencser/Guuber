@@ -21,4 +21,7 @@ public class MessageKind {
     
     /* passenger location should be deleted */
     public static final String PASSENGEREXIT = "PASSENGEREXIT";
+    
+    /* driver start the ride */
+    public static final String STARTRIDE = "STARTRIDE";
 }

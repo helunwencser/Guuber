@@ -23,4 +23,6 @@ public class MessageReply {
     public static String DRIVEREXITOK = "DRIVEREXITOK";
 
     public static String PASSENGEREXITOK = "DRIVEREXITOK";
+
+    public static String STARTRIDEOK = "STARTRIDEOK";
 }
