@@ -18,10 +18,10 @@ import java.util.List;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.common.CommonSignInSignUpActivity;
-import guuber.cmu.edu.activities.passenger.*;
+import guuber.cmu.edu.activities.driver.*;
 import guuber.cmu.edu.activities.driver.StartServiceActivity;
-import guuber.cmu.edu.activities.passenger.UpdateProfileActivity;
-import guuber.cmu.edu.activities.passenger.ViewHistoryActivity;
+import guuber.cmu.edu.activities.driver.UpdateProfileActivity;
+import guuber.cmu.edu.activities.driver.ViewHistoryActivity;
 
 public class FindPassengerActivity extends AppCompatActivity {
 
@@ -72,17 +72,18 @@ public class FindPassengerActivity extends AppCompatActivity {
                 if (arg2 == 1) {
                     Log.d("sdsd0", "sdsd0");
                     Intent intent = new Intent(FindPassengerActivity.this, UpdateProfileActivity.class);
-                    intent.putExtra("userName", username);
+                    intent.putExtra("username", username);
                     intent.putExtra("userType", userType);
                     intent.putExtra("email", email);
                     intent.putExtra("gender", gender);
                     intent.putExtra("carId", carId);
+                    Log.d("driverPPPP",username+userType);
                     startActivity(intent);
 
                 } else if (arg2 == 2) {
                     Log.d("sdsd1", "sdsd1");
                     Intent intent = new Intent(FindPassengerActivity.this, ViewHistoryActivity.class);
-                    intent.putExtra("userName", username);
+                    intent.putExtra("username", username);
                     startActivity(intent);
 
                 } else if(arg2 == 3){
@@ -97,6 +98,7 @@ public class FindPassengerActivity extends AppCompatActivity {
         });
 
     }
+
     public void findDriver(View view) {
 
     }

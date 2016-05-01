@@ -69,8 +69,8 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("userName");
-        Log.d("userName", userName);
+        String userName = intent.getStringExtra("username");
+        Log.d("username", userName);
         final List<Transaction> transactionList = tranController.selectTransactionsByPassenger(userName);
         Log.d("transaction", transactionList.get(0).toString());
 

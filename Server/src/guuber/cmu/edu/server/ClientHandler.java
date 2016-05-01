@@ -89,6 +89,11 @@ public class ClientHandler implements Runnable {
 						this.connection.getBufferedWriter().flush();
 						this.connection.setUsername(user.getUsername());
 						this.connection.setUserType(user.getUserType());
+						if(user.getUserType().equals("Driver")) {
+							Connections.addDriverConnection(user.getUsername(), connection);
+						} else {
+							Connections.addPassengerConnection(user.getUsername(), connection);
+						}
 					}
 					break;
 				/**
@@ -99,6 +104,7 @@ public class ClientHandler implements Runnable {
 					String driverLocationUpdate = ClientMessageKind.DRIVERLOC + ":" + this.connection.getUsername()
 												+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToPassengers(driverLocationUpdate);
+					break;
 				/**
 				 * Message format:
 				 * PASSENGERLOC:latitude:longtitude
@@ -107,6 +113,41 @@ public class ClientHandler implements Runnable {
 					String passengerLocationUpdate = ClientMessageKind.PASSENGERLOC + ":" + this.connection.getUsername()
 													+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToDrivers(passengerLocationUpdate);
+					break;
+				/**
+				 * Message format:
+				 * CHATFROMDRIVER:receiver:content
+				 * */
+				case ServerMessageKind.CHATFROMDRIVER:
+					String messageToPassenger = ClientMessageKind.CHATFROMDRIVER + ":" + this.connection.getUsername()
+												+ ":" + elements[2];
+					Connections.sendMessageToPassenger(elements[1], messageToPassenger);
+					break;
+				/**
+				 * Message format:
+				 * CHATFROMPASSENGER:receiver:content
+				 * */
+				case ServerMessageKind.CHATFROMPASSENGER:
+					String messageToDriver = ClientMessageKind.CHATFROMPASSENGER + ":" + this.connection.getUsername()
+												+ ":" + elements[2];
+					Connections.sendMessageToDriver(elements[1], messageToDriver);
+					break;
+				/**
+				 * Message format:
+				 * PASSENGERDEST:latitude:longtitude
+				 * */
+				case ServerMessageKind.PASSENGERDEST:
+					if(this.connection.getUserType().equals("Passenger")) {
+						String destinationMessage = ClientMessageKind.PASSENGERDEST + ":" + this.connection.getUsername()
+													+ message.substring(message.indexOf(":"));
+						Connections.broadcastMessageToDrivers(destinationMessage);
+					}
+					break;
+				case ServerMessageKind.STARTRIDE:
+					if(this.connection.getUserType().equals("Driver")) {
+						String startRideMessage = ClientMessageKind.STARTRIDE + ":" + this.connection.getUsername();
+						Connections.sendMessageToPassenger(elements[1], startRideMessage);
+					}
 					break;
 				default:
 					break;

@@ -87,6 +87,7 @@ public class GuuberService extends Service {
                                     bundle
                             );
                         }
+                        break;
                     case ClientMessageKind.PASSENGERLOC:
                         if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
@@ -94,11 +95,34 @@ public class GuuberService extends Service {
                                     bundle
                             );
                         }
-
-                    case ClientMessageKind.UPDATEDRIVERPROFILEDENIED:
-                    case ClientMessageKind.UPDATEDRIVERPROFILEOKAY:
-                        if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERUPDATEPROFILEACTIVITY)) {
-                            resultReceiverMap.get(ActivityNames.DRIVERUPDATEPROFILEACTIVITY).send(
+                        break;
+                    case ClientMessageKind.CHATFROMDRIVER:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.CHATFROMPASSENGER:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.PASSENGERDEST:
+                        if(resultReceiverMap.containsKey(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.STARTRIDE:
+                        if(resultReceiverMap.containsKey(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
                                     ResultCode.RESULTCODE,
                                     bundle
                             );
@@ -106,8 +130,17 @@ public class GuuberService extends Service {
                         break;
                     case ClientMessageKind.UPDATEPASSENGERPROFILEDENIED:
                     case ClientMessageKind.UPDATEPASSENGERPROFILEOKAY:
-                        if(resultReceiverMap.keySet().contains(ActivityNames.PASSENGERUPDATEPROFILEACTIVITY)) {
+                        if(resultReceiverMap.containsKey(ActivityNames.PASSENGERUPDATEPROFILEACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.PASSENGERUPDATEPROFILEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.UPDATEDRIVERPROFILEDENIED:
+                    case ClientMessageKind.UPDATEDRIVERPROFILEOKAY:
+                        if(resultReceiverMap.containsKey(ActivityNames.DRIVERUPDATEPROFILEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERUPDATEPROFILEACTIVITY).send(
                                     ResultCode.RESULTCODE,
                                     bundle
                             );

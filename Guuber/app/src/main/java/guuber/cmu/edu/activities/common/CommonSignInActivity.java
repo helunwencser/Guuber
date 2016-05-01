@@ -19,6 +19,7 @@ import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.service.GuuberService;
+import android.util.Log;
 
 public class CommonSignInActivity extends AppCompatActivity {
 
@@ -126,6 +127,7 @@ public class CommonSignInActivity extends AppCompatActivity {
                 userType = elements[3];
                 email = elements[4];
                 gender = elements[5];
+                Log.d("recieverserver P",email + gender);
                 if(userType.equals("Driver")) {
                     carId = elements[6];
                 } else {

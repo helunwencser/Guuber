@@ -225,7 +225,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.CHAT + ":" + receiverid + ":" + current);
+            mess.putExtra("message", ServerMessageKind.CHATFROMPASSENGER + ":" + receiverid + ":" + current);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
             startService(mess);
@@ -291,6 +291,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     e.printStackTrace();;
                 }
             }
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", Operation.SENDMESSAGE);
+            mess.putExtra("message", ServerMessageKind.PASSENGERDEST + ":" + destLon + ":" + destLat);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
+            startService(mess);
         }
     };
 
@@ -360,6 +367,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
+            System.out.println("Response from server: " + response);
+
             String[] splits = response.split(":");
             if (response == null || response.length() == 0) {
                 return;
@@ -388,14 +397,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-                        Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
-                        mess.putExtra("operation", Operation.SENDMESSAGE);
-                        mess.putExtra("message", ServerMessageKind.PASSENGERDEST + ":" + driver + ":" + destLon + ":" + destLat);
-                        mess.putExtra("receiver", resultReceiver);
-                        mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
-                        startService(mess);
-
                         Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
                         intent.putExtra("driver", driver);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -403,7 +404,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         finish();
                     }
                 });
-            } else if (type.equals(ClientMessageKind.CHAT)) {
+            } else if (type.equals(ClientMessageKind.CHATFROMDRIVER)) {
                 final String driver = splits[1];
                 final String content = splits[2];
                 runOnUiThread(new Runnable() {

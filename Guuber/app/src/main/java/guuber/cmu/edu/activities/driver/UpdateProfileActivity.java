@@ -96,7 +96,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 (Button) findViewById(R.id.driver_update_cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
 
-        //新的取值
+        //
         username = userNameEditText.getText().toString();
         password = passwordEditText.getText().toString();
         Repassword = retypePasswordEditText.getText().toString();
@@ -173,9 +173,17 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if (validateCompleteness()) {
             if (validatePasswordMatch(password,Repassword)) {
                 if (validatePasswordComplexity(password)) {
-                    UpdateDriverProfile updateDriverProfile = new UpdateDriverProfile(null);
+                    UpdateDriverProfileReceiver updateDriverProfileReceiver = new UpdateDriverProfileReceiver(null);
                     Intent intent = new Intent(this, GuuberService.class);
-                    putInfoIntoIntent(intent);
+                    intent.putExtra("operation", Operation.SENDMESSAGE);
+                    intent.putExtra("message", ServerMessageKind.UPDATEDRIVERPROFILE + ":"
+                                                                    + username + ":"
+                                                                    + password +":"
+                                                                    + email + ":"
+                                                                    + gender+ ":"
+                                                                    + carId + ":");
+                    intent.putExtra("receiver", updateDriverProfileReceiver);
+                    intent.putExtra("activityName", ActivityNames.DRIVERUPDATEPROFILEACTIVITY);
                     startService(intent);
                 } else {
                     pop("Update Error", "Password doesn't meet requirement", "Back");
@@ -202,16 +210,16 @@ public class UpdateProfileActivity extends AppCompatActivity {
     };
 
     @SuppressLint("ParcelCreator")
-    public class UpdateDriverProfile extends ResultReceiver {
+    public class UpdateDriverProfileReceiver extends ResultReceiver {
 
-        public UpdateDriverProfile(Handler handler) {
+        public UpdateDriverProfileReceiver(Handler handler) {
             super(handler);
         }
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
-            if(response.equals(ClientMessageKind.UPDATEUSERPROFILEOKAY)) {
+            if(response.equals(ClientMessageKind.UPDATEDRIVERPROFILEOKAY)) {
                 Intent intent = null;
                 if(userType.equals("Driver")) {
                     putInfoIntoIntent(intent);

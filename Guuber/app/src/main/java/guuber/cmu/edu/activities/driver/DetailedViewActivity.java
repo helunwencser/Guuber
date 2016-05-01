@@ -34,7 +34,7 @@ public class DetailedViewActivity extends AppCompatActivity {
         View.OnClickListener onClickListener = new View.OnClickListener(){
             public void onClick(View v) {
                 Intent intent = new Intent(DetailedViewActivity.this,ViewHistoryActivity.class);
-                intent.putExtra("userName","Bob");
+                intent.putExtra("username","Bob");
                 startActivity(intent);
             }
         };
