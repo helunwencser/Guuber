@@ -129,8 +129,8 @@ public class GuuberService extends Service {
                         }
                         break;
                     case ClientMessageKind.ENDRIDE:
-                        if(resultReceiverMap.containsKey(ActivityNames.DRIVERENDSERVICEACTIVITY)) {
-                            resultReceiverMap.get(ActivityNames.DRIVERENDSERVICEACTIVITY).send(
+                        if(resultReceiverMap.containsKey(ActivityNames.PASSENGERENDSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERENDSERVICEACTIVITY).send(
                                     ResultCode.RESULTCODE,
                                     bundle
                             );
