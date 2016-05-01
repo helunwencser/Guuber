@@ -124,6 +124,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         passengerDestMarkers = new HashMap<String, Marker>();
 
         resultReceiver = new DriverStartResultReceiver(null);
+
+        Intent intent = new Intent(this, GuuberService.class);
+        intent.putExtra("operation", Operation.SENDMESSAGE);
+        intent.putExtra("message", ServerMessageKind.DRIVERREQUESTLOC);
+        intent.putExtra("receiver", resultReceiver);
+        intent.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
+        startService(intent);
     }
 
     public void updateLocation(Location location) {
@@ -338,8 +345,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             }
             String[] splits = response.split(":");
             String type = splits[0];
-            final String passenger = splits[1];
+
             if(type.equals(ClientMessageKind.PASSENGERLOC)) {
+                final String passenger = splits[1];
                 final Double lon = Double.parseDouble(splits[2]);
                 final Double lat = Double.parseDouble(splits[3]);
                 runOnUiThread(new Runnable() {
@@ -349,6 +357,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.PASSENGERCANCEL)) {
+                final String passenger = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -358,6 +367,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             } else if (type.equals(ClientMessageKind.PASSENGERDEST)) {
                 final Double lon = Double.parseDouble(splits[2]);
                 final Double lat = Double.parseDouble(splits[3]);
+                final String passenger = splits[1];
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -367,6 +377,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 });
             } else if (type.equals(ClientMessageKind.CHATFROMPASSENGER)) {
                 final String content = splits[2];
+                final String passenger = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -384,10 +395,23 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.STARTRIDE)) {
+                final String passenger = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         removePassengerMarker(passenger);
+                    }
+                });
+            } else if (type.equals(ClientMessageKind.PASSENGERREQUESTLOC)) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(StartServiceActivity.this, GuuberService.class);
+                        intent.putExtra("operation", Operation.SENDMESSAGE);
+                        intent.putExtra("message", ServerMessageKind.DRIVERLOC + ":" + currLon + ":" + currLat);
+                        intent.putExtra("receiver", resultReceiver);
+                        intent.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
+                        startService(intent);
                     }
                 });
             }
