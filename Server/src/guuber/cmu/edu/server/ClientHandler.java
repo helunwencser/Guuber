@@ -245,6 +245,10 @@ public class ClientHandler implements Runnable {
 						Connections.broadcastMessageToDrivers(passengerRequestLocationMessage);
 					}
 					break;
+				/**
+				 * Message format:
+				 * EXIT
+				 * */
 				case ServerMessageKind.EXIT:
 					this.connection.getBufferedReader().close();
 					this.connection.getBufferedWriter().close();
