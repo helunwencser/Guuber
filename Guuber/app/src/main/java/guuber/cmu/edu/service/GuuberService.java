@@ -120,6 +120,14 @@ public class GuuberService extends Service {
                             );
                         }
                         break;
+                    case ClientMessageKind.STARTRIDE:
+                        if(resultReceiverMap.containsKey(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
                     default:
                         break;
                 }

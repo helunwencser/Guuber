@@ -143,6 +143,12 @@ public class ClientHandler implements Runnable {
 						Connections.broadcastMessageToDrivers(destinationMessage);
 					}
 					break;
+				case ServerMessageKind.STARTRIDE:
+					if(this.connection.getUserType().equals("Driver")) {
+						String startRideMessage = ClientMessageKind.STARTRIDE + ":" + this.connection.getUsername();
+						Connections.sendMessageToPassenger(elements[1], startRideMessage);
+					}
+					break;
 				default:
 					break;
 				}
