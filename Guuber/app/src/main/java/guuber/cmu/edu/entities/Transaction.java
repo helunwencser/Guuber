@@ -16,7 +16,7 @@ public class Transaction {
     private String endTime;
     private String startLocation;
     private String endLocation;
-    private int cost;
+    private String cost;
 
     public int getTransaction_id() {
         return transaction_id;
@@ -34,7 +34,7 @@ public class Transaction {
             String endTime,
             String startLocation,
             String endLocation,
-            int cost
+            String cost
     ) {
         this.transaction_id = transaction_id;
         this.driver = driver;
@@ -93,11 +93,11 @@ public class Transaction {
         this.endLocation = endLocation;
     }
 
-    public int getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 }

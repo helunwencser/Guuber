@@ -57,6 +57,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private String currentPassenger;
 
+    private String myName;
+
     private ResultReceiver resultReceiver;
 
     @Override
@@ -124,6 +126,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         passengerDestMarkers = new HashMap<String, Marker>();
 
         resultReceiver = new DriverStartResultReceiver(null);
+
+        Intent parameters = getIntent();
+        myName = parameters.getStringExtra("username");
 
         Intent intent = new Intent(this, GuuberService.class);
         intent.putExtra("operation", Operation.SENDMESSAGE);
@@ -206,7 +211,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             messageInput.setText("");
             messageHistory.setText(history + "\n" + "Me: " + current);
             scollToBottom();
-            String senderid = "me";
+            String senderid = myName;
             String receiverid = currentPassenger;
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
@@ -253,6 +258,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("passenger", currentPassenger);
+            intent.putExtra("username", myName);
             intent.putExtra("destLon", Double.toString(pos.longitude));
             intent.putExtra("destLat", Double.toString(pos.latitude));
             startActivity(intent);
@@ -392,6 +398,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             String result = history + "\n" + passenger + ": " + content;
                             allMessages.put(passenger, result);
                         }
+                        Message message = new Message(passenger, myName, content, new Date().toString());
+                        meassageDBController.insertMessage(message);
                     }
                 });
             } else if (type.equals(ClientMessageKind.STARTRIDE)) {

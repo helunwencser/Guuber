@@ -35,6 +35,8 @@ import java.util.Date;
 import java.util.List;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.dbLayout.TransactionDBController;
+import guuber.cmu.edu.entities.Transaction;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
@@ -64,6 +66,10 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private Date startTime;
     private Date endTime;
+
+    private String myName;
+
+    private TransactionDBController transactionDBController;
 
     private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
@@ -111,6 +117,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             e.printStackTrace();
         }
 
+        Intent parameters = getIntent();
+        myName = parameters.getStringExtra("username");
+
         Button endButton =
                 (Button) findViewById(R.id.driver_endButton);
         endButton.setOnClickListener(endButtonClicked);
@@ -121,6 +130,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         passenger = intent.getStringExtra("passenger");
 
         startTime = new Date();
+
+        transactionDBController = new TransactionDBController(this);
     }
 
     public void updateLocation(Location location) {
@@ -183,14 +194,22 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
             endTime = new Date();
 
-            System.out.println("End Service: " + startTime.toString());
-            System.out.println("End Service: " + endTime.toString());
-            System.out.println("End Service: " + getCost());
+            String startLocation = "" + startLat + "," + startLon;
+            String endLocation = "" + destLat + "," + destLon;
+            String cost = getCost();
+
+            Transaction transaction= new Transaction(0,myName, passenger,startTime.toString(),
+                                        endTime.toString(),startLocation,endLocation,cost);
+            transactionDBController.insertTransaction(transaction);
 
             Intent intent = new Intent(EndServiceActivity.this, FindPassengerActivity.class);
             startActivity(intent);
         }
     };
+
+    public void saveTransaction() {
+
+    }
 
     @Override
     public void onRoutingFailure(RouteException e) {

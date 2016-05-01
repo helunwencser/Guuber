@@ -70,7 +70,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.passenger_update_email);
 
 
-        //接住前面的传参
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
@@ -81,9 +81,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         retypePasswordEditText.setText(password);
         // carId = intent.getStringExtra("carId");
 
-        Log.d("UserInfoPUP", username +password+ userType + email + gender + carId);
+        Log.d("UserInfoPUPDATE", username + "\t" + password + "\t" + userType + "\t" + email + "\t" + gender + "\t" + carId);
 
-        //设置显示
         userNameEditText.setText(username);
         emailEditText.setText(email);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_type, android.R.layout.simple_spinner_item);
@@ -94,19 +93,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
             genderSpinner.setSelection(spinnerPosition);
         }
 
-        Log.d("UserInfoPUPP", username + userType + email + gender + carId);
+        Log.d("UserInfoPUPDATEPPP",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
 
 
         Button cancelButton =
                 (Button) findViewById(R.id.passenger_update_cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
 
-        //新的取值
-        username = userNameEditText.getText().toString();
-        password = passwordEditText.getText().toString();
-        Repassword = retypePasswordEditText.getText().toString();
-        email = emailEditText.getText().toString();
-        gender = genderSpinner.getSelectedItem().toString();
+
 
     }
 
@@ -154,12 +148,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
         }
-        EditText passwordEditText = (EditText)this.findViewById(R.id.driver_update_password);
         password = passwordEditText.getText().toString();
-
-        EditText passwordEditTextre = (EditText)this.findViewById(R.id.driver_update_retypePassword);
-        Repassword = passwordEditTextre.getText().toString();
-
+        Repassword = retypePasswordEditText.getText().toString();
+        email = emailEditText.getText().toString();
+        gender = genderSpinner.getSelectedItem().toString();
 
         if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
             pop(
@@ -222,11 +214,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
             if(response.equals(ClientMessageKind.UPDATEPASSENGERPROFILEOKAY)) {
-                Intent intent = null;
+               /* Intent intent = null;
                 if(userType.equals("Passenger")) {
                     putInfoIntoIntent(intent);
                     startActivity(intent);
-                }
+                }*/
+                Log.d("updateOkayP","uuuuu");
             } else {
                 runOnUiThread(new Runnable() {
                     @Override
