@@ -32,6 +32,18 @@ public class FindPassengerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_activity_find_passenger);
 
+        Intent intent = getIntent();
+
+
+        //userprofile
+        final String username = intent.getStringExtra("username");
+        final String userType = intent.getStringExtra("userType");
+        final String email = intent.getStringExtra("email");
+        final String gender = intent.getStringExtra("gender");
+        final String carId = intent.getStringExtra("carId");
+        Log.d("UserInfoD", username + userType + email + gender + carId);
+
+
         View.OnClickListener findButtonClicked = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +66,35 @@ public class FindPassengerActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spin.setAdapter(adapter);
         spin.setSelection(0, false);
-        spin.setOnItemSelectedListener(new SpinnerListener() {});
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+                if (arg2 == 1) {
+                    Log.d("sdsd0", "sdsd0");
+                    Intent intent = new Intent(FindPassengerActivity.this, UpdateProfileActivity.class);
+                    intent.putExtra("userName", username);
+                    intent.putExtra("userType", userType);
+                    intent.putExtra("email", email);
+                    intent.putExtra("gender", gender);
+                    intent.putExtra("carId", carId);
+                    startActivity(intent);
+
+                } else if (arg2 == 2) {
+                    Log.d("sdsd1", "sdsd1");
+                    Intent intent = new Intent(FindPassengerActivity.this, ViewHistoryActivity.class);
+                    intent.putExtra("userName", username);
+                    startActivity(intent);
+
+                } else if(arg2 == 3){
+                    Log.d("sdsd2", "sdsd2");
+                    Intent intent = new Intent(FindPassengerActivity.this, CommonSignInSignUpActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
 
     }
     public void findDriver(View view) {
@@ -62,32 +102,5 @@ public class FindPassengerActivity extends AppCompatActivity {
     }
 
 
-    public class SpinnerListener implements AdapterView.OnItemSelectedListener {
 
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
-                if (arg2 == 1) {
-                    Log.d("sdsd0", "sdsd0");
-                    Intent intent = new Intent(FindPassengerActivity.this, UpdateProfileActivity.class);
-                    intent.putExtra("userName", "Bob");
-                    startActivity(intent);
-
-                } else if (arg2 == 2) {
-                    Log.d("sdsd1", "sdsd1");
-                    Intent intent = new Intent(FindPassengerActivity.this, ViewHistoryActivity.class);
-                    intent.putExtra("userName", "Bob");
-                    startActivity(intent);
-
-                } else if(arg2 == 3) {
-                    Log.d("sdsd2", "sdsd2");
-                    Intent intent = new Intent(FindPassengerActivity.this, CommonSignInSignUpActivity.class);
-                    startActivity(intent);
-                }
-
-
-        }
-
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
-    }
 }

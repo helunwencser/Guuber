@@ -94,6 +94,25 @@ public class GuuberService extends Service {
                                     bundle
                             );
                         }
+
+                    case ClientMessageKind.UPDATEDRIVERPROFILEDENIED:
+                    case ClientMessageKind.UPDATEDRIVERPROFILEOKAY:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERUPDATEPROFILEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERUPDATEPROFILEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.UPDATEPASSENGERPROFILEDENIED:
+                    case ClientMessageKind.UPDATEPASSENGERPROFILEOKAY:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.PASSENGERUPDATEPROFILEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERUPDATEPROFILEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
                     default:
                         break;
                 }

@@ -221,7 +221,7 @@
             android:layout_weight="1"
             android:text="Save"
             android:id="@+id/driver_update_saveButton"
-            android:onClick="save"
+            android:onClick="saveD"
             android:layout_gravity="center_horizontal" />
 
         <Button

@@ -30,6 +30,17 @@ public class FindDriverActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.passenger_activity_find_driver);
 
+
+        //userprofile
+        Intent intent = getIntent();
+        final String username = intent.getStringExtra("username");
+        final String userType = intent.getStringExtra("userType");
+        final String email = intent.getStringExtra("email");
+        final String gender = intent.getStringExtra("gender");
+        final String carId = intent.getStringExtra("carId");
+
+        Log.d("UserInfoP", username + userType + email + gender + carId);
+
         View.OnClickListener findButtonClicked = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +68,17 @@ public class FindDriverActivity extends AppCompatActivity  {
                     if (arg2 == 1) {
                         Log.d("sdsd0", "sdsd0");
                         Intent intent = new Intent(FindDriverActivity.this, UpdateProfileActivity.class);
-                        intent.putExtra("userName", "Bob");
+                        intent.putExtra("userName", username);
+                        intent.putExtra("userType", userType);
+                        intent.putExtra("email", email);
+                        intent.putExtra("gender", gender);
+                        intent.putExtra("carId", carId);
                         startActivity(intent);
 
                     } else if (arg2 == 2) {
                         Log.d("sdsd1", "sdsd1");
                         Intent intent = new Intent(FindDriverActivity.this, ViewHistoryActivity.class);
-                        intent.putExtra("userName", "Bob");
+                        intent.putExtra("userName", username);
                         startActivity(intent);
 
                     } else if(arg2 == 3){

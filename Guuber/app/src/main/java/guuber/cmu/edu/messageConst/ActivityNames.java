@@ -13,5 +13,9 @@ public class ActivityNames {
 
     public static final String COMMONSIGNUPACTIVITY = "CommonSignUpActivity";
 
+    public static final String DRIVERUPDATEPROFILEACTIVITY = "DRIVERUPDATEPROFILEACTIVITY";
+
+    public static final String PASSENGERUPDATEPROFILEACTIVITY = "PASSENGERUPDATEPROFILEACTIVITY";
+
 
 }

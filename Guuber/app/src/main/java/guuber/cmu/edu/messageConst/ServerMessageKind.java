@@ -32,5 +32,7 @@ public class ServerMessageKind {
     public static final String CHAT = "CHAT";
 
     /*update user profile*/
-    public static final String UPDATEUSERPROFILE = "UPDATEUSERPROFILE";
+    public static final String UPDATEDRIVERPROFILE = "UPDATEDRIVERPROFILE";
+
+    public static final String UPDATEPASSENGERPROFILE = "UPDATEPASSENGERPROFILE";
 }

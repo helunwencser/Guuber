@@ -196,7 +196,7 @@
             android:layout_height="wrap_content"
             android:text="Save"
             android:id="@+id/passenger_update_saveButton"
-            android:onClick="save"
+            android:onClick="saveP"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"/>
 

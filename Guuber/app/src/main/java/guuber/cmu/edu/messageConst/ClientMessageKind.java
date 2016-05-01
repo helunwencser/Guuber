@@ -34,8 +34,10 @@ public class ClientMessageKind {
     public static final String CHAT = "CHAT";
 
     /*update user profile*/
-    public static final String UPDATEUSERPROFILEOKAY = "UPDATEUSERPROFILEOKAY";
+    public static final String UPDATEPASSENGERPROFILEOKAY = "UPDATEPASSENGERPROFILEOKAY";
+    public static final String UPDATEPASSENGERPROFILEDENIED = "UPDATEPASSENGERPROFILEDENIED";
 
-    public static final String UPDATEUSERPROFILEDENIED = "UPDATEUSERPROFILEDENIED";
+    public static final String UPDATEDRIVERPROFILEOKAY  = "UPDATEDRIVERPROFILEOKAY ";
+    public static final String UPDATEDRIVERPROFILEDENIED = "UPDATEDRIVERPROFILEDENIED";
 
 }

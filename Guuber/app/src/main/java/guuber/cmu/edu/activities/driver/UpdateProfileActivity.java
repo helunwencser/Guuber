@@ -1,7 +1,11 @@
 package guuber.cmu.edu.activities.driver;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +16,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
+import guuber.cmu.edu.messageConst.ActivityNames;
+import guuber.cmu.edu.messageConst.ClientMessageKind;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.messageConst.ServerMessageKind;
+import guuber.cmu.edu.service.GuuberService;
+
 import android.content.Intent;
+import android.widget.ArrayAdapter;
 
 /**
  * Created by wangziming on 4/9/16.
@@ -26,7 +38,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private Spinner genderSpinner;
     private EditText emailEditText;
     private EditText carIDEditText;
+    private Context context;
 
+    String username;
+    String userType;
+    String email;
+    String gender;
+    String carId;
+    String password;
+    String Repassword;
 
     // password must contain 8 to 20 characters
     // it must contain at least one uppercase, one lowercase, one digit,
@@ -39,7 +59,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_activity_update_profile);
+        this.context = this;
 
+        //定位
         userNameEditText = (EditText) findViewById(R.id.driver_update_userName);
         passwordEditText = (EditText) findViewById(R.id.driver_update_password);
         retypePasswordEditText = (EditText) findViewById(R.id.driver_update_retypePassword);
@@ -47,29 +69,56 @@ public class UpdateProfileActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.driver_update_email);
         carIDEditText = (EditText) findViewById(R.id.driver_update_carID);
 
-        Button saveButton =
-                (Button) findViewById(R.id.driver_update_saveButton);
-        saveButton.setOnClickListener(saveButtonClicked);
+         //接住前面的传参
+         Intent intent = getIntent();
+         username = intent.getStringExtra("username");
+         userType = intent.getStringExtra("userType");
+         email = intent.getStringExtra("email");
+         gender = intent.getStringExtra("gender");
+         carId = intent.getStringExtra("carId");
+
+         //设置显示
+         userNameEditText.setText(username);
+         emailEditText.setText(email);
+         carIDEditText.setText(carId);
+         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_type, android.R.layout.simple_spinner_item);
+         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+         genderSpinner.setAdapter(adapter);
+         if (!gender.equals(null)) {
+            int spinnerPosition = adapter.getPosition(gender);
+            genderSpinner.setSelection(spinnerPosition);
+         }
+
+
+
 
         Button cancelButton =
                 (Button) findViewById(R.id.driver_update_cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
+
+        //新的取值
+        username = userNameEditText.getText().toString();
+        password = passwordEditText.getText().toString();
+        Repassword = retypePasswordEditText.getText().toString();
+        email = emailEditText.getText().toString();
+        carId = carIDEditText.getText().toString();
+        gender = genderSpinner.getSelectedItem().toString();
+
+
     }
 
-    private boolean validatePasswordMatch() {
-        String password = passwordEditText.getText().toString();
-        String retypePassword = retypePasswordEditText.getText().toString();
+
+    /////////////////////////////////////////
+    private boolean validatePasswordMatch(String password,String retypePassword) {
         if (!password.equals(retypePassword)) {
             return false;
         }
         return true;
     }
 
-    private boolean validatePasswordComplexity() {
-        String password = passwordEditText.getText().toString();
+    private boolean validatePasswordComplexity(String password) {
 
         Pattern pattern = Pattern.compile(password);
-
         Matcher matcher = pattern.matcher(password);
 
         return matcher.matches();
@@ -93,46 +142,56 @@ public class UpdateProfileActivity extends AppCompatActivity {
         }
         return true;
     }
+    /////////////////////////////////////////
 
-    private boolean sendUser() {
-        String userName = userNameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String email = emailEditText.getText().toString();
-        String carID = carIDEditText.getText().toString();
-        //String userType = getResources().getString(R.string.type_driver);
-        String userType = "Driver";
-        String gender = genderSpinner.getSelectedItem().toString();
 
-        User user = new User(userName, password, userType, email, gender, carID);
+    ///////////////
+    public void saveD(View view) {
+        EditText usernameEditText = (EditText)this.findViewById(R.id.driver_update_userName);
+        username = usernameEditText.getText().toString();
+        if(username == null || username.length() < 6) {
+            pop("Invalid user name", "User name must have at least 6 characters", "Back");
+        }
+        EditText passwordEditText = (EditText)this.findViewById(R.id.driver_update_password);
+        password = passwordEditText.getText().toString();
 
-        // send user object with socket
+        EditText passwordEditTextre = (EditText)this.findViewById(R.id.driver_update_retypePassword);
+        Repassword = passwordEditTextre.getText().toString();
 
-        return true;
-    }
 
-    View.OnClickListener saveButtonClicked = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (validateCompleteness()) {
-                if (validatePasswordMatch()) {
-                    if (validatePasswordComplexity()) {
-                        if (sendUser()) {
-                            pop("Congratulations", "You have successfully updated profile!", "Continue");
-                        } else {
-                            pop("Update Error", "UserName already exist", "Back");
-                        }
-                    } else {
-                        pop("Update Error", "Password doesn't meet requirement", "Back");
-                    }
+        if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
+            pop(
+                    "Invalid password",
+                    "password must contain 8 to 20 characters," +
+                            "it must contain at least one uppercase, one lowercase, one digit," +
+                            "one special character (@#$%!)",
+                    "Back"
+            );
+            return;
+        }
+
+        if (validateCompleteness()) {
+            if (validatePasswordMatch(password,Repassword)) {
+                if (validatePasswordComplexity(password)) {
+                    UpdateDriverProfile updateDriverProfile = new UpdateDriverProfile(null);
+                    Intent intent = new Intent(this, GuuberService.class);
+                    putInfoIntoIntent(intent);
+                    startService(intent);
                 } else {
-                    pop("Update Error", "Password and retype don't match", "Back");
+                    pop("Update Error", "Password doesn't meet requirement", "Back");
                 }
             } else {
-                pop("Update Error", "Information is incomplete", "Back");
+                pop("Update Error", "Password and retype don't match", "Back");
             }
+        } else {
+            pop("Update Error", "Information is incomplete", "Back");
         }
-    };
 
+    }
+
+
+
+    //////////////////
 
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
@@ -141,6 +200,47 @@ public class UpdateProfileActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
+    @SuppressLint("ParcelCreator")
+    public class UpdateDriverProfile extends ResultReceiver {
+
+        public UpdateDriverProfile(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            String response = resultData.getString("response");
+            if(response.equals(ClientMessageKind.UPDATEUSERPROFILEOKAY)) {
+                Intent intent = null;
+                if(userType.equals("Driver")) {
+                    putInfoIntoIntent(intent);
+                    startActivity(intent);
+                }
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pop(
+                                "Updated failed",
+                                "Please Try Again",
+                                "Save"
+                        );
+                    }
+                });
+                return;
+            }
+        }
+    }
+
+    private void putInfoIntoIntent(Intent intent) {
+        intent.putExtra("username", username);
+        intent.putExtra("password", password);
+        intent.putExtra("userType", userType);
+        intent.putExtra("email", email);
+        intent.putExtra("gender", gender);
+        intent.putExtra("carId", carId);
+    }
 
 
 }
