@@ -29,7 +29,10 @@ public class ServerMessageKind {
     public static final String STARTRIDE = "STARTRIDE";
 
     /* chatting */
-    public static final String CHAT = "CHAT";
+    public static final String CHATFROMDRIVER = "CHATFROMDRIVER";
+
+    /* chatting */
+    public static final String CHATFROMPASSENGER = "CHATFROMPASSENGER";
 
     /*update user profile*/
     public static final String UPDATEUSERPROFILE = "UPDATEUSERPROFILE";

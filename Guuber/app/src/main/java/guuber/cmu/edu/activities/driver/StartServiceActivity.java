@@ -205,7 +205,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.CHAT + ":" + receiverid + ":" + current);
+            mess.putExtra("message", ServerMessageKind.CHATFROMDRIVER + ":" + receiverid + ":" + current);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             startService(mess);
@@ -319,6 +319,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
+            System.out.println("Response from server: " + response);
+
             if (response == null || response.length() == 0) {
                 return;
             }
@@ -357,7 +359,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         finish();
                     }
                 });
-            } else if (type.equals(ClientMessageKind.CHAT)) {
+            } else if (type.equals(ClientMessageKind.CHATFROMPASSENGER)) {
                 final String passenger = splits[1];
                 final String content = splits[2];
                 runOnUiThread(new Runnable() {
