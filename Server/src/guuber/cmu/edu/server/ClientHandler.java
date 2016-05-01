@@ -114,6 +114,24 @@ public class ClientHandler implements Runnable {
 													+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToDrivers(passengerLocationUpdate);
 					break;
+				/**
+				 * Message format:
+				 * CHATFROMDRIVER:receiver:content
+				 * */
+				case ServerMessageKind.CHATFROMDRIVER:
+					String messageToPassenger = ClientMessageKind.CHATFROMDRIVER + ":" + this.connection.getUsername()
+												+ ":" + elements[2];
+					Connections.sendMessageToPassenger(elements[1], messageToPassenger);
+					break;
+				/**
+				 * Message format:
+				 * CHATFROMPASSENGER:receiver:content
+				 * */
+				case ServerMessageKind.CHATFROMPASSENGER:
+					String messageToDriver = ClientMessageKind.CHATFROMPASSENGER + ":" + this.connection.getUsername()
+												+ ":" + elements[2];
+					Connections.sendMessageToDriver(elements[1], messageToDriver);
+					break;
 				default:
 					break;
 				}

@@ -87,6 +87,7 @@ public class GuuberService extends Service {
                                     bundle
                             );
                         }
+                        break;
                     case ClientMessageKind.PASSENGERLOC:
                         if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
                             resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
@@ -94,6 +95,23 @@ public class GuuberService extends Service {
                                     bundle
                             );
                         }
+                        break;
+                    case ClientMessageKind.CHATFROMDRIVER:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.CHATFROMPASSENGER:
+                        if(resultReceiverMap.keySet().contains(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
                     default:
                         break;
                 }
