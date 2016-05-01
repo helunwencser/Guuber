@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,15 +74,21 @@ public class UpdateProfileActivity extends AppCompatActivity {
          //接住前面的传参
          Intent intent = getIntent();
          username = intent.getStringExtra("username");
+         password = intent.getStringExtra("password");
          userType = intent.getStringExtra("userType");
          email = intent.getStringExtra("email");
          gender = intent.getStringExtra("gender");
          carId = intent.getStringExtra("carId");
 
-         //设置显示
+        Log.d("UserInfoDDD", username + password + userType + email + gender + carId);
+
+
+        //设置显示
          userNameEditText.setText(username);
          emailEditText.setText(email);
          carIDEditText.setText(carId);
+         passwordEditText.setText(password);
+         retypePasswordEditText.setText(password);
          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_type, android.R.layout.simple_spinner_item);
          adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
          genderSpinner.setAdapter(adapter);
@@ -148,8 +155,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     ///////////////
     public void saveD(View view) {
-        EditText usernameEditText = (EditText)this.findViewById(R.id.driver_update_userName);
-        username = usernameEditText.getText().toString();
+        username = userNameEditText.getText().toString();
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
         }

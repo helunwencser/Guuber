@@ -73,12 +73,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
         //接住前面的传参
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
         userType = intent.getStringExtra("userType");
         email = intent.getStringExtra("email");
         gender = intent.getStringExtra("gender");
-       // carId = intent.getStringExtra("carId");
+        passwordEditText.setText(password);
+        retypePasswordEditText.setText(password);
+        // carId = intent.getStringExtra("carId");
 
-        Log.d("UserInfoPUP", username + userType + email + gender + carId);
+        Log.d("UserInfoPUP", username +password+ userType + email + gender + carId);
 
         //设置显示
         userNameEditText.setText(username);
@@ -147,8 +150,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     ///////////////
     public void saveP(View view) {
-        EditText usernameEditText = (EditText)this.findViewById(R.id.driver_update_userName);
-        username = usernameEditText.getText().toString();
+        username = userNameEditText.getText().toString();
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
         }
