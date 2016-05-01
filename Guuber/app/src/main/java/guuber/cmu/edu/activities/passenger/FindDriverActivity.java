@@ -18,6 +18,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.common.CommonSignInSignUpActivity;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.service.GuuberService;
 
 public class FindDriverActivity extends AppCompatActivity  {
 
@@ -69,7 +71,6 @@ public class FindDriverActivity extends AppCompatActivity  {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
                     if (arg2 == 1) {
-                        Log.d("sdsd0", "sdsd0");
                         Intent intent = new Intent(FindDriverActivity.this, UpdateProfileActivity.class);
                         intent.putExtra("username", username);
                         intent.putExtra("userType", userType);
@@ -81,13 +82,17 @@ public class FindDriverActivity extends AppCompatActivity  {
                         startActivity(intent);
 
                     } else if (arg2 == 2) {
-                        Log.d("sdsd1", "sdsd1");
                         Intent intent = new Intent(FindDriverActivity.this, ViewHistoryActivity.class);
                         intent.putExtra("username", username);
                         startActivity(intent);
 
                     } else if(arg2 == 3){
-                        Log.d("sdsd2", "sdsd2");
+                        /* end the background service */
+                        Intent endServiceIntent = new Intent(FindDriverActivity.this, GuuberService.class);
+                        endServiceIntent.putExtra("operation", Operation.ENDBACKGROUNDSERVICE);
+                        startService(endServiceIntent);
+                        Intent stopServiceIntent = new Intent(FindDriverActivity.this, GuuberService.class);
+                        stopService(stopServiceIntent);
                         Intent intent = new Intent(FindDriverActivity.this, CommonSignInSignUpActivity.class);
                         startActivity(intent);
                     }

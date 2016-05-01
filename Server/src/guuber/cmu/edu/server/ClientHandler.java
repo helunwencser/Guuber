@@ -245,6 +245,16 @@ public class ClientHandler implements Runnable {
 						Connections.broadcastMessageToDrivers(passengerRequestLocationMessage);
 					}
 					break;
+				case ServerMessageKind.EXIT:
+					this.connection.getBufferedReader().close();
+					this.connection.getBufferedWriter().close();
+					Connections.deleteConnection(this.connection);
+					if(this.connection.getUserType().equals("Driver")) {
+						Connections.deleteDriverConnection(this.connection.getUsername(), connection);
+					} else {
+						Connections.deletePassengerConnection(this.connection.getUsername(), connection);
+					}
+					break;
 				default:
 					break;
 				}
@@ -252,6 +262,7 @@ public class ClientHandler implements Runnable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("User " + this.connection.getUsername() + " is lost or has logout");
 		}
 		dbOperation.closeResources();
 	}

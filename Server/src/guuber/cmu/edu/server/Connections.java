@@ -41,6 +41,16 @@ public class Connections {
 	}
 	
 	/**
+	 * delete connection
+	 * @param	connection	connection to be deleted
+	 * */
+	public static void deleteConnection(Connection connection) {
+		if(connections.contains(connection)) {
+			connections.remove(connection);
+		}
+	}
+	
+	/**
 	 * add passenger connection to passengerConnections
 	 * @param	passengerName	the username of passenger
 	 * 
@@ -48,6 +58,17 @@ public class Connections {
 	 * */
 	public static void addPassengerConnection(String passengerName, Connection connection) {
 		passengerConnections.put(passengerName, connection);
+	}
+	
+	/**
+	 * remove passenger connection from passengerConnections
+	 * @param	passengerName	the name of passenger
+	 * @param	connection	connection to be deleted
+	 * */
+	public static void deletePassengerConnection(String passengerName, Connection connection) {
+		if(passengerConnections.keySet().contains(passengerName)) {
+			passengerConnections.remove(passengerName, connection);
+		}
 	}
 	
 	/**
@@ -71,6 +92,18 @@ public class Connections {
 	 * */
 	public static void addDriverConnection(String driverName, Connection connection) {
 		driverConnections.put(driverName, connection);
+	}
+	
+	
+	/**
+	 * delete connection from driverConnections
+	 * @param	driverName	the name of driver
+	 * @param	connection	the connection to be deleted
+	 * */
+	public static void deleteDriverConnection(String driverName, Connection connection) {
+		if(driverConnections.keySet().contains(driverName)) {
+			driverConnections.remove(driverName, connection);
+		}
 	}
 	
 	/**

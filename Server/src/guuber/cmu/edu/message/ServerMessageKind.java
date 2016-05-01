@@ -47,4 +47,7 @@ public class ServerMessageKind {
     public static final String UPDATEDRIVERPROFILE = "UPDATEDRIVERPROFILE";
 
     public static final String UPDATEPASSENGERPROFILE = "UPDATEPASSENGERPROFILE";
+    
+    /* exit the application */
+    public static final String EXIT = "EXIT";
 }

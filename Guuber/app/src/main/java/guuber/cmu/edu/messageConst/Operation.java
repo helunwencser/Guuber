@@ -11,4 +11,6 @@ public class Operation {
     public static final String STARTBACKGROUNDSERVICE = "STARTBACKGROUNDSERVICE";
 
     public static final String SENDMESSAGE = "SENDMESSAGE";
+
+    public static final String ENDBACKGROUNDSERVICE = "ENDBACKGROUNDSERVICE";
 }

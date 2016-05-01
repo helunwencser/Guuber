@@ -21,6 +21,7 @@ import java.util.Map;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.ws.remote.ServerConfig;
 
@@ -231,6 +232,15 @@ public class GuuberService extends Service {
             new Thread(
                     new MessageHandler(intent)
             ).start();
+        } else if(operation.equals(Operation.ENDBACKGROUNDSERVICE)) {
+            try {
+                this.bufferedWriter.write(ServerMessageKind.EXIT + "\n");
+                this.bufferedWriter.flush();
+                this.bufferedWriter.close();
+                this.bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return START_STICKY;
     }
