@@ -291,6 +291,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     e.printStackTrace();;
                 }
             }
+
+            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", Operation.SENDMESSAGE);
+            mess.putExtra("message", ServerMessageKind.PASSENGERDEST + ":" + destLon + ":" + destLat);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
+            startService(mess);
         }
     };
 
@@ -390,14 +397,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-                        Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
-                        mess.putExtra("operation", Operation.SENDMESSAGE);
-                        mess.putExtra("message", ServerMessageKind.PASSENGERDEST + ":" + driver + ":" + destLon + ":" + destLat);
-                        mess.putExtra("receiver", resultReceiver);
-                        mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
-                        startService(mess);
-
                         Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
                         intent.putExtra("driver", driver);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

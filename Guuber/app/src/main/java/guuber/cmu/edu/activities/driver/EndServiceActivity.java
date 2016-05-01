@@ -38,6 +38,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     private LocationManager locationManager;
     private Marker marker;
 
+    private Marker destMarker;
+
     private Double destLon;
     private Double destLat;
 
@@ -148,6 +150,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
     }
 
     View.OnClickListener endButtonClicked = new View.OnClickListener() {
