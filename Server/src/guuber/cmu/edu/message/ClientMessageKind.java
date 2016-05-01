@@ -38,6 +38,12 @@ public class ClientMessageKind {
     /* chatting */
     public static final String CHATFROMPASSENGER = "CHATFROMPASSENGER";
 
+    /* driver request location */
+    public static final String DRIVERREQUESTLOC = "DRIVERREQUESTLOC";
+    
+    /* passenger request location */
+    public static final String PASSENGERREQUESTLOC = "PASSENGERREQUESTLOC";
+    
     /*update user profile*/
     public static final String UPDATEPASSENGERPROFILEOKAY = "UPDATEPASSENGERPROFILEOKAY";
     public static final String UPDATEPASSENGERPROFILEDENIED = "UPDATEPASSENGERPROFILEDENIED";
