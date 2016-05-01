@@ -181,7 +181,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                                                                     + password +":"
                                                                     + email + ":"
                                                                     + gender+ ":"
-                                                                    + carId + ":");
+                                                                    + carId);
                     intent.putExtra("receiver", updateDriverProfileReceiver);
                     intent.putExtra("activityName", ActivityNames.DRIVERUPDATEPROFILEACTIVITY);
                     startService(intent);
