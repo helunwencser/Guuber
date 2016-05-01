@@ -410,6 +410,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     @Override
                     public void run() {
                         if (splits.length == 2) {
+                            currLat = null;
+                            currLon = null;
                             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
                             intent.putExtra("driver", driver);
                             intent.putExtra("username", myName);
@@ -439,6 +441,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             }
                             String result = history + "\n" + driver + ": " + content;
                             allMessages.put(driver, result);
+                            driverMarkers.get(driver).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                         }
                         Message message = new Message(driver, myName, content, new Date().toString());
                         meassageDBController.insertMessage(message);

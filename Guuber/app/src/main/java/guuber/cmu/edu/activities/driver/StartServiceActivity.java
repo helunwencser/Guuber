@@ -253,6 +253,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess2.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             startService(mess2);
 
+            currLat = null;
+            currLon = null;
+
             Marker dest = passengerDestMarkers.get(currentPassenger);
             Marker passengerMarker = passengerMarkers.get(currentPassenger);
             LatLng pos = dest.getPosition();
@@ -401,6 +404,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             }
                             String result = history + "\n" + passenger + ": " + content;
                             allMessages.put(passenger, result);
+                            passengerMarkers.get(passenger).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                         }
                         Message message = new Message(passenger, myName, content, new Date().toString());
                         meassageDBController.insertMessage(message);
