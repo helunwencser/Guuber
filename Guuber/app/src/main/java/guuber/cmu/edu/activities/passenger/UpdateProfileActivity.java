@@ -177,7 +177,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     intent.putExtra("operation", Operation.SENDMESSAGE);
                     intent.putExtra("message", ServerMessageKind.UPDATEPASSENGERPROFILE + ":"
                             + username + ":"
-                            + password +":"
+                            + password + ":"
+                            + userType + ":"
                             + email + ":"
                             + gender);
                     intent.putExtra("receiver", updateDriverProfileReceiver);
