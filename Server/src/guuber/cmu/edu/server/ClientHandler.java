@@ -87,6 +87,8 @@ public class ClientHandler implements Runnable {
 						System.out.println(response);
 						this.connection.getBufferedWriter().write(response);
 						this.connection.getBufferedWriter().flush();
+						this.connection.setUsername(user.getUsername());
+						this.connection.setUserType(user.getUserType());
 					}
 					break;
 				/**
