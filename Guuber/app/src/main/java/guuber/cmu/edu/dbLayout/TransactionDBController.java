@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import guuber.cmu.edu.entities.Transaction;
+import android.util.Log;
 
 /**
  * Created by lunwenh on 4/8/2016.
@@ -109,7 +110,7 @@ public class TransactionDBController {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
-
+        Log.d("tran","0");
         String[] projection = {
                 TransactionModel._ID,
                 TransactionModel.DRIVER,
@@ -120,7 +121,7 @@ public class TransactionDBController {
                 TransactionModel.END_LOCATION,
                 TransactionModel.COST
         };
-
+        Log.d("tran","1");
         String sortOrder = TransactionModel._ID + " DESC";
 
         Cursor cursor = sqLiteDatabase.query(
@@ -132,7 +133,9 @@ public class TransactionDBController {
                 null,
                 sortOrder
         );
+        Log.d("tran","2");
         if(cursor.moveToFirst()) {
+            Log.d("tran","3");
             do {
                 res.add(
                         new Transaction(
@@ -148,6 +151,7 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
+        Log.d("tran","4");
         return res;
     }
 

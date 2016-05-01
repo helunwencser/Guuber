@@ -20,40 +20,51 @@ import guuber.cmu.edu.entities.Transaction;
 public class DetailedViewActivity extends AppCompatActivity {
 
     Button returnButton;
-    TextView driverName;
-    TextView startTime;
-    TextView endTime;
-    TextView cost;
+    TextView driverNameT;
+    TextView startTimeT;
+    TextView endTimeT;
+    TextView costT;
+    TextView startLocationT;
+    TextView endLocationT;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.passenger_activity_detailed_view);
+        setContentView(R.layout.driver_activity_detailed_view);
+        Intent intent = getIntent();
+        final String username = intent.getStringExtra("username");
+        final String driverName = intent.getStringExtra("driver");
+        final String startTime = intent.getStringExtra("startTime");
+        final String endtime = intent.getStringExtra("endTime");
+        final String cost = intent.getStringExtra("cost");
+        final String startLocation = intent.getStringExtra("startLocation");
+        final String endLocation = intent.getStringExtra("endLocation");
+
 
         View.OnClickListener onClickListener = new View.OnClickListener(){
             public void onClick(View v) {
                 Intent intent = new Intent(DetailedViewActivity.this,ViewHistoryActivity.class);
-                intent.putExtra("username","Bob");
+                intent.putExtra("username",username);
                 startActivity(intent);
             }
         };
         returnButton = (Button)findViewById(R.id.passenger_detailed_returnButton);
         returnButton.setOnClickListener(onClickListener);
 
-        driverName = (TextView)findViewById(R.id.transactionPassenger);
-        startTime  = (TextView)findViewById(R.id.transactionStartTime);
-        endTime = (TextView)findViewById(R.id.transactionEndTime);
-        cost = (TextView)findViewById(R.id.transactionCost);
-        Intent intent = getIntent();
-        int transactionID = Integer.parseInt(intent.getStringExtra("transactionID"));
-        TransactionDBController controller = new TransactionDBController(this);
-        List<Transaction> result = controller.selectTransactionsByTransactionID(transactionID);
+        driverNameT = (TextView)findViewById(R.id.transactionPassenger);
+        startTimeT  = (TextView)findViewById(R.id.transactionStartTime);
+        endTimeT = (TextView)findViewById(R.id.transactionEndTime);
+        costT = (TextView)findViewById(R.id.transactionCost);
+        startLocationT = (TextView)findViewById(R.id.startLocation);
+        endLocationT =   (TextView)findViewById(R.id.endLocation);
 
-        driverName.setText(result.get(0).getDriver());
-        startTime.setText(result.get(0).getStartTime());
-        endTime.setText(result.get(0).getEndTime());
-        cost.setText(String.valueOf(result.get(0).getCost()));
+        driverNameT.setText(driverName);
+        startTimeT.setText(startTime);
+        endTimeT.setText(endtime);
+        costT.setText(cost);
+        startLocationT.setText(startLocation);
+        endLocationT.setText(endLocation);
 
     }
 

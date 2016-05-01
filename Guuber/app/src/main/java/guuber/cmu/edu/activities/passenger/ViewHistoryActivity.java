@@ -52,16 +52,14 @@ public class ViewHistoryActivity extends AppCompatActivity {
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
         String userName = intent.getStringExtra("username");
-        Log.d("usernameDV", userName);
-        final List<Transaction> transactionList = tranController.selectTransactionsByDriver(userName);
-        Log.d("transactionDV", transactionList.get(0).toString());
-
-
+        Log.d("usernamePV", userName);
+        final List<Transaction> transactionList = tranController.selectTransactionsByPassenger(userName);
         int transactionSize = transactionList.size();
+        Log.d("usernamePVSize", String.valueOf(transactionSize));
         if(transactionSize != 0){
+            Log.d("transactionPV", transactionList.get(0).toString());
             String[] res = new String[transactionSize];
             for(int i = 0; i< transactionSize; i++){
-
                 StringBuilder sam = new StringBuilder();
                 sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
                 sam.append(transactionList.get(i).getDriver()+"\t");
@@ -87,7 +85,13 @@ public class ViewHistoryActivity extends AppCompatActivity {
                                         long arg3) {
                     String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
                     Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
-                    Indent.putExtra("transactionID", transactionID);
+                    Indent.putExtra("username", transactionList.get(pos).getPassenger());
+                    Indent.putExtra("driver", transactionList.get(pos).getDriver());
+                    Indent.putExtra("startTime", transactionList.get(pos).getStartTime());
+                    Indent.putExtra("endTime", transactionList.get(pos).getEndTime());
+                    Indent.putExtra("startLocation", transactionList.get(pos).getStartLocation());
+                    Indent.putExtra("endLocation", transactionList.get(pos).getEndLocation());
+                    Indent.putExtra("cost", transactionList.get(pos).getCost());
                     startActivity(Indent);
                 }
             });

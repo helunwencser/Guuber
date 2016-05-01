@@ -71,12 +71,11 @@ public class ViewHistoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String userName = intent.getStringExtra("username");
         Log.d("usernameDV", userName);
-        final List<Transaction> transactionList = tranController.selectTransactionsByPassenger(userName);
-        Log.d("transactionDV", transactionList.get(0).toString());
-
+        final List<Transaction> transactionList = tranController.selectTransactionsByDriver(userName);
 
         int transactionSize = transactionList.size();
         if(transactionSize != 0){
+            Log.d("transactionDV", transactionList.get(0).toString());
             String[] res = new String[transactionSize];
             for(int i = 0; i< transactionSize; i++){
 
@@ -106,6 +105,13 @@ public class ViewHistoryActivity extends AppCompatActivity {
                     String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
                     Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
                     Indent.putExtra("transactionID", transactionID);
+                    Indent.putExtra("username", transactionList.get(pos).getDriver());
+                    Indent.putExtra("passenger", transactionList.get(pos).getPassenger());
+                    Indent.putExtra("startTime", transactionList.get(pos).getStartTime());
+                    Indent.putExtra("endTime", transactionList.get(pos).getEndTime());
+                    Indent.putExtra("startLocation", transactionList.get(pos).getStartLocation());
+                    Indent.putExtra("endLocation", transactionList.get(pos).getEndLocation());
+                    Indent.putExtra("cost", transactionList.get(pos).getCost());
                     startActivity(Indent);
                 }
             });
