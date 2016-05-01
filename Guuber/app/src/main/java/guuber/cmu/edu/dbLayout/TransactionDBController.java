@@ -57,7 +57,7 @@ public class TransactionDBController {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
-
+        Log.d("tranD","0");
         String[] projection = {
                 TransactionModel._ID,
                 TransactionModel.DRIVER,
@@ -68,19 +68,21 @@ public class TransactionDBController {
                 TransactionModel.END_LOCATION,
                 TransactionModel.COST
         };
-
+        Log.d("tranD","1D");
         String sortOrder = TransactionModel._ID + " DESC";
 
         Cursor cursor = sqLiteDatabase.query(
                 TransactionModel.TABLE_NAME,
                 projection,
-                TransactionModel.DRIVER + "=?",
+                TransactionModel.PASSENGER + "=?",
                 new String[] {driver},
                 null,
                 null,
                 sortOrder
         );
+        Log.d("tranD","2D");
         if(cursor.moveToFirst()) {
+            Log.d("tranD","3D");
             do {
                 res.add(
                         new Transaction(
@@ -96,6 +98,7 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
+        Log.d("tranD","4");
         return res;
     }
 

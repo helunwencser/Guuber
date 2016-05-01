@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -20,6 +21,7 @@ import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.service.GuuberService;
 import android.util.Log;
+import guuber.cmu.edu.dbLayout.TransactionDBHelper;
 
 public class CommonSignInActivity extends AppCompatActivity {
 
@@ -44,6 +46,9 @@ public class CommonSignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_in);
         context = this;
+        TransactionDBHelper transactionDBHelper =  new TransactionDBHelper(this);
+        SQLiteDatabase sqLiteDatabase = transactionDBHelper.getWritableDatabase();
+        transactionDBHelper.onCreate(sqLiteDatabase);
     }
 
     /**

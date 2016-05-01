@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
+import guuber.cmu.edu.dbLayout.TransactionDBHelper;
 import guuber.cmu.edu.entities.User;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
@@ -48,6 +50,9 @@ public class CommonSignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_up);
         this.context = this;
+        TransactionDBHelper transactionDBHelper =  new TransactionDBHelper(this);
+        SQLiteDatabase sqLiteDatabase = transactionDBHelper.getWritableDatabase();
+        transactionDBHelper.onCreate(sqLiteDatabase);
     }
 
     //sign up

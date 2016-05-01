@@ -50,6 +50,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
         cancel.setOnClickListener(onClickListener);
 
         TransactionDBController tranController = new TransactionDBController(this);
+
         Intent intent = getIntent();
         String userName = intent.getStringExtra("username");
         Log.d("usernamePV", userName);
