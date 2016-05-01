@@ -435,6 +435,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.DRIVERREQUESTLOC)) {
+                if (currLon == null) {
+                    return;
+                }
                 Intent intent = new Intent(StartServiceActivity.this, GuuberService.class);
                 intent.putExtra("operation", Operation.SENDMESSAGE);
                 intent.putExtra("message", ServerMessageKind.PASSENGERLOC + ":" + currLon + ":" + currLat);

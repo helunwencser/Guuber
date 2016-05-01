@@ -20,6 +20,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Date;
+
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
@@ -39,6 +41,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private ResultReceiver resultReceiver;
 
+    private Date startTime;
+    private Date endTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +54,6 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
 
         resultReceiver = new PassengerEndResultReceiver(null);
-
 
         try {
             // Acquire a reference to the system Location Manager
@@ -93,6 +97,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         mess2.putExtra("receiver", resultReceiver);
         mess2.putExtra("activityName", ActivityNames.PASSENGERENDSERVICEACTIVITY);
         startService(mess2);
+
+        startTime = new Date();
     }
 
     public void updateLocation(Location location) {
@@ -109,6 +115,16 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         }
 
     }
+
+    public String getCost() {
+        if (endTime == null) {
+            endTime = new Date();
+        }
+        long passed = endTime.getTime() - startTime.getTime();
+        Double cost = Math.ceil((double) passed/1000.0/60.0) * 0.8;
+        return String.format("$%.2f", cost);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -139,6 +155,12 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             }
 
             if (response.equals(ClientMessageKind.ENDRIDE)) {
+                endTime = new Date();
+
+                System.out.println("End Service: " + startTime.toString());
+                System.out.println("End Service: " + endTime.toString());
+                System.out.println("End Service: " + getCost());
+
                 Intent intent = new Intent(EndServiceActivity.this, FindDriverActivity.class);
                 startActivity(intent);
             }

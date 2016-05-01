@@ -406,6 +406,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        if (currLon == null) {
+                            return;
+                        }
                         Intent intent = new Intent(StartServiceActivity.this, GuuberService.class);
                         intent.putExtra("operation", Operation.SENDMESSAGE);
                         intent.putExtra("message", ServerMessageKind.DRIVERLOC + ":" + currLon + ":" + currLat);
