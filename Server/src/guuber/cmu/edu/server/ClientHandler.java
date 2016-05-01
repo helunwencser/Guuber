@@ -167,6 +167,12 @@ public class ClientHandler implements Runnable {
 						Connections.sendMessageToPassenger(elements[1], endRideMessage);
 					}
 					break;
+				/**
+				 * Message format:
+				 * PASSENGERCANCEL
+				 * */
+				case ServerMessageKind.PASSENGERCANCEL:
+					break;
 				default:
 					break;
 				}

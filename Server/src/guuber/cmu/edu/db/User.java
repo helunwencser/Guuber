@@ -15,23 +15,23 @@ public class User implements Serializable {
 	private String username;
 	private String password;
 	private String userType;
-	private String gender;
 	private String email;
+	private String gender;
 	private String carId;
 	
 	public User(
 			String username,
 			String password,
 			String userType,
-			String gender,
 			String email,
+			String gender,
 			String carId
 			) {
 		this.username = username;
 		this.password = password;
 		this.userType = userType;
-		this.gender = gender;
 		this.email = email;
+		this.gender = gender;
 		this.carId = carId;
 	}
 	
