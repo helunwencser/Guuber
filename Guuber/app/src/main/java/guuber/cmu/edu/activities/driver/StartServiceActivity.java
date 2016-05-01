@@ -234,13 +234,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 return;
             }
 
-            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
-            mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.DRIVEREXIT);
-            mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
-            startService(mess);
-
             Intent mess2 = new Intent(StartServiceActivity.this, GuuberService.class);
             mess2.putExtra("operation", Operation.SENDMESSAGE);
             mess2.putExtra("message", ServerMessageKind.STARTRIDE + ":" + currentPassenger);
@@ -266,7 +259,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.DRIVEREXIT);
+            mess.putExtra("message", ServerMessageKind.DRIVERCANCEL);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             startService(mess);
@@ -355,7 +348,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         addPassengerMarker(passenger, lon, lat);
                     }
                 });
-            } else if (type.equals(ClientMessageKind.PASSENGEREXIT)) {
+            } else if (type.equals(ClientMessageKind.PASSENGERCANCEL)) {
                 final String passenger = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override

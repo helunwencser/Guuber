@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
@@ -132,7 +133,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             LatLng start = new LatLng(lat, lon);
             LatLng end = new LatLng(destLat, destLon);
             routing = new Routing.Builder()
-                    .travelMode(Routing.TravelMode.WALKING)
+                    .travelMode(Routing.TravelMode.DRIVING)
                     .withListener(this)
                     .waypoints(start, end)
                     .build();
