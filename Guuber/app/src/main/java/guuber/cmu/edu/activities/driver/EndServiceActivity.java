@@ -65,6 +65,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     private Date startTime;
     private Date endTime;
 
+    private String myName;
+
     private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
     @Override
@@ -110,6 +112,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
+        Intent parameters = getIntent();
+        myName = parameters.getStringExtra("username");
 
         Button endButton =
                 (Button) findViewById(R.id.driver_endButton);

@@ -45,6 +45,7 @@ public class FindDriverActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FindDriverActivity.this, StartServiceActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         };

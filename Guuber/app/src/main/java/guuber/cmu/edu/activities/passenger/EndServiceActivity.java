@@ -44,6 +44,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     private Date startTime;
     private Date endTime;
 
+    private String myName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
         Intent intent = getIntent();
         driver = intent.getStringExtra("driver");
+
+        Intent parameters = getIntent();
+        myName = parameters.getStringExtra("username");
 
         Intent mess2 = new Intent(EndServiceActivity.this, GuuberService.class);
         mess2.putExtra("operation", Operation.SENDMESSAGE);

@@ -18,10 +18,7 @@ import java.util.List;
 
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.common.CommonSignInSignUpActivity;
-import guuber.cmu.edu.activities.driver.*;
-import guuber.cmu.edu.activities.driver.StartServiceActivity;
-import guuber.cmu.edu.activities.driver.UpdateProfileActivity;
-import guuber.cmu.edu.activities.driver.ViewHistoryActivity;
+
 
 public class FindPassengerActivity extends AppCompatActivity {
 
@@ -48,6 +45,7 @@ public class FindPassengerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FindPassengerActivity.this, StartServiceActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         };
