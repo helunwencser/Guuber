@@ -28,6 +28,9 @@ public class ServerMessageKind {
     /* driver start the ride */
     public static final String STARTRIDE = "STARTRIDE";
 
+    /* driver end the ride */
+    public static final String ENDRIDE = "ENDRIDE";
+
     /* chatting */
     public static final String CHATFROMDRIVER = "CHATFROMDRIVER";
 

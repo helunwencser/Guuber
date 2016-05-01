@@ -36,6 +36,9 @@ public class ClientMessageKind {
     /* chatting */
     public static final String CHATFROMPASSENGER = "CHATFROMPASSENGER";
 
+    /* driver end the ride */
+    public static final String ENDRIDE = "ENDRIDE";
+    
     /*update user profile*/
     public static final String UPDATEUSERPROFILEOKAY = "UPDATEUSERPROFILEOKAY";
 
