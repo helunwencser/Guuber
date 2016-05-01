@@ -307,7 +307,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.PASSENGEREXIT);
+            mess.putExtra("message", ServerMessageKind.PASSENGERCANCEL);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
             startService(mess);
@@ -384,7 +384,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         addDriverMarker(driver, lon, lat);
                     }
                 });
-            } else if (type.equals(ClientMessageKind.DRIVEREXIT)) {
+            } else if (type.equals(ClientMessageKind.DRIVERCANCEL)) {
                 final String driver = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override
