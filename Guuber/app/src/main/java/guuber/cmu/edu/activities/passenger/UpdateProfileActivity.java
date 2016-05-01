@@ -81,7 +81,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         retypePasswordEditText.setText(password);
         // carId = intent.getStringExtra("carId");
 
-        Log.d("UserInfoPUPDATE",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
+        Log.d("UserInfoPUPDATE", username + "\t" + password + "\t" + userType + "\t" + email + "\t" + gender + "\t" + carId);
         //设置显示
         userNameEditText.setText(username);
         emailEditText.setText(email);
@@ -101,11 +101,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(cancelButtonClicked);
 
         //新的取值
-        username = userNameEditText.getText().toString();
-        password = passwordEditText.getText().toString();
-        Repassword = retypePasswordEditText.getText().toString();
-        email = emailEditText.getText().toString();
-        gender = genderSpinner.getSelectedItem().toString();
 
     }
 
@@ -153,12 +148,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
         }
-        EditText passwordEditText = (EditText)this.findViewById(R.id.passenger_update_password);
         password = passwordEditText.getText().toString();
-
-        EditText passwordEditTextre = (EditText)this.findViewById(R.id.passenger_update_retypePassword);
-        Repassword = passwordEditTextre.getText().toString();
-
+        Repassword = retypePasswordEditText.getText().toString();
+        email = emailEditText.getText().toString();
+        gender = genderSpinner.getSelectedItem().toString();
 
         if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
             pop(

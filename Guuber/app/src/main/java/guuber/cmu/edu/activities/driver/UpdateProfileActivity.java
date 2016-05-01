@@ -103,13 +103,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 (Button) findViewById(R.id.driver_update_cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
 
-        //
-        username = userNameEditText.getText().toString();
-        password = passwordEditText.getText().toString();
-        Repassword = retypePasswordEditText.getText().toString();
-        email = emailEditText.getText().toString();
-        carId = carIDEditText.getText().toString();
-        gender = genderSpinner.getSelectedItem().toString();
+
+
 
     }
 
@@ -157,12 +152,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
         }
-        EditText passwordEditText = (EditText)this.findViewById(R.id.driver_update_password);
+
         password = passwordEditText.getText().toString();
-
-        EditText passwordEditTextre = (EditText)this.findViewById(R.id.driver_update_retypePassword);
-        Repassword = passwordEditTextre.getText().toString();
-
+        Repassword = retypePasswordEditText.getText().toString();
+        email = emailEditText.getText().toString();
+        carId = carIDEditText.getText().toString();
+        gender = genderSpinner.getSelectedItem().toString();
 
         if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
             pop(
