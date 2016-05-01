@@ -225,6 +225,26 @@ public class ClientHandler implements Runnable {
 						Connections.sendMessageToPassenger(this.connection.getUsername(), passengerUpdateProfileReply);
 					}
 					break;
+				/**
+				 * Message format:
+				 * DRIVERREQUESTLOC
+				 * */
+				case ServerMessageKind.DRIVERREQUESTLOC:
+					if(this.connection.getUserType().equals("Driver")) {
+						String driverRequestLocationMessage = ClientMessageKind.DRIVERREQUESTLOC;
+						Connections.broadcastMessageToPassengers(driverRequestLocationMessage);
+					}
+					break;
+				/**
+				 * Message format:
+				 * PASSENGERREQUESTLOC
+				 * */
+				case ServerMessageKind.PASSENGERREQUESTLOC:
+					if(this.connection.getUserType().equals("Passenger")) {
+						String passengerRequestLocationMessage = ClientMessageKind.PASSENGERREQUESTLOC;
+						Connections.broadcastMessageToDrivers(passengerRequestLocationMessage);
+					}
+					break;
 				default:
 					break;
 				}
