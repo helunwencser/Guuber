@@ -126,6 +126,11 @@ public class GuuberService extends Service {
                                     ResultCode.RESULTCODE,
                                     bundle
                             );
+                        } else if(resultReceiverMap.containsKey(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
                         }
                         break;
                     case ClientMessageKind.ENDRIDE:

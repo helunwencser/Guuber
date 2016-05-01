@@ -114,6 +114,28 @@ public class Connections {
 	}
 	
 	/**
+	 * broadcast message to all drivers except driverName
+	 * @param	driverName	the name of driver
+	 * @param	message	message to be broadcast
+	 * */
+	public static void broadcastMessageToDriversExcept(String driverName, String message) {
+		Set<String> keys = driverConnections.keySet();
+		for(String key : keys) {
+			if(!key.equals(driverName)) {
+				Connection connection = driverConnections.get(key);
+				try {
+					connection.getBufferedWriter().write(message + "\n");
+					connection.getBufferedWriter().flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("broadcast message: " + message + " to " + connection.getUsername() + " fails");
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	/**
 	 * send message to driver directly
 	 * @param username	the name of driver
 	 * 
@@ -149,6 +171,29 @@ public class Connections {
 				// TODO Auto-generated catch block
 				System.out.println("broadcast message: " + message + " to " + connection.getUsername() + " fails");
 				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * broadcast message to all drivers except passengerName
+	 * @param passengerName	the name of driver
+	 * 
+	 * @param	message	message to be sent
+	 * */
+	public static void broadcastMessageToPassengerExcept(String passengerName, String message) {
+		Set<String> keys = passengerConnections.keySet();
+		for(String key : keys) {
+			if(!key.equals(passengerName)) {
+				Connection connection = passengerConnections.get(key);
+				try {
+					connection.getBufferedWriter().write(message + "\n");
+					connection.getBufferedWriter().flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("broadcast message: " + message + " to " + connection.getUsername() + " fails");
+					e.printStackTrace();
+				}
 			}
 		}
 	}
