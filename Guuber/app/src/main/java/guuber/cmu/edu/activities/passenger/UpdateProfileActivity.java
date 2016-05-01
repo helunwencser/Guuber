@@ -70,7 +70,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.passenger_update_email);
 
 
-        //接住前面的传参
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
@@ -82,7 +82,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         // carId = intent.getStringExtra("carId");
 
         Log.d("UserInfoPUPDATE", username + "\t" + password + "\t" + userType + "\t" + email + "\t" + gender + "\t" + carId);
-        //设置显示
+
         userNameEditText.setText(username);
         emailEditText.setText(email);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_type, android.R.layout.simple_spinner_item);
@@ -100,7 +100,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 (Button) findViewById(R.id.passenger_update_cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
 
-        //新的取值
+
 
     }
 

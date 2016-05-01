@@ -63,7 +63,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         setContentView(R.layout.driver_activity_update_profile);
         this.context = this;
 
-        //定位
+
         userNameEditText = (TextView) findViewById(R.id.driver_update_userName);
         passwordEditText = (EditText) findViewById(R.id.driver_update_password);
         retypePasswordEditText = (EditText) findViewById(R.id.driver_update_retypePassword);
@@ -71,7 +71,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.driver_update_email);
         carIDEditText = (EditText) findViewById(R.id.driver_update_carID);
 
-         //接住前面的传参
+
          Intent intent = getIntent();
          username = intent.getStringExtra("username");
          password = intent.getStringExtra("password");
@@ -82,7 +82,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         Log.d("UserInfoDDDUPDATE",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
 
-        //设置显示
+
          userNameEditText.setText(username);
          emailEditText.setText(email);
          carIDEditText.setText(carId);
