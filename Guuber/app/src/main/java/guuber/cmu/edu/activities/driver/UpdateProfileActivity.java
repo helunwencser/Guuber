@@ -80,8 +80,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
          gender = intent.getStringExtra("gender");
          carId = intent.getStringExtra("carId");
 
-        Log.d("UserInfoDDD", username + password + userType + email + gender + carId);
-
+        Log.d("UserInfoDDDUPDATE",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
 
         //设置显示
          userNameEditText.setText(username);
@@ -111,7 +110,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         email = emailEditText.getText().toString();
         carId = carIDEditText.getText().toString();
         gender = genderSpinner.getSelectedItem().toString();
-
 
     }
 
@@ -228,11 +226,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
             if(response.equals(ClientMessageKind.UPDATEDRIVERPROFILEOKAY)) {
-                Intent intent = null;
+                /*Intent intent = null;
                 if(userType.equals("Driver")) {
                     putInfoIntoIntent(intent);
                     startActivity(intent);
-                }
+                }*/
+                Log.d("updateOkayD","uuuuu");
             } else {
                 runOnUiThread(new Runnable() {
                     @Override

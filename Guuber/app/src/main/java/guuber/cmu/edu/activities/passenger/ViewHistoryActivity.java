@@ -52,9 +52,9 @@ public class ViewHistoryActivity extends AppCompatActivity {
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
         String userName = intent.getStringExtra("username");
-        Log.d("username", userName);
+        Log.d("usernameDV", userName);
         final List<Transaction> transactionList = tranController.selectTransactionsByDriver(userName);
-        Log.d("transaction", transactionList.get(0).toString());
+        Log.d("transactionDV", transactionList.get(0).toString());
 
 
         int transactionSize = transactionList.size();

@@ -34,12 +34,14 @@ public class FindDriverActivity extends AppCompatActivity  {
         //userprofile
         Intent intent = getIntent();
         final String username = intent.getStringExtra("username");
+        final String password = intent.getStringExtra("password");
         final String userType = intent.getStringExtra("userType");
         final String email = intent.getStringExtra("email");
         final String gender = intent.getStringExtra("gender");
         final String carId = intent.getStringExtra("carId");
 
-        Log.d("UserInfoP", username + userType + email + gender + carId);
+
+        Log.d("UserInfoP",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
 
         View.OnClickListener findButtonClicked = new View.OnClickListener() {
             @Override
@@ -70,9 +72,11 @@ public class FindDriverActivity extends AppCompatActivity  {
                         Intent intent = new Intent(FindDriverActivity.this, UpdateProfileActivity.class);
                         intent.putExtra("username", username);
                         intent.putExtra("userType", userType);
+                        intent.putExtra("password", password);
                         intent.putExtra("email", email);
                         intent.putExtra("gender", gender);
                         intent.putExtra("carId", carId);
+                        Log.d("UserInfoPENTER", username + "\t" + password + "\t" + userType + "\t" + email + "\t" + gender + "\t" + carId);
                         startActivity(intent);
 
                     } else if (arg2 == 2) {

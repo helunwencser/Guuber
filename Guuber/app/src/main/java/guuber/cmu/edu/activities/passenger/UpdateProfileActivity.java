@@ -81,8 +81,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         retypePasswordEditText.setText(password);
         // carId = intent.getStringExtra("carId");
 
-        Log.d("UserInfoPUP", username +password+ userType + email + gender + carId);
-
+        Log.d("UserInfoPUPDATE",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
         //设置显示
         userNameEditText.setText(username);
         emailEditText.setText(email);
@@ -94,7 +93,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             genderSpinner.setSelection(spinnerPosition);
         }
 
-        Log.d("UserInfoPUPP", username + userType + email + gender + carId);
+        Log.d("UserInfoPUPDATEPPP",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
 
 
         Button cancelButton =
@@ -154,10 +153,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if(username == null || username.length() < 6) {
             pop("Invalid user name", "User name must have at least 6 characters", "Back");
         }
-        EditText passwordEditText = (EditText)this.findViewById(R.id.driver_update_password);
+        EditText passwordEditText = (EditText)this.findViewById(R.id.passenger_update_password);
         password = passwordEditText.getText().toString();
 
-        EditText passwordEditTextre = (EditText)this.findViewById(R.id.driver_update_retypePassword);
+        EditText passwordEditTextre = (EditText)this.findViewById(R.id.passenger_update_retypePassword);
         Repassword = passwordEditTextre.getText().toString();
 
 
@@ -222,11 +221,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
             if(response.equals(ClientMessageKind.UPDATEPASSENGERPROFILEOKAY)) {
-                Intent intent = null;
+               /* Intent intent = null;
                 if(userType.equals("Passenger")) {
                     putInfoIntoIntent(intent);
                     startActivity(intent);
-                }
+                }*/
+                Log.d("updateOkayP","uuuuu");
             } else {
                 runOnUiThread(new Runnable() {
                     @Override

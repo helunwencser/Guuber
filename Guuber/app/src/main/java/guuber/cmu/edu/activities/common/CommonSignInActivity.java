@@ -127,12 +127,12 @@ public class CommonSignInActivity extends AppCompatActivity {
                 userType = elements[3];
                 email = elements[4];
                 gender = elements[5];
-                Log.d("recieverserver P",email + gender);
                 if(userType.equals("Driver")) {
                     carId = elements[6];
                 } else {
                     carId = "";
                 }
+                Log.d("recieverserver P",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
                 Intent intent = null;
                 if(userType.equals("Driver")) {
                     intent = new Intent(context, FindPassengerActivity.class);
