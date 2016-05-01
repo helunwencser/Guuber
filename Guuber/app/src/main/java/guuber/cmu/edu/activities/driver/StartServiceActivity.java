@@ -36,7 +36,6 @@ import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
-import guuber.cmu.edu.resultCode.ResultCode;
 import guuber.cmu.edu.service.GuuberService;
 
 public class StartServiceActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -54,12 +53,12 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private Map<String, String> allMessages;
     private Map<String, Marker> passengerMarkers;
+    private Map<String, Marker> passengerDestMarkers;
 
     private String currentPassenger;
 
     private ResultReceiver resultReceiver;
 
-    private boolean serviceStarted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        serviceStarted = false;
 
         try {
             // Acquire a reference to the system Location Manager
@@ -123,6 +121,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
         allMessages = new HashMap<String, String>();
         passengerMarkers = new HashMap<String, Marker>();
+        passengerDestMarkers = new HashMap<String, Marker>();
 
         resultReceiver = new DriverStartResultReceiver(null);
     }
@@ -230,10 +229,10 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         public void onClick(View v) {
 
-            if (serviceStarted) {
+            if (passengerDestMarkers.get(currentPassenger) == null) {
                 return;
             }
-            serviceStarted = true;
+
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
             mess.putExtra("message", ServerMessageKind.DRIVEREXIT);
@@ -247,6 +246,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             mess2.putExtra("receiver", resultReceiver);
             mess2.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             startService(mess2);
+
+            Marker dest = passengerDestMarkers.get(currentPassenger);
+            LatLng pos = dest.getPosition();
+            Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("passenger", currentPassenger);
+            intent.putExtra("destLon", pos.longitude);
+            intent.putExtra("destLat", pos.latitude);
+            startActivity(intent);
+            finish();
         }
     };
 
@@ -278,6 +287,18 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         passengerMarkers.put(passengerID, passengerMarker);
     }
 
+    private void addPassengerDestMarker(String passengerID, double lon, double lat) {
+        if (passengerDestMarkers.get(passengerID) != null) {
+            passengerDestMarkers.get(passengerID).remove();
+        }
+        LatLng place = new LatLng(lat, lon);
+        Marker passengerDestMarker = mMap.addMarker(new MarkerOptions().position(place)
+                                                    .title(passengerID + " destination"));
+        passengerDestMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        passengerDestMarkers.put(passengerID, passengerDestMarker);
+    }
+
+
     private void removePassengerMarker(String passengerID) {
         if (passengerMarkers.get(passengerID) != null) {
             passengerMarkers.get(passengerID).remove();
@@ -287,9 +308,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if (serviceStarted) {
-            return false;
-        }
         for (String passenger : passengerMarkers.keySet()) {
             if (passengerMarkers.get(passenger).equals(marker)) {
                 String history = messageHistory.getText().toString();
@@ -345,18 +363,14 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.PASSENGERDEST)) {
-                final Double lon = Double.parseDouble(splits[1]);
-                final Double lat = Double.parseDouble(splits[2]);
+                final String passenger = splits[1];
+                final Double lon = Double.parseDouble(splits[2]);
+                final Double lat = Double.parseDouble(splits[3]);
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("passenger", currentPassenger);
-                        intent.putExtra("destLon", lon);
-                        intent.putExtra("destLat", lat);
-                        startActivity(intent);
-                        finish();
+                        addPassengerDestMarker(passenger, lon, lat);
                     }
                 });
             } else if (type.equals(ClientMessageKind.CHATFROMPASSENGER)) {
