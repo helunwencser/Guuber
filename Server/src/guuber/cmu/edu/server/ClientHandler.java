@@ -89,6 +89,11 @@ public class ClientHandler implements Runnable {
 						this.connection.getBufferedWriter().flush();
 						this.connection.setUsername(user.getUsername());
 						this.connection.setUserType(user.getUserType());
+						if(user.getUserType().equals("Driver")) {
+							Connections.addDriverConnection(user.getUsername(), connection);
+						} else {
+							Connections.addPassengerConnection(user.getUsername(), connection);
+						}
 					}
 					break;
 				/**
