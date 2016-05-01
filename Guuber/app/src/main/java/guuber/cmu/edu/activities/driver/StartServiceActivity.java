@@ -254,13 +254,17 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             startService(mess2);
 
             Marker dest = passengerDestMarkers.get(currentPassenger);
+            Marker passengerMarker = passengerMarkers.get(currentPassenger);
             LatLng pos = dest.getPosition();
+            LatLng passengerPos = passengerMarker.getPosition();
             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("passenger", currentPassenger);
             intent.putExtra("username", myName);
             intent.putExtra("destLon", Double.toString(pos.longitude));
             intent.putExtra("destLat", Double.toString(pos.latitude));
+            intent.putExtra("passengerLon", Double.toString(passengerPos.longitude));
+            intent.putExtra("passengerLat", Double.toString(passengerPos.latitude));
             startActivity(intent);
             finish();
         }

@@ -51,9 +51,13 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     private Marker marker;
 
     private Marker destMarker;
+    private Marker passengerMarker;
 
     private Double destLon;
     private Double destLat;
+
+    private Double passengerLon;
+    private Double passengerLat;
 
     private Double startLon;
     private Double startLat;
@@ -70,8 +74,6 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     private String myName;
 
     private TransactionDBController transactionDBController;
-
-    private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +129,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         Intent intent = getIntent();
         destLon = Double.parseDouble(intent.getStringExtra("destLon"));
         destLat = Double.parseDouble(intent.getStringExtra("destLat"));
+        passengerLon = Double.parseDouble(intent.getStringExtra("passengerLon"));
+        passengerLat = Double.parseDouble(intent.getStringExtra("passengerLat"));
         passenger = intent.getStringExtra("passenger");
 
         startTime = new Date();
@@ -145,15 +149,17 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-            LatLng start = new LatLng(lat, lon);
-            LatLng end = new LatLng(destLat, destLon);
-            routing = new Routing.Builder()
-                    .travelMode(Routing.TravelMode.DRIVING)
-                    .withListener(this)
-                    .waypoints(start, end)
-                    .build();
-            routing.execute();
-
+            if (routing == null) {
+                LatLng start = new LatLng(lat, lon);
+                LatLng pass = new LatLng(passengerLat, passengerLon);
+                LatLng end = new LatLng(destLat, destLon);
+                routing = new Routing.Builder()
+                        .travelMode(Routing.TravelMode.DRIVING)
+                        .withListener(this)
+                        .waypoints(start, pass, end)
+                        .build();
+                routing.execute();
+            }
             if (startLon == null) {
                 startLon = lon;
                 startLat = lat;
@@ -167,7 +173,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(18));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         try {
             Location loc = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
 
@@ -177,9 +183,14 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         }
 
         LatLng place = new LatLng(destLat, destLon);
-        Marker passengerDestMarker = mMap.addMarker(new MarkerOptions().position(place)
+        destMarker = mMap.addMarker(new MarkerOptions().position(place)
                 .title("destination"));
-        passengerDestMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        destMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+
+        LatLng loc = new LatLng(passengerLat, passengerLon);
+        passengerMarker = mMap.addMarker(new MarkerOptions().position(loc)
+                .title("passenger"));
+        passengerMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
     }
 
     View.OnClickListener endButtonClicked = new View.OnClickListener() {
@@ -203,13 +214,11 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             transactionDBController.insertTransaction(transaction);
 
             Intent intent = new Intent(EndServiceActivity.this, FindPassengerActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         }
     };
-
-    public void saveTransaction() {
-
-    }
 
     @Override
     public void onRoutingFailure(RouteException e) {
