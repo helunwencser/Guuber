@@ -187,6 +187,44 @@ public class ClientHandler implements Runnable {
 						Connections.broadcastMessageToPassengers(driverCancelMessage);
 					}
 					break;
+				/**
+				 * Message format:
+				 * UPDATEDRIVERPROFILE:username:password:userType:email:gender:carId
+				 * */
+				case ServerMessageKind.UPDATEDRIVERPROFILE:
+					if(this.connection.getUserType().equals("Driver")) {
+						dbOperation.deleteByUsername(elements[1]);
+						dbOperation.insertUser(new User(
+								elements[1],
+								elements[2],
+								elements[3],
+								elements[4],
+								elements[5],
+								elements[6]
+								));
+						String driverUpdateProfileReply = ClientMessageKind.UPDATEDRIVERPROFILEOKAY;
+						Connections.sendMessageToDriver(this.connection.getUsername(), driverUpdateProfileReply);
+					}
+					break;
+				/**
+				 * Message format:
+				 * UPDATEPASSENGERPROFILE:username:password:userType:email:gender
+				 * */
+				case ServerMessageKind.UPDATEPASSENGERPROFILE:
+					if(this.connection.getUserType().equals("Passenger")) {
+						dbOperation.deleteByUsername(elements[1]);
+						dbOperation.insertUser(new User(
+								elements[1],
+								elements[2],
+								elements[3],
+								elements[4],
+								elements[5],
+								""
+								));
+						String passengerUpdateProfileReply = ClientMessageKind.UPDATEPASSENGERPROFILEOKAY;
+						Connections.sendMessageToPassenger(this.connection.getUsername(), passengerUpdateProfileReply);
+					}
+					break;
 				default:
 					break;
 				}

@@ -15,5 +15,8 @@ public class MySQLStatement {
 	
 	/* select user by username */
 	public static String SELECT_BY_USERNAME = "select * from user_table where username = ?";
+	
+	/* delete user by username */
+	public static String DELETE_BY_USERNAME = "delete from user_table where username = ?";
 
 }

@@ -23,6 +23,8 @@ public class DBOperation {
 	
 	private PreparedStatement selectByUsernameStatement = null;
 	
+	private PreparedStatement deleteByUsernameStatement = null;
+	
 	/**
 	 * setup database connection and prepare statements
 	 * */
@@ -33,6 +35,7 @@ public class DBOperation {
 			insertStatement = conn.prepareStatement(MySQLStatement.INSERT);
 			selectByUsernamePasswordStatement = conn.prepareStatement(MySQLStatement.SELECT_BY_USERNAME_PASSWORD);
 			selectByUsernameStatement = conn.prepareStatement(MySQLStatement.SELECT_BY_USERNAME);
+			deleteByUsernameStatement = conn.prepareStatement(MySQLStatement.DELETE_BY_USERNAME);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,6 +121,20 @@ public class DBOperation {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * Delete one user record by username
+	 * @param	username	the name of user
+	 * */
+	public void deleteByUsername(String username) {
+		try {
+			this.deleteByUsernameStatement.setString(1, username);
+			this.deleteByUsernameStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
