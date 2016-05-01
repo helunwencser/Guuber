@@ -229,7 +229,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         public void onClick(View v) {
 
-            if (passengerDestMarkers.get(currentPassenger) == null) {
+            if (currentPassenger == null ||
+                    passengerDestMarkers.get(currentPassenger) == null) {
                 return;
             }
 
@@ -252,8 +253,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("passenger", currentPassenger);
-            intent.putExtra("destLon", pos.longitude);
-            intent.putExtra("destLat", pos.latitude);
+            intent.putExtra("destLon", Double.toString(pos.longitude));
+            intent.putExtra("destLat", Double.toString(pos.latitude));
             startActivity(intent);
             finish();
         }

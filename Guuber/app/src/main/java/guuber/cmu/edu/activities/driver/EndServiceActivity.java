@@ -19,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -151,6 +152,10 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             e.printStackTrace();
         }
 
+        LatLng place = new LatLng(destLat, destLon);
+        Marker passengerDestMarker = mMap.addMarker(new MarkerOptions().position(place)
+                .title("destination"));
+        passengerDestMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
     }
 
     View.OnClickListener endButtonClicked = new View.OnClickListener() {
