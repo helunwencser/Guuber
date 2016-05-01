@@ -23,6 +23,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Date;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.dbLayout.TransactionDBController;
+import guuber.cmu.edu.entities.Transaction;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
@@ -41,10 +43,18 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private ResultReceiver resultReceiver;
 
+    private Double startLon;
+    private Double startLat;
+
+    private Double destLon;
+    private Double destLat;
+
     private Date startTime;
     private Date endTime;
 
     private String myName;
+
+    private TransactionDBController transactionDBController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +105,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
         Intent parameters = getIntent();
         myName = parameters.getStringExtra("username");
+        destLon = Double.parseDouble(intent.getStringExtra("destLon"));
+        destLat = Double.parseDouble(intent.getStringExtra("destLat"));
 
         Intent mess2 = new Intent(EndServiceActivity.this, GuuberService.class);
         mess2.putExtra("operation", Operation.SENDMESSAGE);
@@ -104,6 +116,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         startService(mess2);
 
         startTime = new Date();
+
+        transactionDBController = new TransactionDBController(this);
+
     }
 
     public void updateLocation(Location location) {
@@ -116,6 +131,11 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             LatLng sydney = new LatLng(lat, lon);
             marker = mMap.addMarker(new MarkerOptions().position(sydney).title("My position"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            if (startLon == null) {
+                startLon = lon;
+                startLat = lat;
+            }
         } else {
         }
 
@@ -129,6 +149,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         Double cost = Math.ceil((double) passed/1000.0/60.0) * 0.8;
         return String.format("$%.2f", cost);
     }
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -162,9 +184,13 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             if (response.equals(ClientMessageKind.ENDRIDE)) {
                 endTime = new Date();
 
-                System.out.println("End Service: " + startTime.toString());
-                System.out.println("End Service: " + endTime.toString());
-                System.out.println("End Service: " + getCost());
+                String startLocation = "" + startLat + "," + startLon;
+                String endLocation = "" + destLat + "," + destLon;
+                String cost = getCost();
+
+                Transaction transaction= new Transaction(0,driver,myName,startTime.toString(),
+                        endTime.toString(),startLocation,endLocation,cost);
+                transactionDBController.insertTransaction(transaction);
 
                 Intent intent = new Intent(EndServiceActivity.this, FindDriverActivity.class);
                 startActivity(intent);

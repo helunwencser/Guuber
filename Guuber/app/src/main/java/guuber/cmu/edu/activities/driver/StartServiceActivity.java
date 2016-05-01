@@ -211,7 +211,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             messageInput.setText("");
             messageHistory.setText(history + "\n" + "Me: " + current);
             scollToBottom();
-            String senderid = "me";
+            String senderid = myName;
             String receiverid = currentPassenger;
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
@@ -398,6 +398,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             String result = history + "\n" + passenger + ": " + content;
                             allMessages.put(passenger, result);
                         }
+                        Message message = new Message(passenger, myName, content, new Date().toString());
+                        meassageDBController.insertMessage(message);
                     }
                 });
             } else if (type.equals(ClientMessageKind.STARTRIDE)) {

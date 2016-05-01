@@ -90,7 +90,7 @@ public class TransactionDBController {
                                 cursor.getString(4),
                                 cursor.getString(5),
                                 cursor.getString(6),
-                                cursor.getInt(7)
+                                cursor.getString(7)
                         )
                 );
             } while(cursor.moveToNext());
@@ -143,7 +143,7 @@ public class TransactionDBController {
                                 cursor.getString(4),
                                 cursor.getString(5),
                                 cursor.getString(6),
-                                cursor.getInt(7)
+                                cursor.getString(7)
                         )
                 );
             } while(cursor.moveToNext());
@@ -190,7 +190,7 @@ public class TransactionDBController {
                                 cursor.getString(4),
                                 cursor.getString(5),
                                 cursor.getString(6),
-                                cursor.getInt(7)
+                                cursor.getString(7)
                         )
                 );
             } while(cursor.moveToNext());

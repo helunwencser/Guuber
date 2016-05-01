@@ -26,7 +26,7 @@ public class TransactionDBHelper extends SQLiteOpenHelper {
             TransactionModel.END_TIME + TEXT_TYPE + COMMA_SEP +
             TransactionModel.START_LOCATION + TEXT_TYPE + COMMA_SEP +
             TransactionModel.END_LOCATION + TEXT_TYPE + COMMA_SEP +
-            TransactionModel.COST + INT_TYPE + COMMA_SEP +
+            TransactionModel.COST + TEXT_TYPE + COMMA_SEP +
             "PRIMARY KEY (" + TransactionModel._ID + ")" +
             " )";
 
