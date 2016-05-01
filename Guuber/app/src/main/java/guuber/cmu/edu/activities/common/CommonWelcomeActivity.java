@@ -66,11 +66,6 @@ public class CommonWelcomeActivity extends AppCompatActivity {
         this.textView = (TextView)this.findViewById(R.id.common_welcome_textview);
         reloadCarImage();
 
-        /* start backend service */
-        Intent intent = new Intent(this, GuuberService.class);
-        intent.putExtra("operation", Operation.STARTBACKGROUNDSERVICE);
-        startService(intent);
-
         final Context context = this;
 
         /* start sign in and sign up page after 3 seconds */

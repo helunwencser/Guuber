@@ -11,6 +11,8 @@ import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.driver.UpdateProfileActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.activities.passenger.ViewHistoryActivity;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.service.GuuberService;
 
 public class CommonSignInSignUpActivity extends AppCompatActivity {
 
@@ -19,6 +21,16 @@ public class CommonSignInSignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_sign_in_sign_up);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        /* start backend service */
+        Intent intent = new Intent(this, GuuberService.class);
+        intent.putExtra("operation", Operation.STARTBACKGROUNDSERVICE);
+        startService(intent);
     }
 
     public void chooseSignInSignUp(View view) {
