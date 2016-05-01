@@ -141,6 +141,22 @@ public class GuuberService extends Service {
                             );
                         }
                         break;
+                    case ClientMessageKind.DRIVERCANCEL:
+                        if(resultReceiverMap.containsKey(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.PASSENGERCANCEL:
+                        if(resultReceiverMap.containsKey(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERENDSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
                     default:
                         break;
                 }

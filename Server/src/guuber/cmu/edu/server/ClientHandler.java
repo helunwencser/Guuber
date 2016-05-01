@@ -151,10 +151,10 @@ public class ClientHandler implements Runnable {
 					if(this.connection.getUserType().equals("Driver")) {
 						String startRideMessage = ClientMessageKind.STARTRIDE + ":" + this.connection.getUsername();
 						Connections.sendMessageToPassenger(elements[1], startRideMessage);
-						String deleteMarkForDriversMessage = ClientMessageKind.STARTRIDE + ":" + elements[1] + ":" + ClientMessageKind.STARTRIDE;
-						Connections.broadcastMessageToDriversExcept(this.connection.getUsername(), deleteMarkForDriversMessage);
-						String deleteMarkForPassengerMessage = ClientMessageKind.STARTRIDE + ":" + this.connection.getUsername() + ":" + ClientMessageKind.STARTRIDE;
-						Connections.broadcastMessageToPassengerExcept(elements[1], deleteMarkForPassengerMessage);
+						String deletePassengerMarkMessage = ClientMessageKind.STARTRIDE + ":" + elements[1] + ":" + ClientMessageKind.STARTRIDE;
+						Connections.broadcastMessageToDriversExcept(this.connection.getUsername(), deletePassengerMarkMessage);
+						String deleteDriverMarkMessage = ClientMessageKind.STARTRIDE + ":" + this.connection.getUsername() + ":" + ClientMessageKind.STARTRIDE;
+						Connections.broadcastMessageToPassengerExcept(elements[1], deleteDriverMarkMessage);
 					}
 					break;
 				/**
@@ -172,6 +172,20 @@ public class ClientHandler implements Runnable {
 				 * PASSENGERCANCEL
 				 * */
 				case ServerMessageKind.PASSENGERCANCEL:
+					if(this.connection.getUserType().equals("Passenger")) {
+						String passengerCanelMessage = ClientMessageKind.PASSENGERCANCEL + ":" + this.connection.getUsername();
+						Connections.broadcastMessageToDrivers(passengerCanelMessage);
+					}
+					break;
+				/**
+				 * Message format:
+				 * DRIVERCANCEL
+				 * */
+				case ServerMessageKind.DRIVERCANCEL:
+					if(this.connection.getUserType().equals("Driver")) {
+						String driverCancelMessage = ClientMessageKind.DRIVERCANCEL + ":" + this.connection.getUsername();
+						Connections.broadcastMessageToPassengers(driverCancelMessage);
+					}
 					break;
 				default:
 					break;
