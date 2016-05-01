@@ -70,6 +70,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private String currentDriver;
 
+    private String myName;
+
     private ResultReceiver resultReceiver;
 
     @Override
@@ -138,6 +140,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         driverMarkers = new HashMap<String, Marker>();
 
         resultReceiver = new PassengerStartResultReceiver(null);
+
+        Intent parameters = getIntent();
+        myName = parameters.getStringExtra("username");
+
+        Intent intent = new Intent(this, GuuberService.class);
+        intent.putExtra("operation", Operation.SENDMESSAGE);
+        intent.putExtra("message", ServerMessageKind.PASSENGERREQUESTLOC);
+        intent.putExtra("receiver", resultReceiver);
+        intent.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
+        startService(intent);
     }
 
     public void updateLocation(Location location) {
@@ -400,6 +412,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         if (splits.length == 2) {
                             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
                             intent.putExtra("driver", driver);
+                            intent.putExtra("username", myName);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
@@ -427,6 +440,16 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         }
                     }
                 });
+            } else if (type.equals(ClientMessageKind.DRIVERREQUESTLOC)) {
+                if (currLon == null) {
+                    return;
+                }
+                Intent intent = new Intent(StartServiceActivity.this, GuuberService.class);
+                intent.putExtra("operation", Operation.SENDMESSAGE);
+                intent.putExtra("message", ServerMessageKind.PASSENGERLOC + ":" + currLon + ":" + currLat);
+                intent.putExtra("receiver", resultReceiver);
+                intent.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
+                startService(intent);
             }
         }
     }

@@ -7,8 +7,8 @@ create table if not exists user_table (
 	username char(64),
 	password char(64),
 	usertype char(32),
-	gender char(32),
 	email char(64),
+	gender char(32),
 	carid char(64),
 	primary key(id)
 );

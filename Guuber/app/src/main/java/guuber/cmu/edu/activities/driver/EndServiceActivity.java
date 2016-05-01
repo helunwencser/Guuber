@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.cmu.guuber.guuber.R;
@@ -61,6 +62,10 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private String passenger;
 
+    private Date startTime;
+    private Date endTime;
+
+    private String myName;
 
     private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
@@ -108,6 +113,9 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             e.printStackTrace();
         }
 
+        Intent parameters = getIntent();
+        myName = parameters.getStringExtra("username");
+
         Button endButton =
                 (Button) findViewById(R.id.driver_endButton);
         endButton.setOnClickListener(endButtonClicked);
@@ -117,6 +125,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         destLat = Double.parseDouble(intent.getStringExtra("destLat"));
         passenger = intent.getStringExtra("passenger");
 
+        startTime = new Date();
     }
 
     public void updateLocation(Location location) {
@@ -177,6 +186,12 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             mess.putExtra("activityName", ActivityNames.DRIVERENDSERVICEACTIVITY);
             startService(mess);
 
+            endTime = new Date();
+
+            System.out.println("End Service: " + startTime.toString());
+            System.out.println("End Service: " + endTime.toString());
+            System.out.println("End Service: " + getCost());
+
             Intent intent = new Intent(EndServiceActivity.this, FindPassengerActivity.class);
             startActivity(intent);
         }
@@ -185,6 +200,15 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onRoutingFailure(RouteException e) {
 
+    }
+
+    public String getCost() {
+        if (endTime == null) {
+            endTime = new Date();
+        }
+        long passed = endTime.getTime() - startTime.getTime();
+        Double cost = Math.ceil((double) passed/1000.0/60.0) * 0.8;
+        return String.format("$%.2f", cost);
     }
 
     @Override

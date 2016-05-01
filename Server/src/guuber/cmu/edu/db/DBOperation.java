@@ -55,8 +55,8 @@ public class DBOperation {
 			this.insertStatement.setString(1, user.getUsername());
 			this.insertStatement.setString(2, user.getPassword());
 			this.insertStatement.setString(3, user.getUserType());
-			this.insertStatement.setString(4, user.getGender());
-			this.insertStatement.setString(5, user.getEmail());
+			this.insertStatement.setString(4, user.getEmail());
+			this.insertStatement.setString(5, user.getGender());
 			this.insertStatement.setString(6, user.getCarId());
 			this.insertStatement.executeUpdate();
 		} catch (SQLException e) {

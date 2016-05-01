@@ -39,6 +39,12 @@ public class ClientMessageKind {
     /* driver end the ride */
     public static final String ENDRIDE = "ENDRIDE";
 
+    /* driver request location */
+    public static final String DRIVERREQUESTLOC = "DRIVERREQUESTLOC";
+
+    /* passenger request location */
+    public static final String PASSENGERREQUESTLOC = "PASSENGERREQUESTLOC";
+    
     /*update user profile*/
     public static final String UPDATEPASSENGERPROFILEOKAY = "UPDATEPASSENGERPROFILEOKAY";
     public static final String UPDATEPASSENGERPROFILEDENIED = "UPDATEPASSENGERPROFILEDENIED";

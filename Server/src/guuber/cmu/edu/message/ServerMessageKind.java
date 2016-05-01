@@ -37,6 +37,12 @@ public class ServerMessageKind {
     /* chatting */
     public static final String CHATFROMPASSENGER = "CHATFROMPASSENGER";
 
+    /* driver request location */
+    public static final String DRIVERREQUESTLOC = "DRIVERREQUESTLOC";
+    
+    /* passenger request location */
+    public static final String PASSENGERREQUESTLOC = "PASSENGERREQUESTLOC";
+    
     /*update user profile*/
     public static final String UPDATEDRIVERPROFILE = "UPDATEDRIVERPROFILE";
 

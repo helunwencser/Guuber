@@ -7,7 +7,7 @@ public class MySQLStatement {
 	
 	/* insert statement */
 	public static String INSERT = "insert into user_table " + 
-									"(username, password, usertype, gender, email, carid) " +
+									"(username, password, usertype, email, gender, carid) " +
 									"values (?, ?, ?, ?, ?, ?)";
 	
 	/* select user by username and password */
