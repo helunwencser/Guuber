@@ -132,6 +132,17 @@ public class ClientHandler implements Runnable {
 												+ ":" + elements[2];
 					Connections.sendMessageToDriver(elements[1], messageToDriver);
 					break;
+				/**
+				 * Message format:
+				 * PASSENGERDEST:latitude:longtitude
+				 * */
+				case ServerMessageKind.PASSENGERDEST:
+					if(this.connection.getUserType().equals("Passenger")) {
+						String destinationMessage = ClientMessageKind.PASSENGERDEST + ":" + this.connection.getUsername()
+													+ message.substring(message.indexOf(":"));
+						Connections.broadcastMessageToDrivers(destinationMessage);
+					}
+					break;
 				default:
 					break;
 				}

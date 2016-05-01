@@ -112,6 +112,14 @@ public class GuuberService extends Service {
                             );
                         }
                         break;
+                    case ClientMessageKind.PASSENGERDEST:
+                        if(resultReceiverMap.containsKey(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
                     default:
                         break;
                 }
