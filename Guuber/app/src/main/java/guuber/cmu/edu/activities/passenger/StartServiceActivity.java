@@ -369,7 +369,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             String response = resultData.getString("response");
             System.out.println("Response from server: " + response);
 
-            String[] splits = response.split(":");
+            final String[] splits = response.split(":");
             if (response == null || response.length() == 0) {
                 return;
             }
@@ -397,11 +397,15 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
-                        intent.putExtra("driver", driver);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        if (splits.length == 2) {
+                            Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
+                            intent.putExtra("driver", driver);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            removeDriverMarker(driver);
+                        }
                     }
                 });
             } else if (type.equals(ClientMessageKind.CHATFROMDRIVER)) {

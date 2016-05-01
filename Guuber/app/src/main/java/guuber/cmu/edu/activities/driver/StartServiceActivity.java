@@ -338,8 +338,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             }
             String[] splits = response.split(":");
             String type = splits[0];
+            final String passenger = splits[1];
             if(type.equals(ClientMessageKind.PASSENGERLOC)) {
-                final String passenger = splits[1];
                 final Double lon = Double.parseDouble(splits[2]);
                 final Double lat = Double.parseDouble(splits[3]);
                 runOnUiThread(new Runnable() {
@@ -349,7 +349,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.PASSENGERCANCEL)) {
-                final String passenger = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -357,7 +356,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.PASSENGERDEST)) {
-                final String passenger = splits[1];
                 final Double lon = Double.parseDouble(splits[2]);
                 final Double lat = Double.parseDouble(splits[3]);
 
@@ -368,7 +366,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.CHATFROMPASSENGER)) {
-                final String passenger = splits[1];
                 final String content = splits[2];
                 runOnUiThread(new Runnable() {
                     @Override
@@ -384,6 +381,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             String result = history + "\n" + passenger + ": " + content;
                             allMessages.put(passenger, result);
                         }
+                    }
+                });
+            } else if (type.equals(ClientMessageKind.STARTRIDE)) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        removePassengerMarker(passenger);
                     }
                 });
             }
