@@ -126,6 +126,35 @@ public class GuuberService extends Service {
                                     ResultCode.RESULTCODE,
                                     bundle
                             );
+                        } else if(resultReceiverMap.containsKey(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.ENDRIDE:
+                        if(resultReceiverMap.containsKey(ActivityNames.PASSENGERENDSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERENDSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.DRIVERCANCEL:
+                        if(resultReceiverMap.containsKey(ActivityNames.PASSENGERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.PASSENGERSTARTSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
+                        }
+                        break;
+                    case ClientMessageKind.PASSENGERCANCEL:
+                        if(resultReceiverMap.containsKey(ActivityNames.DRIVERSTARTSERVICEACTIVITY)) {
+                            resultReceiverMap.get(ActivityNames.DRIVERENDSERVICEACTIVITY).send(
+                                    ResultCode.RESULTCODE,
+                                    bundle
+                            );
                         }
                         break;
                     case ClientMessageKind.UPDATEPASSENGERPROFILEDENIED:

@@ -234,13 +234,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 return;
             }
 
-            Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
-            mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.DRIVEREXIT);
-            mess.putExtra("receiver", resultReceiver);
-            mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
-            startService(mess);
-
             Intent mess2 = new Intent(StartServiceActivity.this, GuuberService.class);
             mess2.putExtra("operation", Operation.SENDMESSAGE);
             mess2.putExtra("message", ServerMessageKind.STARTRIDE + ":" + currentPassenger);
@@ -266,7 +259,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.DRIVEREXIT);
+            mess.putExtra("message", ServerMessageKind.DRIVERCANCEL);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.DRIVERSTARTSERVICEACTIVITY);
             startService(mess);
@@ -338,15 +331,15 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
-            System.out.println("Response from server: " + response);
+            //System.out.println("Response from server: " + response);
 
             if (response == null || response.length() == 0) {
                 return;
             }
             String[] splits = response.split(":");
             String type = splits[0];
+            final String passenger = splits[1];
             if(type.equals(ClientMessageKind.PASSENGERLOC)) {
-                final String passenger = splits[1];
                 final Double lon = Double.parseDouble(splits[2]);
                 final Double lat = Double.parseDouble(splits[3]);
                 runOnUiThread(new Runnable() {
@@ -355,8 +348,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         addPassengerMarker(passenger, lon, lat);
                     }
                 });
-            } else if (type.equals(ClientMessageKind.PASSENGEREXIT)) {
-                final String passenger = splits[1];
+            } else if (type.equals(ClientMessageKind.PASSENGERCANCEL)) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -364,7 +356,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.PASSENGERDEST)) {
-                final String passenger = splits[1];
                 final Double lon = Double.parseDouble(splits[2]);
                 final Double lat = Double.parseDouble(splits[3]);
 
@@ -375,7 +366,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                     }
                 });
             } else if (type.equals(ClientMessageKind.CHATFROMPASSENGER)) {
-                final String passenger = splits[1];
                 final String content = splits[2];
                 runOnUiThread(new Runnable() {
                     @Override
@@ -391,6 +381,13 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             String result = history + "\n" + passenger + ": " + content;
                             allMessages.put(passenger, result);
                         }
+                    }
+                });
+            } else if (type.equals(ClientMessageKind.STARTRIDE)) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        removePassengerMarker(passenger);
                     }
                 });
             }

@@ -307,7 +307,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
             Intent mess = new Intent(StartServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
-            mess.putExtra("message", ServerMessageKind.PASSENGEREXIT);
+            mess.putExtra("message", ServerMessageKind.PASSENGERCANCEL);
             mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.PASSENGERSTARTSERVICEACTIVITY);
             startService(mess);
@@ -369,7 +369,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             String response = resultData.getString("response");
             System.out.println("Response from server: " + response);
 
-            String[] splits = response.split(":");
+            final String[] splits = response.split(":");
             if (response == null || response.length() == 0) {
                 return;
             }
@@ -384,7 +384,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                         addDriverMarker(driver, lon, lat);
                     }
                 });
-            } else if (type.equals(ClientMessageKind.DRIVEREXIT)) {
+            } else if (type.equals(ClientMessageKind.DRIVERCANCEL)) {
                 final String driver = splits[1];
                 runOnUiThread(new Runnable() {
                     @Override
@@ -397,11 +397,15 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
-                        intent.putExtra("driver", driver);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        if (splits.length == 2) {
+                            Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
+                            intent.putExtra("driver", driver);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            removeDriverMarker(driver);
+                        }
                     }
                 });
             } else if (type.equals(ClientMessageKind.CHATFROMDRIVER)) {
