@@ -52,7 +52,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
         String userName = intent.getStringExtra("username");
-        Log.d("userName", userName);
+        Log.d("username", userName);
         final List<Transaction> transactionList = tranController.selectTransactionsByDriver(userName);
         Log.d("transaction", transactionList.get(0).toString());
 
@@ -95,7 +95,6 @@ public class ViewHistoryActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this,"No Related Transactions",Toast.LENGTH_SHORT).show();
         }
-
 
     }
 

@@ -26,13 +26,14 @@ import guuber.cmu.edu.service.GuuberService;
 
 import android.content.Intent;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 /**
  * Created by wangziming on 4/9/16.
  */
 public class UpdateProfileActivity extends AppCompatActivity {
 
-    private EditText userNameEditText;
+    private TextView userNameEditText;
     private EditText passwordEditText;
     private EditText retypePasswordEditText;
     private Spinner genderSpinner;
@@ -62,7 +63,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         this.context = this;
 
         //定位
-        userNameEditText = (EditText) findViewById(R.id.driver_update_userName);
+        userNameEditText = (TextView) findViewById(R.id.driver_update_userName);
         passwordEditText = (EditText) findViewById(R.id.driver_update_password);
         retypePasswordEditText = (EditText) findViewById(R.id.driver_update_retypePassword);
         genderSpinner = (Spinner) findViewById(R.id.driver_update_gender);
@@ -179,6 +180,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     intent.putExtra("message", ServerMessageKind.UPDATEDRIVERPROFILE + ":"
                                                                     + username + ":"
                                                                     + password +":"
+                                                                    + userType + ":"
                                                                     + email + ":"
                                                                     + gender+ ":"
                                                                     + carId);
