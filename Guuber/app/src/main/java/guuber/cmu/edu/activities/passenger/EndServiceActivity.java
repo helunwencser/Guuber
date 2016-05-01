@@ -1,11 +1,14 @@
 package guuber.cmu.edu.activities.passenger;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.messageConst.ClientMessageKind;
 
 /**
  * Created by wangziming on 4/9/16.
@@ -99,6 +103,29 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             updateLocation(loc);
         } catch (SecurityException e) {
             e.printStackTrace();
+        }
+    }
+
+    @SuppressLint("ParcelCreator")
+    public class PassengerEndResultReceiver extends ResultReceiver {
+
+        public PassengerEndResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            String response = resultData.getString("response");
+            //System.out.println("Response from server: " + response);
+
+            if (response == null || response.length() == 0) {
+                return;
+            }
+
+            if (response.equals(ClientMessageKind.ENDRIDE)) {
+                Intent intent = new Intent(EndServiceActivity.this, FindDriverActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }

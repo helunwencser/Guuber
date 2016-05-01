@@ -7,7 +7,9 @@ public class ActivityNames {
 
     public static final String DRIVERSTARTSERVICEACTIVITY = "DriverStartServiceActivity";
 
-    public static final String DRIVERENDSERVICEACTIVITY = "DRIVERENDSERVICEACTIVITY";
+    public static final String DRIVERENDSERVICEACTIVITY = "DriverEndServiceActivity";
+
+    public static final String PASSENGERENDSERVICEACTIVITY = "PassengerEndServiceActivity";
 
     public static final String PASSENGERSTARTSERVICEACTIVITY = "PassengerStartServiceActivity";
 

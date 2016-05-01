@@ -1,11 +1,14 @@
 package guuber.cmu.edu.activities.driver;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.messageConst.ActivityNames;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.messageConst.ServerMessageKind;
+import guuber.cmu.edu.service.GuuberService;
 
 /**
  * Created by wangziming on 4/9/16.
@@ -53,6 +60,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private String passenger;
 
+    private ResultReceiver resultReceiver;
+
     private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
     @Override
@@ -64,6 +73,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
                 .findFragmentById(R.id.driver_end_map);
         mapFragment.getMapAsync(this);
 
+        resultReceiver = new DriverEndResultReceiver(null);
 
         try {
             // Acquire a reference to the system Location Manager
@@ -108,6 +118,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         destLon = Double.parseDouble(intent.getStringExtra("destLon"));
         destLat = Double.parseDouble(intent.getStringExtra("destLat"));
         passenger = intent.getStringExtra("passenger");
+
     }
 
     public void updateLocation(Location location) {
@@ -161,6 +172,14 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     View.OnClickListener endButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            Intent mess = new Intent(EndServiceActivity.this, GuuberService.class);
+            mess.putExtra("operation", Operation.SENDMESSAGE);
+            mess.putExtra("message", ServerMessageKind.ENDRIDE + ":" + passenger);
+            mess.putExtra("receiver", resultReceiver);
+            mess.putExtra("activityName", ActivityNames.DRIVERENDSERVICEACTIVITY);
+            startService(mess);
+
             Intent intent = new Intent(EndServiceActivity.this, FindPassengerActivity.class);
             startActivity(intent);
         }
@@ -201,5 +220,18 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onRoutingCancelled() {
 
+    }
+
+    @SuppressLint("ParcelCreator")
+    public class DriverEndResultReceiver extends ResultReceiver {
+
+        public DriverEndResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+
+        }
     }
 }
