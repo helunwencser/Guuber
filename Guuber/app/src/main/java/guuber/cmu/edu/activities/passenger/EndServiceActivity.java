@@ -50,6 +50,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
         resultReceiver = new PassengerEndResultReceiver(null);
 
+
         try {
             // Acquire a reference to the system Location Manager
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -86,12 +87,12 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         Intent intent = getIntent();
         driver = intent.getStringExtra("driver");
 
-        Intent mess = new Intent(EndServiceActivity.this, GuuberService.class);
-        mess.putExtra("operation", Operation.SENDMESSAGE);
-        mess.putExtra("message", ServerMessageKind.ENDRIDE);
-        mess.putExtra("receiver", resultReceiver);
-        mess.putExtra("activityName", ActivityNames.PASSENGERENDSERVICEACTIVITY);
-        startService(mess);
+        Intent mess2 = new Intent(EndServiceActivity.this, GuuberService.class);
+        mess2.putExtra("operation", Operation.SENDMESSAGE);
+        mess2.putExtra("message", ServerMessageKind.ENDRIDE);
+        mess2.putExtra("receiver", resultReceiver);
+        mess2.putExtra("activityName", ActivityNames.PASSENGERENDSERVICEACTIVITY);
+        startService(mess2);
     }
 
     public void updateLocation(Location location) {

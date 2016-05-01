@@ -17,10 +17,10 @@ public class ServerMessageKind {
     public static final String PASSENGERLOC = "PASSENGERLOC";
 
     /* driver location should be deleted */
-    public static final String DRIVEREXIT = "DRIVEREXIT";
-
+    public static final String DRIVERCANCEL = "DRIVERCANCEL";
+    
     /* passenger location should be deleted */
-    public static final String PASSENGEREXIT = "PASSENGEREXIT";
+    public static final String  PASSENGERCANCEL= "PASSENGERCANCEL";
 
     /* passenger's destination */
     public static final String PASSENGERDEST = "PASSENGERDEST";
