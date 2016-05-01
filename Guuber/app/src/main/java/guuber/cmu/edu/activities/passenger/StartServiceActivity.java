@@ -413,8 +413,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                             Intent intent = new Intent(StartServiceActivity.this, EndServiceActivity.class);
                             intent.putExtra("driver", driver);
                             intent.putExtra("username", myName);
-                            intent.putExtra("destLon", destLon);
-                            intent.putExtra("destLat", destLat);
+                            intent.putExtra("destLon", Double.toString(destLon));
+                            intent.putExtra("destLat", Double.toString(destLat));
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
