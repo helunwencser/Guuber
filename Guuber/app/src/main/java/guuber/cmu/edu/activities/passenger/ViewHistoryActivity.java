@@ -96,7 +96,6 @@ public class ViewHistoryActivity extends AppCompatActivity {
             Toast.makeText(this,"No Related Transactions",Toast.LENGTH_SHORT).show();
         }
 
-
     }
 
 
