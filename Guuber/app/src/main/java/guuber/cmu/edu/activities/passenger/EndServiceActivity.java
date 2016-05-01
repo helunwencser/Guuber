@@ -21,7 +21,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
+import guuber.cmu.edu.messageConst.Operation;
+import guuber.cmu.edu.messageConst.ServerMessageKind;
+import guuber.cmu.edu.service.GuuberService;
 
 /**
  * Created by wangziming on 4/9/16.
@@ -33,6 +37,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private String driver;
 
+    private ResultReceiver resultReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,8 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.passenger_end_map);
         mapFragment.getMapAsync(this);
+
+        resultReceiver = new PassengerEndResultReceiver(null);
 
         try {
             // Acquire a reference to the system Location Manager
@@ -77,6 +85,13 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
         Intent intent = getIntent();
         driver = intent.getStringExtra("driver");
+
+        Intent mess = new Intent(EndServiceActivity.this, GuuberService.class);
+        mess.putExtra("operation", Operation.SENDMESSAGE);
+        mess.putExtra("message", ServerMessageKind.ENDRIDE);
+        mess.putExtra("receiver", resultReceiver);
+        mess.putExtra("activityName", ActivityNames.PASSENGERENDSERVICEACTIVITY);
+        startService(mess);
     }
 
     public void updateLocation(Location location) {
@@ -116,7 +131,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
-            //System.out.println("Response from server: " + response);
+            System.out.println("Response from server: " + response);
 
             if (response == null || response.length() == 0) {
                 return;

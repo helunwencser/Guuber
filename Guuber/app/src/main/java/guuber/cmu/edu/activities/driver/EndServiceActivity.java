@@ -60,7 +60,6 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
     private String passenger;
 
-    private ResultReceiver resultReceiver;
 
     private static final int[] COLORS = new int[]{R.color.colorPrimary,R.color.colorPrimaryDark,R.color.colorAccent};
 
@@ -72,8 +71,6 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.driver_end_map);
         mapFragment.getMapAsync(this);
-
-        resultReceiver = new DriverEndResultReceiver(null);
 
         try {
             // Acquire a reference to the system Location Manager
@@ -176,7 +173,6 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             Intent mess = new Intent(EndServiceActivity.this, GuuberService.class);
             mess.putExtra("operation", Operation.SENDMESSAGE);
             mess.putExtra("message", ServerMessageKind.ENDRIDE + ":" + passenger);
-            mess.putExtra("receiver", resultReceiver);
             mess.putExtra("activityName", ActivityNames.DRIVERENDSERVICEACTIVITY);
             startService(mess);
 
@@ -220,18 +216,5 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onRoutingCancelled() {
 
-    }
-
-    @SuppressLint("ParcelCreator")
-    public class DriverEndResultReceiver extends ResultReceiver {
-
-        public DriverEndResultReceiver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-        }
     }
 }
