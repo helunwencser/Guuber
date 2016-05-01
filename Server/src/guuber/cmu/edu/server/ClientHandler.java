@@ -104,6 +104,7 @@ public class ClientHandler implements Runnable {
 					String driverLocationUpdate = ClientMessageKind.DRIVERLOC + ":" + this.connection.getUsername()
 												+ message.substring(message.indexOf(":"));
 					Connections.broadcastMessageToPassengers(driverLocationUpdate);
+					break;
 				/**
 				 * Message format:
 				 * PASSENGERLOC:latitude:longtitude
