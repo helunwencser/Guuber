@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,7 +28,7 @@ import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
-import guuber.cmu.edu.service.GuuberService;
+import guuber.cmu.edu.ws.remote.GuuberService;
 
 /**
  * Created by wangziming on 4/9/16.

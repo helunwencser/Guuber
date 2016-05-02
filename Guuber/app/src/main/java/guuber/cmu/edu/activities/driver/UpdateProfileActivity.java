@@ -13,20 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.common.CommonSignInActivity;
 import guuber.cmu.edu.activities.common.CommonSignUpActivity;
-import guuber.cmu.edu.activities.passenger.FindDriverActivity;
-import guuber.cmu.edu.entities.User;
 import guuber.cmu.edu.exception.UpdateException;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
-import guuber.cmu.edu.service.GuuberService;
+import guuber.cmu.edu.ws.remote.GuuberService;
 
 import android.content.Intent;
 import android.widget.ArrayAdapter;

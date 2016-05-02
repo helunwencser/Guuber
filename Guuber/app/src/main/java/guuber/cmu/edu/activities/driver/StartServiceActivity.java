@@ -37,7 +37,7 @@ import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
-import guuber.cmu.edu.service.GuuberService;
+import guuber.cmu.edu.ws.remote.GuuberService;
 
 public class StartServiceActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 

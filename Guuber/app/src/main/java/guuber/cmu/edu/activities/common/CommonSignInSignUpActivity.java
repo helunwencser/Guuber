@@ -3,16 +3,11 @@ package guuber.cmu.edu.activities.common;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.activities.driver.FindPassengerActivity;
-import guuber.cmu.edu.activities.driver.UpdateProfileActivity;
-import guuber.cmu.edu.activities.passenger.FindDriverActivity;
-import guuber.cmu.edu.activities.passenger.ViewHistoryActivity;
 import guuber.cmu.edu.messageConst.Operation;
-import guuber.cmu.edu.service.GuuberService;
+import guuber.cmu.edu.ws.remote.GuuberService;
 
 public class CommonSignInSignUpActivity extends AppCompatActivity {
 
