@@ -121,7 +121,6 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
         Intent parameters = getIntent();
         myName = parameters.getStringExtra("username");
-        System.out.println("EndService Username: " + myName);
 
         Button endButton =
                 (Button) findViewById(R.id.driver_endButton);

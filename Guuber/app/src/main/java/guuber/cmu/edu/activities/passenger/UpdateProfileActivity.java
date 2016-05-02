@@ -71,14 +71,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
         setContentView(R.layout.passenger_activity_update_profile);
         this.context = this;
 
-        //定位
         userNameEditText = (TextView)findViewById(R.id.passenger_update_userName);
         passwordEditText = (EditText) findViewById(R.id.passenger_update_password);
         retypePasswordEditText = (EditText) findViewById(R.id.passenger_update_retypePassword);
         genderSpinner = (Spinner) findViewById(R.id.passenger_update_gender);
         emailEditText = (EditText) findViewById(R.id.passenger_update_email);
-
-
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
@@ -88,7 +85,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         gender = intent.getStringExtra("gender");
         passwordEditText.setText(password);
         retypePasswordEditText.setText(password);
-        // carId = intent.getStringExtra("carId");
 
         if(!CommonSignInActivity.userinfo.getUsername().equals("")){
             username = CommonSignInActivity.userinfo.getUsername();
@@ -107,8 +103,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         }
 
-        Log.d("UserInfoPUPDATE", username + "\t" + password + "\t" + userType + "\t" + email + "\t" + gender + "\t" + carId);
-
         userNameEditText.setText(username);
         emailEditText.setText(email);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_type, android.R.layout.simple_spinner_item);
@@ -119,19 +113,13 @@ public class UpdateProfileActivity extends AppCompatActivity {
             genderSpinner.setSelection(spinnerPosition);
         }
 
-        Log.d("UserInfoPUPDATEPPP",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
-
-
         Button cancelButton =
                 (Button) findViewById(R.id.passenger_update_cancelButton);
         cancelButton.setOnClickListener(cancelButtonClicked);
 
-
-
     }
 
 
-    /////////////////////////////////////////
     private boolean validatePasswordMatch(String password,String retypePassword) {
         if (!password.equals(retypePassword)) {
             return false;
@@ -157,10 +145,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         }
         return true;
     }
-    /////////////////////////////////////////
 
-
-    ///////////////
     public void saveP(View view) {
         try {
             username = userNameEditText.getText().toString();
@@ -235,9 +220,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
 
-
-    //////////////////
-
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -257,12 +239,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
             if(response.equals(ClientMessageKind.UPDATEPASSENGERPROFILEOKAY)) {
-               /* Intent intent = null;
-                if(userType.equals("Passenger")) {
-                    putInfoIntoIntent(intent);
-                    startActivity(intent);
-                }*/
-                Log.d("updateOkayP","uuuuu");
+
             } else {
                 runOnUiThread(new Runnable() {
                     @Override

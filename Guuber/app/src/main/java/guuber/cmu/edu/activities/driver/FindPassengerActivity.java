@@ -61,9 +61,6 @@ public class FindPassengerActivity extends AppCompatActivity {
 
         }
 
-
-        Log.d("UserInfoD",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
-
         View.OnClickListener findButtonClicked = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +95,6 @@ public class FindPassengerActivity extends AppCompatActivity {
                     intent.putExtra("email", email);
                     intent.putExtra("gender", gender);
                     intent.putExtra("carId", carId);
-                    Log.d("UserInfoDENTER", username + "\t" + password + "\t" + userType + "\t" + email + "\t" + gender + "\t" + carId);
                     startActivity(intent);
 
                 } else if (arg2 == 2) {
@@ -123,11 +119,5 @@ public class FindPassengerActivity extends AppCompatActivity {
         });
 
     }
-
-    public void findDriver(View view) {
-
-    }
-
-
 
 }

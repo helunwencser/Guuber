@@ -82,7 +82,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
                 throw new SignUpException(3);
             }
             Spinner userTypeSpinner = (Spinner) this.findViewById(R.id.sign_up_user_type_spinner);
-            userType = (String) userTypeSpinner.getSelectedItem().toString();
+            userType =  userTypeSpinner.getSelectedItem().toString();
             if (userType == null) {
                 throw new SignUpException(4);
             }
@@ -142,7 +142,6 @@ public class CommonSignUpActivity extends AppCompatActivity {
         userinfo.setEmail(email);
         userinfo.setGender(gender);
         userinfo.setCarId(carId);
-        Log.d("commonuser",userinfo.getEmail()+userinfo.getPassword());
     }
 
     /**

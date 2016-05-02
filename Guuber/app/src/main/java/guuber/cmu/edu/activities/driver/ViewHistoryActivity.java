@@ -51,8 +51,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
     private ListView listView;
     Button cancel;
     String username;
-    //ArrayList transactionList = new ArrayList();
-    //TextView transactionId ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,21 +80,20 @@ public class ViewHistoryActivity extends AppCompatActivity {
         }else{
             username = CommonSignUpActivity.userinfo.getUsername();
         }
-        Log.d("usernameDV", username);
+
         final List<Transaction> transactionList = tranController.selectTransactionsByDriver(username);
         int transactionSize = transactionList.size();
-        Log.d("usernameDVSize", String.valueOf(transactionSize));
+
         if(transactionSize != 0){
-            Log.d("transactionDV", transactionList.get(0).toString());
+
             String[] res = new String[transactionSize];
             for(int i = 0; i< transactionSize; i++){
 
                 StringBuilder sam = new StringBuilder();
-                //sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
                 sam.append(transactionList.get(i).getPassenger()+"\t");
                 sam.append(transactionList.get(i).getStartTime());
                 res[i] = sam.toString();
-                Log.d("res[i]",res[i]);
+
             }
 
 
@@ -103,19 +101,14 @@ public class ViewHistoryActivity extends AppCompatActivity {
                     android.R.layout.simple_list_item_1, res));
 
 
-            /*ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.passenger_view_transaction_entry,
-                    new String[] { "id","drivername","startTime"},
-                    new int[] {R.id.pTransactionID, R.id.driver_name,R.id.pStartTime});
-            setListAdapter(adapter);*/
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
                                         long arg3) {
-                    //String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
+
                     Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
-                    //Indent.putExtra("transactionID", transactionID);
                     Indent.putExtra("username", transactionList.get(pos).getDriver());
                     Indent.putExtra("passenger", transactionList.get(pos).getPassenger());
                     Indent.putExtra("startTime", transactionList.get(pos).getStartTime());
@@ -160,21 +153,15 @@ public class ViewHistoryActivity extends AppCompatActivity {
         }else{
             username = CommonSignUpActivity.userinfo.getUsername();
         }
-        Log.d("usernameDV", username);
         final List<Transaction> transactionList = tranController.selectTransactionsByDriver(username);
         int transactionSize = transactionList.size();
-        Log.d("usernameDVSize", String.valueOf(transactionSize));
         if(transactionSize != 0){
-            Log.d("transactionDV", transactionList.get(0).toString());
             String[] res = new String[transactionSize];
             for(int i = 0; i< transactionSize; i++){
-
                 StringBuilder sam = new StringBuilder();
-                //sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
                 sam.append(transactionList.get(i).getPassenger()+"\t");
                 sam.append(transactionList.get(i).getStartTime());
                 res[i] = sam.toString();
-                Log.d("res[i]",res[i]);
             }
 
 
@@ -182,19 +169,15 @@ public class ViewHistoryActivity extends AppCompatActivity {
                     android.R.layout.simple_list_item_1, res));
 
 
-            /*ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.passenger_view_transaction_entry,
-                    new String[] { "id","drivername","startTime"},
-                    new int[] {R.id.pTransactionID, R.id.driver_name,R.id.pStartTime});
-            setListAdapter(adapter);*/
+
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
                                         long arg3) {
-                   //String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
+
                     Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
-                    //Indent.putExtra("transactionID", transactionID);
                     Indent.putExtra("username", transactionList.get(pos).getDriver());
                     Indent.putExtra("passenger", transactionList.get(pos).getPassenger());
                     Indent.putExtra("startTime", transactionList.get(pos).getStartTime());

@@ -33,13 +33,11 @@ public class TransactionDBHelper extends SQLiteOpenHelper {
 
     public TransactionDBHelper(Context context) {
         super(context, DBConfig.DATABASE_NAME, null, 1);
-        Log.d("OnCreated", "Succeed");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
-        Log.d("OnCreated","Succeed");
     }
 
     @Override

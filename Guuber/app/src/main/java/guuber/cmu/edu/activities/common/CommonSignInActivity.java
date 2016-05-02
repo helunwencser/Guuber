@@ -57,7 +57,6 @@ public class CommonSignInActivity extends AppCompatActivity {
         transactionDBHelper.onCreate(sqLiteDatabase);
         MessageDBHelper messageDBHelper = new MessageDBHelper(this);
         messageDBHelper.onCreate(sqLiteDatabase);
-        Log.d("create Table", "table created");
     }
 
     /**
@@ -150,7 +149,7 @@ public class CommonSignInActivity extends AppCompatActivity {
                 } else {
                     carId = "";
                 }
-                Log.d("recieverserver P",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
+
                 Intent intent = null;
                 if(userType.equals("Driver")) {
                     intent = new Intent(context, FindPassengerActivity.class);
