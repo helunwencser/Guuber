@@ -3,6 +3,7 @@ package guuber.cmu.edu.dbLayout;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by lunwenh on 4/8/2016.
@@ -32,11 +33,13 @@ public class TransactionDBHelper extends SQLiteOpenHelper {
 
     public TransactionDBHelper(Context context) {
         super(context, DBConfig.DATABASE_NAME, null, 1);
+        Log.d("OnCreated", "Succeed");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
+        Log.d("OnCreated","Succeed");
     }
 
     @Override

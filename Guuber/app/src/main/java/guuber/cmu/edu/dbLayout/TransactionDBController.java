@@ -74,7 +74,7 @@ public class TransactionDBController {
         Cursor cursor = sqLiteDatabase.query(
                 TransactionModel.TABLE_NAME,
                 projection,
-                TransactionModel.PASSENGER + "=?",
+                TransactionModel.DRIVER + "=?",
                 new String[] {driver},
                 null,
                 null,

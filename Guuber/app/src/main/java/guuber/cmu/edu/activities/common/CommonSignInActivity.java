@@ -49,6 +49,7 @@ public class CommonSignInActivity extends AppCompatActivity {
         TransactionDBHelper transactionDBHelper =  new TransactionDBHelper(this);
         SQLiteDatabase sqLiteDatabase = transactionDBHelper.getWritableDatabase();
         transactionDBHelper.onCreate(sqLiteDatabase);
+        Log.d("create Table", "table created");
     }
 
     /**
