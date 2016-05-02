@@ -121,6 +121,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
 
         Intent parameters = getIntent();
         myName = parameters.getStringExtra("username");
+        System.out.println("EndService Username: " + myName);
 
         Button endButton =
                 (Button) findViewById(R.id.driver_endButton);
@@ -214,6 +215,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             transactionDBController.insertTransaction(transaction);
 
             Intent intent = new Intent(EndServiceActivity.this, FindPassengerActivity.class);
+            intent.putExtra("username", myName);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();

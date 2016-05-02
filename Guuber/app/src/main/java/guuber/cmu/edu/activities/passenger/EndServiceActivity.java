@@ -193,7 +193,10 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
                 transactionDBController.insertTransaction(transaction);
 
                 Intent intent = new Intent(EndServiceActivity.this, FindDriverActivity.class);
+                intent.putExtra("username", myName);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         }
     }

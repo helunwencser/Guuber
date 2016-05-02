@@ -352,6 +352,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     public boolean onMarkerClick(Marker marker) {
         for (String driver : driverMarkers.keySet()) {
             if (driverMarkers.get(driver).equals(marker)) {
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                 String history = messageHistory.getText().toString();
                 if (history.length() > 0 && currentDriver != null) {
                     allMessages.put(currentDriver, history);

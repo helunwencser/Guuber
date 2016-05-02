@@ -130,6 +130,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         Intent parameters = getIntent();
         myName = parameters.getStringExtra("username");
 
+        System.out.println("StartService Username: " + myName);
+
         Intent intent = new Intent(this, GuuberService.class);
         intent.putExtra("operation", Operation.SENDMESSAGE);
         intent.putExtra("message", ServerMessageKind.DRIVERREQUESTLOC);
@@ -324,6 +326,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     public boolean onMarkerClick(Marker marker) {
         for (String passenger : passengerMarkers.keySet()) {
             if (passengerMarkers.get(passenger).equals(marker)) {
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                 String history = messageHistory.getText().toString();
                 if (history.length() > 0 && currentPassenger != null) {
                     allMessages.put(currentPassenger, history);
