@@ -20,6 +20,7 @@ import guuber.cmu.edu.entities.Transaction;
 public class DetailedViewActivity extends AppCompatActivity {
 
     Button returnButton;
+    String username = "";
     TextView driverNameT;
     TextView startTimeT;
     TextView endTimeT;
@@ -34,7 +35,7 @@ public class DetailedViewActivity extends AppCompatActivity {
         setContentView(R.layout.driver_activity_detailed_view);
         Intent intent = getIntent();
         final String username = intent.getStringExtra("username");
-        final String driverName = intent.getStringExtra("driver");
+        final String passengerName = intent.getStringExtra("passenger");
         final String startTime = intent.getStringExtra("startTime");
         final String endtime = intent.getStringExtra("endTime");
         final String cost = intent.getStringExtra("cost");
@@ -49,7 +50,7 @@ public class DetailedViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         };
-        returnButton = (Button)findViewById(R.id.passenger_detailed_returnButton);
+        returnButton = (Button)findViewById(R.id.driver_detailed_returnButton);
         returnButton.setOnClickListener(onClickListener);
 
         driverNameT = (TextView)findViewById(R.id.transactionPassenger);
@@ -59,7 +60,7 @@ public class DetailedViewActivity extends AppCompatActivity {
         startLocationT = (TextView)findViewById(R.id.startLocation);
         endLocationT =   (TextView)findViewById(R.id.endLocation);
 
-        driverNameT.setText(driverName);
+        driverNameT.setText(passengerName);
         startTimeT.setText(startTime);
         endTimeT.setText(endtime);
         costT.setText(cost);

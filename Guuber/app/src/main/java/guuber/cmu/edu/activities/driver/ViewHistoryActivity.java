@@ -26,7 +26,7 @@ import java.util.HashMap;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.common.CommonSignInActivity;
 import guuber.cmu.edu.activities.common.CommonSignUpActivity;
-import guuber.cmu.edu.activities.passenger.DetailedViewActivity;
+import guuber.cmu.edu.activities.driver.DetailedViewActivity;
 import guuber.cmu.edu.dbLayout.TransactionDBController;
 import guuber.cmu.edu.entities.Transaction;
 import java.util.List;
@@ -72,7 +72,87 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
+
         username = intent.getStringExtra("username");
+
+        if(CommonSignInActivity.userinfo.getUsername() != null){
+            username = CommonSignInActivity.userinfo.getUsername();
+
+        }else{
+            username = CommonSignUpActivity.userinfo.getUsername();
+        }
+        Log.d("usernameDV", username);
+        final List<Transaction> transactionList = tranController.selectTransactionsByDriver(username);
+        int transactionSize = transactionList.size();
+        Log.d("usernameDVSize", String.valueOf(transactionSize));
+        if(transactionSize != 0){
+            Log.d("transactionDV", transactionList.get(0).toString());
+            String[] res = new String[transactionSize];
+            for(int i = 0; i< transactionSize; i++){
+
+                StringBuilder sam = new StringBuilder();
+                sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
+                sam.append(transactionList.get(i).getPassenger()+"\t");
+                sam.append(transactionList.get(i).getStartTime());
+                res[i] = sam.toString();
+                Log.d("res[i]",res[i]);
+            }
+
+
+            listView.setAdapter(new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, res));
+
+
+            /*ListAdapter adapter = new SimpleAdapter(ViewHistoryActivity.this,data, R.layout.passenger_view_transaction_entry,
+                    new String[] { "id","drivername","startTime"},
+                    new int[] {R.id.pTransactionID, R.id.driver_name,R.id.pStartTime});
+            setListAdapter(adapter);*/
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
+                                        long arg3) {
+                    String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
+                    Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
+                    Indent.putExtra("transactionID", transactionID);
+                    Indent.putExtra("username", transactionList.get(pos).getDriver());
+                    Indent.putExtra("passenger", transactionList.get(pos).getPassenger());
+                    Indent.putExtra("startTime", transactionList.get(pos).getStartTime());
+                    Indent.putExtra("endTime", transactionList.get(pos).getEndTime());
+                    Indent.putExtra("startLocation", transactionList.get(pos).getStartLocation());
+                    Indent.putExtra("endLocation", transactionList.get(pos).getEndLocation());
+                    Indent.putExtra("cost", transactionList.get(pos).getCost());
+                    startActivity(Indent);
+                }
+            });
+
+        }else{
+            Toast.makeText(this,"No Related Transactions",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    protected void onStart(){
+         super.onStart();
+         setContentView(R.layout.driver_activity_view_history);
+         listView = (ListView) this.findViewById(R.id.driversss_view_list);
+
+        View.OnClickListener onClickListener = new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewHistoryActivity.this,FindPassengerActivity.class);
+                startActivity(intent);
+            }
+        };
+        cancel = (Button)this.findViewById(R.id.driver_view_cancelButton);
+        cancel.setOnClickListener(onClickListener);
+
+        TransactionDBController tranController = new TransactionDBController(this);
+        Intent intent = getIntent();
+
+        username = intent.getStringExtra("username");
+
         if(CommonSignInActivity.userinfo.getUsername() != null){
             username = CommonSignInActivity.userinfo.getUsername();
 
@@ -128,7 +208,6 @@ public class ViewHistoryActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this,"No Related Transactions",Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
