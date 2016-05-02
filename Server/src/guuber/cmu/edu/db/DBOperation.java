@@ -66,9 +66,9 @@ public class DBOperation {
 	
 	/**
 	 * Select user from database by username and password
-	 * @param username - the name of user
+	 * @param username	the name of user
 	 * 
-	 * @param password - password
+	 * @param password	password
 	 * 
 	 * @return if there is a record in database, return the user;
 	 * 			otherwise, return null
@@ -97,7 +97,7 @@ public class DBOperation {
 	
 	/**
 	 * Select user from database by username
-	 * @param username - the name of user
+	 * @param username 	 the name of user
 	 * 
 	 * @return if there is a record in database, return the user;
 	 * 			otherwise, return null
