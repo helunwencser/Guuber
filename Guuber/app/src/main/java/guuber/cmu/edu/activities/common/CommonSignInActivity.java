@@ -15,6 +15,7 @@ import android.widget.EditText;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
+import guuber.cmu.edu.dbLayout.MessageDBHelper;
 import guuber.cmu.edu.exception.SignInException;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
@@ -54,6 +55,8 @@ public class CommonSignInActivity extends AppCompatActivity {
         TransactionDBHelper transactionDBHelper =  new TransactionDBHelper(this);
         SQLiteDatabase sqLiteDatabase = transactionDBHelper.getWritableDatabase();
         transactionDBHelper.onCreate(sqLiteDatabase);
+        MessageDBHelper messageDBHelper = new MessageDBHelper(this);
+        messageDBHelper.onCreate(sqLiteDatabase);
         Log.d("create Table", "table created");
     }
 

@@ -24,6 +24,7 @@ import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.service.GuuberService;
 import android.util.Log;
+import guuber.cmu.edu.dbLayout.MessageDBHelper;
 
 public class CommonSignUpActivity extends AppCompatActivity {
 
@@ -58,6 +59,8 @@ public class CommonSignUpActivity extends AppCompatActivity {
         TransactionDBHelper transactionDBHelper =  new TransactionDBHelper(this);
         SQLiteDatabase sqLiteDatabase = transactionDBHelper.getWritableDatabase();
         transactionDBHelper.onCreate(sqLiteDatabase);
+        MessageDBHelper messageDBHelper = new MessageDBHelper(this);
+        messageDBHelper.onCreate(sqLiteDatabase);
     }
 
     //sign up
