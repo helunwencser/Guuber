@@ -23,7 +23,6 @@ import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.resultCode.ResultCode;
-import guuber.cmu.edu.ws.remote.ServerConfig;
 
 /**
  * This class handles all issues related to connect with server

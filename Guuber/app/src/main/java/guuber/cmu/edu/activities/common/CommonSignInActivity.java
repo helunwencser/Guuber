@@ -129,7 +129,6 @@ public class CommonSignInActivity extends AppCompatActivity {
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
-            System.out.println("response: " + response);
             /**
              * Message format:
              * SIGNINOK:username:password:userType:email:gender:carId

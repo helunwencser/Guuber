@@ -10,13 +10,13 @@ public class MySQLStatement {
 									"(username, password, usertype, email, gender, carid) " +
 									"values (?, ?, ?, ?, ?, ?)";
 	
-	/* select user by username and password */
+	/* select user by user name and password */
 	public static String SELECT_BY_USERNAME_PASSWORD = "select * from user_table where username = ? and password = ?";
 	
-	/* select user by username */
+	/* select user by user name */
 	public static String SELECT_BY_USERNAME = "select * from user_table where username = ?";
 	
-	/* delete user by username */
+	/* delete user by user name */
 	public static String DELETE_BY_USERNAME = "delete from user_table where username = ?";
 
 }
