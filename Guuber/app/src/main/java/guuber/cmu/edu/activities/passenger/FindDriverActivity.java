@@ -17,13 +17,21 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.common.CommonSignInActivity;
 import guuber.cmu.edu.activities.common.CommonSignInSignUpActivity;
+import guuber.cmu.edu.activities.common.CommonSignUpActivity;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.service.GuuberService;
 
 public class FindDriverActivity extends AppCompatActivity  {
 
     Spinner spin;
+    String username;
+    String password;
+    String userType;
+    String email;
+    String gender;
+    String carId;
     private ArrayAdapter<String> adapter;
     private final String[] categories={"UserProfile","Transactions","Log out"};
 
@@ -33,14 +41,22 @@ public class FindDriverActivity extends AppCompatActivity  {
         setContentView(R.layout.passenger_activity_find_driver);
 
 
-        //userprofile
-        Intent intent = getIntent();
-        final String username = intent.getStringExtra("username");
-        final String password = intent.getStringExtra("password");
-        final String userType = intent.getStringExtra("userType");
-        final String email = intent.getStringExtra("email");
-        final String gender = intent.getStringExtra("gender");
-        final String carId = intent.getStringExtra("carId");
+        if(CommonSignInActivity.userinfo.getUsername() != null){
+            username = CommonSignInActivity.userinfo.getUsername();
+            password = CommonSignInActivity.userinfo.getPassword();
+            userType = CommonSignInActivity.userinfo.getUserType();
+            email = CommonSignInActivity.userinfo.getEmail();
+            gender = CommonSignInActivity.userinfo.getGender();
+            carId = CommonSignInActivity.userinfo.getCarId();
+        }else{
+            username = CommonSignUpActivity.userinfo.getUsername();
+            password = CommonSignUpActivity.userinfo.getPassword();
+            userType = CommonSignUpActivity.userinfo.getUserType();
+            email = CommonSignUpActivity.userinfo.getEmail();
+            gender = CommonSignUpActivity.userinfo.getGender();
+            carId = CommonSignUpActivity.userinfo.getCarId();
+
+        }
 
 
         Log.d("UserInfoP",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);

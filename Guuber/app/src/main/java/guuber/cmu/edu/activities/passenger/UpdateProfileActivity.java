@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.common.CommonSignInActivity;
+import guuber.cmu.edu.activities.common.CommonSignUpActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
 import guuber.cmu.edu.exception.UpdateException;
@@ -81,6 +83,23 @@ public class UpdateProfileActivity extends AppCompatActivity {
         passwordEditText.setText(password);
         retypePasswordEditText.setText(password);
         // carId = intent.getStringExtra("carId");
+
+        if(CommonSignInActivity.userinfo.getUsername() != null){
+            username = CommonSignInActivity.userinfo.getUsername();
+            password = CommonSignInActivity.userinfo.getPassword();
+            userType = CommonSignInActivity.userinfo.getUserType();
+            email = CommonSignInActivity.userinfo.getEmail();
+            gender = CommonSignInActivity.userinfo.getGender();
+            carId = CommonSignInActivity.userinfo.getCarId();
+        }else{
+            username = CommonSignUpActivity.userinfo.getUsername();
+            password = CommonSignUpActivity.userinfo.getPassword();
+            userType = CommonSignUpActivity.userinfo.getUserType();
+            email = CommonSignUpActivity.userinfo.getEmail();
+            gender = CommonSignUpActivity.userinfo.getGender();
+            carId = CommonSignUpActivity.userinfo.getCarId();
+
+        }
 
         Log.d("UserInfoPUPDATE", username + "\t" + password + "\t" + userType + "\t" + email + "\t" + gender + "\t" + carId);
 

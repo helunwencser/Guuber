@@ -26,6 +26,8 @@ public class User implements Serializable{
     private String gender = "";
     private String carId = "";
 
+    public User(){}
+
     public User(
             String username,
             String password,

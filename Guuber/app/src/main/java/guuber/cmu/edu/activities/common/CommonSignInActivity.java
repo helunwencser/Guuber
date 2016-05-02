@@ -27,7 +27,7 @@ import guuber.cmu.edu.entities.User;
 
 public class CommonSignInActivity extends AppCompatActivity {
 
-    public static User user;
+    public static User userinfo = new User();
 
 
     private Context context;
@@ -110,6 +110,12 @@ public class CommonSignInActivity extends AppCompatActivity {
         intent.putExtra("email", email);
         intent.putExtra("gender", gender);
         intent.putExtra("carId", carId);
+        userinfo.setUsername(username);
+        userinfo.setPassword(password);
+        userinfo.setUserType(userType);
+        userinfo.setEmail(email);
+        userinfo.setGender(gender);
+        userinfo.setCarId(carId);
     }
 
     @SuppressLint("ParcelCreator")

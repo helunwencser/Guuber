@@ -24,6 +24,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import edu.cmu.guuber.guuber.R;
+import guuber.cmu.edu.activities.common.CommonSignInActivity;
+import guuber.cmu.edu.activities.common.CommonSignUpActivity;
 import guuber.cmu.edu.activities.passenger.DetailedViewActivity;
 import guuber.cmu.edu.dbLayout.TransactionDBController;
 import guuber.cmu.edu.entities.Transaction;
@@ -48,6 +50,7 @@ import guuber.cmu.edu.entities.Transaction;
 public class ViewHistoryActivity extends AppCompatActivity {
     private ListView listView;
     Button cancel;
+    String username;
     //ArrayList transactionList = new ArrayList();
     //TextView transactionId ;
 
@@ -69,9 +72,15 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
         TransactionDBController tranController = new TransactionDBController(this);
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("username");
-        Log.d("usernameDV", userName);
-        final List<Transaction> transactionList = tranController.selectTransactionsByDriver(userName);
+        username = intent.getStringExtra("username");
+        if(CommonSignInActivity.userinfo.getUsername() != null){
+            username = CommonSignInActivity.userinfo.getUsername();
+
+        }else{
+            username = CommonSignUpActivity.userinfo.getUsername();
+        }
+        Log.d("usernameDV", username);
+        final List<Transaction> transactionList = tranController.selectTransactionsByDriver(username);
         int transactionSize = transactionList.size();
         Log.d("usernameDVSize", String.valueOf(transactionSize));
         if(transactionSize != 0){

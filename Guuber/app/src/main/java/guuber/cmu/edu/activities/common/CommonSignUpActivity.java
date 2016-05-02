@@ -26,6 +26,9 @@ import guuber.cmu.edu.service.GuuberService;
 
 public class CommonSignUpActivity extends AppCompatActivity {
 
+
+    public static User userinfo = new User();
+
     // password must contain 8 to 20 characters
     // it must contain at least one uppercase, one lowercase, one digit,
     // one special character (@#$%!)
@@ -129,6 +132,12 @@ public class CommonSignUpActivity extends AppCompatActivity {
         intent.putExtra("email", email);
         intent.putExtra("gender", gender);
         intent.putExtra("carId", carId);
+        userinfo.setUsername(username);
+        userinfo.setPassword(password);
+        userinfo.setUserType(userType);
+        userinfo.setEmail(email);
+        userinfo.setGender(gender);
+        userinfo.setCarId(carId);
     }
 
     /**
