@@ -40,7 +40,7 @@ public class TransactionDBController {
         contentValues.put(TransactionModel.PASSENGER, transaction.getPassenger());
         contentValues.put(TransactionModel.START_TIME, transaction.getStartTime());
         contentValues.put(TransactionModel.END_TIME, transaction.getEndTime());
-        contentValues.put(TransactionModel.START_LOCATION, transaction.getStartTime());
+        contentValues.put(TransactionModel.START_LOCATION, transaction.getStartLocation());
         contentValues.put(TransactionModel.END_LOCATION, transaction.getEndLocation());
         contentValues.put(TransactionModel.COST, transaction.getCost());
         sqLiteDatabase.insert(TransactionModel.TABLE_NAME, null, contentValues);
