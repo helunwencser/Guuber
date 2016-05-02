@@ -61,5 +61,31 @@
     <string name="input_username_hint">input your username here</string>
     <string name="title_activity_find">Gubber</string>
     <string name="title_activity_common_sign_in">CommonSignInActivity</string>
+    <string name="passenger">Passenger</string>
+    <string name="passengername">Passenger Name</string>
+    <string name="starttime">Start Time</string>
+    <string name="endtime">End Time</string>
+    <string name="cost">Cost</string>
+    <string name="startlocation">Start Location</string>
+    <string name="endlocation">End Location</string>
+    <string name="returnbutton">Return</string>
+    <string name="inservice">In Service</string>
+    <string name="endservice">End Service</string>
+    <string name="findpassenger">Find Passenger</string>
+    <string name="messageinput">Message Input</string>
+    <string name="send">Send</string>
+    <string name="start">Start</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="carid">Car-ID</string>
+    <string name="input_and_update">Input new and click SAVE to update</string>
+    <string name="userame">User Name</string>
+    <string name="driver">Driver</string>
+    <string name="email">Email</string>
+    <string name="gender">Gender</string>
+    <string name="detail_reminder"> Click to view details</string>
+    <string name="driver_name">driver name</string>
+    <string name="finddriver">Find Driver</string>
+    <string name="destination">Destination</string>
 
 </resources>

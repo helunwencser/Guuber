@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Guuber"
+        android:text="@string/app_name"
         android:gravity="center"
         android:layout_weight="1"/>
 
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Driver"
+                android:text="@string/driver"
                 android:gravity="center" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:hint="driver name"
+                android:hint="@string/driver_name"
                 android:gravity="center" />
 
         </LinearLayout>
@@ -69,7 +69,7 @@
                 android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Start Time"
+                android:text="@string/starttime"
                 android:gravity="center" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:hint="start time"
+                android:hint="@string/starttime"
                 android:gravity="center" />
         </LinearLayout>
 
@@ -94,7 +94,7 @@
                 android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="End Time"
+                android:text="@string/endtime"
                 android:gravity="center" />
             <TextView
                 android:id="@+id/transactionEndTime"
@@ -102,7 +102,7 @@
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:hint="end time"
+                android:hint="@string/endtime"
                 android:gravity="center" />
         </LinearLayout>
 
@@ -118,7 +118,7 @@
                 android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Cost"
+                android:text="@string/cost"
                 android:gravity="center" />
             <TextView
                 android:id="@+id/transactionCost"
@@ -126,7 +126,7 @@
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:hint="cost"
+                android:hint="@string/cost"
                 android:gravity="center" />
         </LinearLayout>
 
@@ -142,7 +142,7 @@
                 android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="StartLocation"
+                android:text="@string/startlocation"
                 android:gravity="center" />
             <TextView
                 android:id="@+id/startLocation"
@@ -150,7 +150,7 @@
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:hint="startLocation"
+                android:hint="@string/startlocation"
                 android:gravity="center" />
         </LinearLayout>
 
@@ -166,7 +166,7 @@
                 android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="EndLocation"
+                android:text="@string/endlocation"
                 android:gravity="center" />
             <TextView
                 android:id="@+id/endLocation"
@@ -174,7 +174,7 @@
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:hint="endLocation"
+                android:hint="@string/endlocation"
                 android:gravity="center" />
         </LinearLayout>
 
@@ -190,7 +190,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Return"
+            android:text="@string/returnbutton"
             android:id="@+id/passenger_detailed_returnButton"
             android:layout_gravity="center_horizontal"/>
 

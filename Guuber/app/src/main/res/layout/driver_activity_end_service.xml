@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Guuber"
+        android:text="@string/app_name"
         android:gravity="center_horizontal"
         android:layout_weight="1"/>
 
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="In Service"
+            android:text="@string/inservice"
             android:gravity="center" />
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,7 +55,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="End Service"
+            android:text="@string/endservice"
             android:id="@+id/driver_endButton"
             android:layout_gravity="center_horizontal"
             />

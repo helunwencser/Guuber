@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Guuber"
+        android:text="@string/app_name"
         android:gravity="center"
         android:layout_weight="1"/>
 
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Input new and click SAVE to update"
+            android:text="@string/input_and_update"
             android:gravity="center"
             android:layout_weight="1"/>
 
@@ -48,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="User Name"
+                android:text="@string/userame"
                 android:gravity="center"
                 android:layout_weight="1.5"/>
 
@@ -72,7 +72,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Password"
+                android:text="@string/password_label"
                 android:gravity="center"
                 android:layout_weight="1.5"/>
 
@@ -97,7 +97,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="RePassword"
+                android:text="@string/retype_password_label"
                 android:gravity="center"
                 android:layout_weight="1.5"/>
 
@@ -122,7 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="User Type"
+                android:text="@string/user_type_label"
                 android:gravity="center"
                 android:layout_weight="1.5"/>
 
@@ -130,7 +130,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Passenger"
+                android:text="@string/passenger"
                 android:gravity="center"
                 android:layout_weight="2"/>
         </LinearLayout>
@@ -146,7 +146,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Gender"
+                android:text="@string/gender"
                 android:gravity="center"
                 android:layout_weight="1.5"/>
 
@@ -168,7 +168,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Email"
+                android:text="@string/email"
                 android:gravity="center"
                 android:layout_weight="1.5"/>
 
@@ -194,7 +194,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/save"
             android:id="@+id/passenger_update_saveButton"
             android:onClick="saveP"
             android:layout_gravity="center_horizontal"
@@ -203,7 +203,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:id="@+id/passenger_update_cancelButton"
             android:onClick="cancel"
             android:layout_gravity="center_horizontal"

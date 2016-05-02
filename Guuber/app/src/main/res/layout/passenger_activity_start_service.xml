@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Guuber"
+        android:text="@string/app_name"
         android:gravity="center"
         android:layout_weight="1"/>
 
@@ -32,13 +32,13 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Destination"
+            android:hint="@string/destination"
             android:id="@+id/passenger_destination"
             android:layout_weight="1"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit"
+            android:text="@string/submit_label"
             android:id="@+id/passenger_start_submitButton"
             android:onClick="submit"
             android:layout_gravity="center_horizontal" />
@@ -85,13 +85,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/passenger_start_input"
-                android:hint="Message Input"
+                android:hint="@string/messageinput"
                 android:layout_weight="2" />
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Send"
+                android:text="@string/send"
                 android:id="@+id/passenger_start_sendButton"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -107,7 +107,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:id="@+id/passenger_start_cancelButton"
             android:onClick="cancel"
             android:layout_gravity="center_horizontal" />

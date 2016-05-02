@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Guuber"
+            android:text="@string/app_name"
             android:gravity="center"
             />
         <Spinner
@@ -57,7 +57,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Find Passenger"
+            android:text="@string/findpassenger"
             android:id="@+id/driver_findButton"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical" />

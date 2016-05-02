@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Guuber"
+        android:text="@string/app_name"
         android:gravity="center"
         android:layout_weight="1"/>
 
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Click to view details"
+            android:text="@string/detail_reminder"
             android:gravity="center" />
 
         <LinearLayout
@@ -47,13 +47,13 @@
             <TextView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="PName"
+                android:text="@string/passengername"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Start"
+                android:text="@string/start"
                 />
         </LinearLayout>
 
@@ -77,7 +77,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:id="@+id/driver_view_cancelButton"
             android:layout_gravity="center_horizontal"
             android:gravity="center" />
