@@ -31,6 +31,7 @@ import guuber.cmu.edu.service.GuuberService;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by wangziming on 4/9/16.
@@ -58,6 +59,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
     // reference: http://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
     private static final String PASSWORD_RESTRICT =
             "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{8,20})";
+
+
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +181,19 @@ public class UpdateProfileActivity extends AppCompatActivity {
         }
         if (validateCompleteness()) {
             if (validatePasswordMatch(password,Repassword)) {
+                try {
+                    if (email == null || !email.matches(EMAIL_PATTERN)) {
+                        throw new UpdateException(6);
+
+                    }
+                    if (userType.equals("Driver") && (carId == null || carId.length() < 6)) {
+                        throw new UpdateException(7);
+
+                    }
+                } catch (UpdateException e) {
+                    e.alert(UpdateProfileActivity.this);
+                    return;
+                }
                 UpdateDriverProfileReceiver updateDriverProfileReceiver = new UpdateDriverProfileReceiver(null);
                 Intent intent = new Intent(this, GuuberService.class);
                 intent.putExtra("operation", Operation.SENDMESSAGE);
@@ -186,6 +205,18 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         + gender);
                 intent.putExtra("receiver", updateDriverProfileReceiver);
                 intent.putExtra("activityName", ActivityNames.PASSENGERUPDATEPROFILEACTIVITY);
+                startService(intent);
+                Toast.makeText(this, "Update Successfully!", Toast.LENGTH_SHORT).show();
+                if(!CommonSignInActivity.userinfo.getUsername().equals("")){
+                    CommonSignInActivity.userinfo.setPassword(password);
+                    CommonSignInActivity.userinfo.setGender(gender);
+                    CommonSignInActivity.userinfo.setEmail(email);
+                }else{
+                    CommonSignUpActivity.userinfo.setPassword(password);
+                    CommonSignUpActivity.userinfo.setGender(gender);
+                    CommonSignUpActivity.userinfo.setEmail(email);
+                }
+
             } else {
                 try {
                     throw new UpdateException(4);
