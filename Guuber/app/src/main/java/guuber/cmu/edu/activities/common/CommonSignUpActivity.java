@@ -23,6 +23,7 @@ import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.service.GuuberService;
+import android.util.Log;
 
 public class CommonSignUpActivity extends AppCompatActivity {
 
@@ -138,6 +139,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
         userinfo.setEmail(email);
         userinfo.setGender(gender);
         userinfo.setCarId(carId);
+        Log.d("commonuser",userinfo.getEmail()+userinfo.getPassword());
     }
 
     /**

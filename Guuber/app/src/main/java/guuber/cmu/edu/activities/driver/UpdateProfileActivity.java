@@ -82,7 +82,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
          gender = intent.getStringExtra("gender");
          carId = intent.getStringExtra("carId");
 
-        if(CommonSignInActivity.userinfo.getUsername() != null){
+        if(CommonSignInActivity.userinfo.getUsername() != ""){
             username = CommonSignInActivity.userinfo.getUsername();
             password = CommonSignInActivity.userinfo.getPassword();
             userType = CommonSignInActivity.userinfo.getUserType();

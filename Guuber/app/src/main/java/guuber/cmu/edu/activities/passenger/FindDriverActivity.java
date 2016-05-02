@@ -41,7 +41,7 @@ public class FindDriverActivity extends AppCompatActivity  {
         setContentView(R.layout.passenger_activity_find_driver);
 
 
-        if(CommonSignInActivity.userinfo.getUsername() != null){
+        if(CommonSignInActivity.userinfo.getUsername() != ""){
             username = CommonSignInActivity.userinfo.getUsername();
             password = CommonSignInActivity.userinfo.getPassword();
             userType = CommonSignInActivity.userinfo.getUserType();
