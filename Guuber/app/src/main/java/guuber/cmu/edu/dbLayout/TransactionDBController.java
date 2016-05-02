@@ -86,7 +86,7 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
-                                cursor.getInt(0),
+                                //cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
@@ -142,7 +142,7 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
-                                cursor.getInt(0),
+                               // cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
@@ -190,7 +190,7 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
-                                cursor.getInt(0),
+                                //cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),

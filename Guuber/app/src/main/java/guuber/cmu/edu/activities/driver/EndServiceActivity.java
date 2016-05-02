@@ -210,7 +210,7 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
             String endLocation = "" + destLat + "," + destLon;
             String cost = getCost();
 
-            Transaction transaction= new Transaction(0,myName, passenger,startTime.toString(),
+            Transaction transaction= new Transaction(myName, passenger,startTime.toString(),
                                         endTime.toString(),startLocation,endLocation,cost);
             transactionDBController.insertTransaction(transaction);
 

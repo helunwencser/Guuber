@@ -91,7 +91,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
             for(int i = 0; i< transactionSize; i++){
 
                 StringBuilder sam = new StringBuilder();
-                sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
+                //sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
                 sam.append(transactionList.get(i).getPassenger()+"\t");
                 sam.append(transactionList.get(i).getStartTime());
                 res[i] = sam.toString();
@@ -113,9 +113,9 @@ public class ViewHistoryActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
                                         long arg3) {
-                    String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
+                    //String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
                     Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
-                    Indent.putExtra("transactionID", transactionID);
+                    //Indent.putExtra("transactionID", transactionID);
                     Indent.putExtra("username", transactionList.get(pos).getDriver());
                     Indent.putExtra("passenger", transactionList.get(pos).getPassenger());
                     Indent.putExtra("startTime", transactionList.get(pos).getStartTime());
@@ -170,7 +170,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
             for(int i = 0; i< transactionSize; i++){
 
                 StringBuilder sam = new StringBuilder();
-                sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
+                //sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
                 sam.append(transactionList.get(i).getPassenger()+"\t");
                 sam.append(transactionList.get(i).getStartTime());
                 res[i] = sam.toString();
@@ -192,9 +192,9 @@ public class ViewHistoryActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
                                         long arg3) {
-                    String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
+                   //String transactionID = String.valueOf(transactionList.get(pos).getTransaction_id());
                     Intent Indent = new Intent(getApplicationContext(), DetailedViewActivity.class);
-                    Indent.putExtra("transactionID", transactionID);
+                    //Indent.putExtra("transactionID", transactionID);
                     Indent.putExtra("username", transactionList.get(pos).getDriver());
                     Indent.putExtra("passenger", transactionList.get(pos).getPassenger());
                     Indent.putExtra("startTime", transactionList.get(pos).getStartTime());
