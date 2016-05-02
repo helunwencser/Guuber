@@ -8,9 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.dbLayout.TransactionDBController;
-import guuber.cmu.edu.entities.Transaction;
-import java.util.List;
+
 
 
 /**

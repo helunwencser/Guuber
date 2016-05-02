@@ -131,7 +131,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         Intent parameters = getIntent();
         myName = parameters.getStringExtra("username");
 
-        System.out.println("StartService Username: " + myName);
 
         Intent intent = new Intent(this, GuuberService.class);
         intent.putExtra("operation", Operation.SENDMESSAGE);
@@ -364,7 +363,6 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
-            System.out.println("Response from server: " + response);
 
             if (response == null || response.length() == 0) {
                 return;

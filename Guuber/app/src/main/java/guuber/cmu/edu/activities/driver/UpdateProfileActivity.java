@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -100,8 +99,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         }
 
-        Log.d("UserInfoDDDUPDATE",username+"\t"+password+"\t"+userType+"\t"+email+"\t"+gender+"\t"+carId);
-
 
          userNameEditText.setText(username);
          emailEditText.setText(email);
@@ -129,7 +126,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
 
-    /////////////////////////////////////////
     private boolean validatePasswordMatch(String password,String retypePassword) {
         if (!password.equals(retypePassword)) {
             return false;
@@ -155,10 +151,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         }
         return true;
     }
-    /////////////////////////////////////////
 
 
-    ///////////////
     public void saveD(View view) {
         try {
             username = userNameEditText.getText().toString();
@@ -236,9 +230,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
 
-
-    //////////////////
-
     View.OnClickListener cancelButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -258,12 +249,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
             if(response.equals(ClientMessageKind.UPDATEDRIVERPROFILEOKAY)) {
-                /*Intent intent = null;
-                if(userType.equals("Driver")) {
-                    putInfoIntoIntent(intent);
-                    startActivity(intent);
-                }*/
-                Log.d("updateOkayD","uuuuu");
+
             } else {
                 runOnUiThread(new Runnable() {
                     @Override

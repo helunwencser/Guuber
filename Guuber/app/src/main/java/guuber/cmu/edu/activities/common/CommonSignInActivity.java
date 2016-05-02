@@ -22,7 +22,6 @@ import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.ws.remote.GuuberService;
-import android.util.Log;
 import guuber.cmu.edu.dbLayout.TransactionDBHelper;
 import guuber.cmu.edu.entities.User;
 
@@ -148,6 +147,7 @@ public class CommonSignInActivity extends AppCompatActivity {
                 } else {
                     carId = "";
                 }
+
                 Intent intent = null;
                 if(userType.equals("Driver")) {
                     intent = new Intent(context, FindPassengerActivity.class);

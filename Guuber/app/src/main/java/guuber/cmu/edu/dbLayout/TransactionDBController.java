@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import guuber.cmu.edu.entities.Transaction;
-import android.util.Log;
 
 /**
  * Created by lunwenh on 4/8/2016.
@@ -57,7 +56,6 @@ public class TransactionDBController {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
-        Log.d("tranD","0");
         String[] projection = {
                 TransactionModel._ID,
                 TransactionModel.DRIVER,
@@ -68,7 +66,7 @@ public class TransactionDBController {
                 TransactionModel.END_LOCATION,
                 TransactionModel.COST
         };
-        Log.d("tranD","1D");
+
         String sortOrder = TransactionModel._ID + " DESC";
 
         Cursor cursor = sqLiteDatabase.query(
@@ -80,13 +78,12 @@ public class TransactionDBController {
                 null,
                 sortOrder
         );
-        Log.d("tranD","2D");
+
         if(cursor.moveToFirst()) {
-            Log.d("tranD","3D");
+
             do {
                 res.add(
                         new Transaction(
-                                //cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
@@ -98,7 +95,6 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
-        Log.d("tranD","4");
         return res;
     }
 
@@ -113,7 +109,6 @@ public class TransactionDBController {
         List<Transaction> res = new ArrayList<Transaction>();
 
         SQLiteDatabase sqLiteDatabase = this.transactionDBHelper.getReadableDatabase();
-        Log.d("tran","0");
         String[] projection = {
                 TransactionModel._ID,
                 TransactionModel.DRIVER,
@@ -124,7 +119,6 @@ public class TransactionDBController {
                 TransactionModel.END_LOCATION,
                 TransactionModel.COST
         };
-        Log.d("tran","1");
         String sortOrder = TransactionModel._ID + " DESC";
 
         Cursor cursor = sqLiteDatabase.query(
@@ -136,13 +130,10 @@ public class TransactionDBController {
                 null,
                 sortOrder
         );
-        Log.d("tran","2");
         if(cursor.moveToFirst()) {
-            Log.d("tran","3");
             do {
                 res.add(
                         new Transaction(
-                               // cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
@@ -154,7 +145,6 @@ public class TransactionDBController {
                 );
             } while(cursor.moveToNext());
         }
-        Log.d("tran","4");
         return res;
     }
 
@@ -190,7 +180,6 @@ public class TransactionDBController {
             do {
                 res.add(
                         new Transaction(
-                                //cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
@@ -205,4 +194,3 @@ public class TransactionDBController {
         return res;
     }
 }
-//cursor.getInt(cursor.getColumnIndex("_ID")),

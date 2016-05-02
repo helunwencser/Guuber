@@ -174,8 +174,6 @@ public class EndServiceActivity extends FragmentActivity implements OnMapReadyCa
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             String response = resultData.getString("response");
-            System.out.println("Response from server: " + response);
-
             if (response == null || response.length() == 0) {
                 return;
             }

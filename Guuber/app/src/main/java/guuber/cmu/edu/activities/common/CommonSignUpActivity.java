@@ -23,7 +23,6 @@ import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.ws.remote.GuuberService;
-import android.util.Log;
 import guuber.cmu.edu.dbLayout.MessageDBHelper;
 
 public class CommonSignUpActivity extends AppCompatActivity {
@@ -82,7 +81,7 @@ public class CommonSignUpActivity extends AppCompatActivity {
                 throw new SignUpException(3);
             }
             Spinner userTypeSpinner = (Spinner) this.findViewById(R.id.sign_up_user_type_spinner);
-            userType = (String) userTypeSpinner.getSelectedItem().toString();
+            userType =  userTypeSpinner.getSelectedItem().toString();
             if (userType == null) {
                 throw new SignUpException(4);
             }
