@@ -331,6 +331,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     };
 
     private void addDriverMarker(String driverID, double lon, double lat) {
+        if (driverID.equals(myName)) {
+            return;
+        }
         if (driverMarkers.get(driverID) != null) {
             driverMarkers.get(driverID).remove();
         }

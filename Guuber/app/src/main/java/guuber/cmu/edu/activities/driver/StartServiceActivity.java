@@ -301,6 +301,9 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     };
 
     private void addPassengerMarker(String passengerID, double lon, double lat) {
+        if (passengerID.equals(myName)) {
+            return;
+        }
         if (passengerMarkers.get(passengerID) != null) {
             passengerMarkers.get(passengerID).remove();
         }

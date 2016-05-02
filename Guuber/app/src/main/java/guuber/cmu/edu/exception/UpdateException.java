@@ -29,6 +29,12 @@ public class UpdateException extends Exception  {
             case 5:
                 this.errorMessage = "Information is incomplete";
                 break;
+            case 6:
+                this.errorMessage = "Invalid email";
+                break;
+            case 7:
+                this.errorMessage = "Invalid carId";
+                break;
         }
         Log.d("Exception", errorMessage);
 
@@ -63,6 +69,12 @@ public class UpdateException extends Exception  {
                 break;
             case 5:
                 builder.setMessage("Please Try Again");
+                break;
+            case 6:
+                builder.setMessage("Please input valid email address");
+                break;
+            case 7:
+                builder.setMessage("Please input valid carId");
                 break;
         }
         builder.setPositiveButton("Back", null);

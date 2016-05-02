@@ -7,12 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.activities.passenger.FindDriverActivity;
-import guuber.cmu.edu.dbLayout.TransactionDBController;
-import guuber.cmu.edu.entities.Transaction;
 
 /**
  * Created by wangziming on 4/9/16.

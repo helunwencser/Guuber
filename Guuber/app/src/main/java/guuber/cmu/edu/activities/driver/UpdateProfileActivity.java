@@ -13,12 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.common.CommonSignInActivity;
 import guuber.cmu.edu.activities.common.CommonSignUpActivity;
+import guuber.cmu.edu.exception.UpdateException;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
@@ -28,6 +26,7 @@ import guuber.cmu.edu.ws.remote.GuuberService;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by wangziming on 4/9/16.
@@ -56,6 +55,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
     // reference: http://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
     private static final String PASSWORD_RESTRICT =
             "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{8,20})";
+
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,14 +137,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validatePasswordComplexity(String password) {
-
-        Pattern pattern = Pattern.compile(password);
-        Matcher matcher = pattern.matcher(password);
-
-        return matcher.matches();
-    }
-
     private void pop(String title, String message, String button) {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(UpdateProfileActivity.this);
@@ -165,31 +160,40 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     ///////////////
     public void saveD(View view) {
-        username = userNameEditText.getText().toString();
-        if(username == null || username.length() < 6) {
-            pop("Invalid user name", "User name must have at least 6 characters", "Back");
-        }
+        try {
+            username = userNameEditText.getText().toString();
+            if(username == null || username.length() < 6) {
+                throw new UpdateException(1);
+            }
 
-        password = passwordEditText.getText().toString();
-        Repassword = retypePasswordEditText.getText().toString();
-        email = emailEditText.getText().toString();
-        carId = carIDEditText.getText().toString();
-        gender = genderSpinner.getSelectedItem().toString();
+            password = passwordEditText.getText().toString();
+            Repassword = retypePasswordEditText.getText().toString();
+            email = emailEditText.getText().toString();
+            carId = carIDEditText.getText().toString();
+            gender = genderSpinner.getSelectedItem().toString();
 
-        if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
-            pop(
-                    "Invalid password",
-                    "password must contain 8 to 20 characters," +
-                            "it must contain at least one uppercase, one lowercase, one digit," +
-                            "one special character (@#$%!)",
-                    "Back"
-            );
+            if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
+                throw new UpdateException(2);
+            }
+        } catch (UpdateException e) {
+            e.alert(this);
             return;
         }
-
         if (validateCompleteness()) {
             if (validatePasswordMatch(password,Repassword)) {
-                if (validatePasswordComplexity(password)) {
+                try {
+                    if (email == null || !email.matches(EMAIL_PATTERN)) {
+                        throw new UpdateException(6);
+
+                    }
+                    if (userType.equals("Driver") && (carId == null || carId.length() < 6)) {
+                        throw new UpdateException(7);
+
+                    }
+                } catch (UpdateException e) {
+                    e.alert(UpdateProfileActivity.this);
+                    return;
+                }
                     UpdateDriverProfileReceiver updateDriverProfileReceiver = new UpdateDriverProfileReceiver(null);
                     Intent intent = new Intent(this, GuuberService.class);
                     intent.putExtra("operation", Operation.SENDMESSAGE);
@@ -203,14 +207,30 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     intent.putExtra("receiver", updateDriverProfileReceiver);
                     intent.putExtra("activityName", ActivityNames.DRIVERUPDATEPROFILEACTIVITY);
                     startService(intent);
-                } else {
-                    pop("Update Error", "Password doesn't meet requirement", "Back");
-                }
+                    Toast.makeText(this, "Update Successfully!", Toast.LENGTH_SHORT).show();
+                    if(!CommonSignInActivity.userinfo.getUsername().equals("")){
+                        CommonSignInActivity.userinfo.setPassword(password);
+                        CommonSignInActivity.userinfo.setGender(gender);
+                        CommonSignInActivity.userinfo.setEmail(email);
+                        CommonSignInActivity.userinfo.setCarId(carId);
+                    }else{
+                        CommonSignUpActivity.userinfo.setPassword(password);
+                        CommonSignUpActivity.userinfo.setGender(gender);
+                        CommonSignUpActivity.userinfo.setEmail(email);
+                        CommonSignUpActivity.userinfo.setCarId(carId);
+                    }
             } else {
-                pop("Update Error", "Password and retype don't match", "Back");
-            }
+                try {
+                    throw new UpdateException(4);
+                } catch (UpdateException e) {
+                    e.alert(UpdateProfileActivity.this);
+                }            }
         } else {
-            pop("Update Error", "Information is incomplete", "Back");
+            try {
+                throw new UpdateException(5);
+            } catch (UpdateException e) {
+                e.alert(UpdateProfileActivity.this);
+            }
         }
 
     }
@@ -248,11 +268,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pop(
-                                "Updated failed",
-                                "Please Try Again",
-                                "Save"
-                        );
+                        try {
+                            throw new UpdateException(3);
+                        } catch (UpdateException e) {
+                            e.alert(UpdateProfileActivity.this);
+                        }
                     }
                 });
                 return;
