@@ -84,7 +84,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         retypePasswordEditText.setText(password);
         // carId = intent.getStringExtra("carId");
 
-        if(CommonSignInActivity.userinfo.getUsername() != ""){
+        if(!CommonSignInActivity.userinfo.getUsername().equals("")){
             username = CommonSignInActivity.userinfo.getUsername();
             password = CommonSignInActivity.userinfo.getPassword();
             userType = CommonSignInActivity.userinfo.getUserType();

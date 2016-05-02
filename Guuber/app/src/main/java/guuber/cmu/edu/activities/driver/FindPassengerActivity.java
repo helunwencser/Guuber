@@ -44,7 +44,7 @@ public class FindPassengerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(CommonSignInActivity.userinfo.getUsername() != ""){
+        if(!CommonSignInActivity.userinfo.getUsername().equals("")){
             username = CommonSignInActivity.userinfo.getUsername();
             password = CommonSignInActivity.userinfo.getPassword();
             userType = CommonSignInActivity.userinfo.getUserType();

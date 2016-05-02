@@ -75,7 +75,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
         username = intent.getStringExtra("username");
 
-        if(CommonSignInActivity.userinfo.getUsername() != null){
+        if(!CommonSignInActivity.userinfo.getUsername().equals("")){
             username = CommonSignInActivity.userinfo.getUsername();
 
         }else{
@@ -154,7 +154,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
         username = intent.getStringExtra("username");
 
-        if(CommonSignInActivity.userinfo.getUsername() != ""){
+        if(!CommonSignInActivity.userinfo.getUsername().equals("")){
             username = CommonSignInActivity.userinfo.getUsername();
 
         }else{
