@@ -22,8 +22,12 @@ import guuber.cmu.edu.messageConst.ServerMessageKind;
 import guuber.cmu.edu.service.GuuberService;
 import android.util.Log;
 import guuber.cmu.edu.dbLayout.TransactionDBHelper;
+import guuber.cmu.edu.entities.User;
 
 public class CommonSignInActivity extends AppCompatActivity {
+
+    public static User user;
+
 
     private Context context;
 
