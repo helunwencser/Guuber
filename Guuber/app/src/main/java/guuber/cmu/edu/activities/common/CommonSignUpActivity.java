@@ -17,6 +17,7 @@ import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.dbLayout.TransactionDBHelper;
 import guuber.cmu.edu.entities.User;
+import guuber.cmu.edu.exception.SignUpException;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
@@ -57,52 +58,47 @@ public class CommonSignUpActivity extends AppCompatActivity {
 
     //sign up
     public void signUp(View view) {
-        EditText userNameEditText = (EditText)this.findViewById(R.id.sign_up_username_editText);
-        username = userNameEditText.getText().toString();
-        if(username == null || username.length() < 6) {
-            pop("Invalid user name", "User name must have at least 6 characters", "Back");
-            return;
-        }
-        EditText passwordEditText = (EditText)this.findViewById(R.id.sign_up_password_editText);
-        password = passwordEditText.getText().toString();
-        EditText rePasswordEditText = (EditText)this.findViewById(R.id.sign_up_retype_password_editText);
-        String rePassword = rePasswordEditText.getText().toString();
-        if(password == null || rePassword == null || !password.equals(rePassword)) {
-            pop("Invalide password", "Password and retyped password must be same", "Back");
-            return;
-        }
-        if(!password.matches(PASSWORD_RESTRICT)) {
-            pop(
-                    "Invalid password",
-                    "password must contain 8 to 20 characters," +
-                    "it must contain at least one uppercase, one lowercase, one digit," +
-                    "one special character (@#$%!)",
-                    "Back"
-            );
-            return;
-        }
-        Spinner userTypeSpinner = (Spinner)this.findViewById(R.id.sign_up_user_type_spinner);
-        userType = (String)userTypeSpinner.getSelectedItem().toString();
-        if(userType == null) {
-            pop("No user type selected", "Please select your user type", "Back");
-            return;
-        }
-        Spinner genderTypeSpinner = (Spinner)this.findViewById(R.id.sign_up_gender_spinner);
-        gender = (String)genderTypeSpinner.getSelectedItem();
-        if(gender == null) {
-            pop("No gender selected", "Please select your gender", "Back");
-            return;
-        }
-        EditText emailEditText = (EditText)this.findViewById(R.id.sign_up_email_editText);
-        email = emailEditText.getText().toString();
-        if(email == null || !email.matches(EMAIL_PATTERN)) {
-            pop("Invalid email", "Please input valid email address", "Back");
-            return;
-        }
-        EditText carIdEditText = (EditText)this.findViewById(R.id.sign_up_car_id_editText);
-        carId = carIdEditText.getText().toString();
-        if(userType.equals("Driver") && (carId == null || carId.length() < 6)) {
-            pop("Invalid carId", "Please input valid carId", "Back");
+        try {
+            EditText userNameEditText = (EditText) this.findViewById(R.id.sign_up_username_editText);
+            username = userNameEditText.getText().toString();
+            if (username == null || username.length() < 6) {
+                throw new SignUpException(1);
+            }
+            EditText passwordEditText = (EditText) this.findViewById(R.id.sign_up_password_editText);
+            password = passwordEditText.getText().toString();
+            EditText rePasswordEditText = (EditText) this.findViewById(R.id.sign_up_retype_password_editText);
+            String rePassword = rePasswordEditText.getText().toString();
+            if (password == null || rePassword == null || !password.equals(rePassword)) {
+                throw new SignUpException(2);
+            }
+            if (!password.matches(PASSWORD_RESTRICT)) {
+                throw new SignUpException(3);
+            }
+            Spinner userTypeSpinner = (Spinner) this.findViewById(R.id.sign_up_user_type_spinner);
+            userType = (String) userTypeSpinner.getSelectedItem().toString();
+            if (userType == null) {
+                throw new SignUpException(4);
+            }
+            Spinner genderTypeSpinner = (Spinner) this.findViewById(R.id.sign_up_gender_spinner);
+            gender = (String) genderTypeSpinner.getSelectedItem();
+            if (gender == null) {
+                throw new SignUpException(5);
+
+            }
+            EditText emailEditText = (EditText) this.findViewById(R.id.sign_up_email_editText);
+            email = emailEditText.getText().toString();
+            if (email == null || !email.matches(EMAIL_PATTERN)) {
+                throw new SignUpException(6);
+
+            }
+            EditText carIdEditText = (EditText) this.findViewById(R.id.sign_up_car_id_editText);
+            carId = carIdEditText.getText().toString();
+            if (userType.equals("Driver") && (carId == null || carId.length() < 6)) {
+                throw new SignUpException(7);
+
+            }
+        } catch (SignUpException e) {
+            e.alert(this);
             return;
         }
         User user = new User(
@@ -175,11 +171,11 @@ public class CommonSignUpActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pop(
-                                "Username has been used",
-                                "Please select another username",
-                                "Back"
-                        );
+                        try {
+                            throw new SignUpException(8);
+                        } catch (SignUpException e) {
+                            e.alert(CommonSignUpActivity.this);
+                        }
                     }
                 });
                 return;

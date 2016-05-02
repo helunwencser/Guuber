@@ -32,6 +32,7 @@ import java.util.Map;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.dbLayout.MessageDBController;
 import guuber.cmu.edu.entities.Message;
+import guuber.cmu.edu.exception.DriverStartServiceException;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
@@ -243,8 +244,14 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         @Override
         public void onClick(View v) {
 
-            if (currentPassenger == null ||
-                    passengerDestMarkers.get(currentPassenger) == null) {
+            try {
+                if (currentPassenger == null) {
+                    throw new DriverStartServiceException(1);
+                } else if (passengerDestMarkers.get(currentPassenger) == null) {
+                    throw new DriverStartServiceException(2);
+                }
+            } catch (DriverStartServiceException e) {
+                e.alert(StartServiceActivity.this);
                 return;
             }
 

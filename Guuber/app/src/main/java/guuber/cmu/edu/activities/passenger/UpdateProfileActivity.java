@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
 import guuber.cmu.edu.entities.User;
+import guuber.cmu.edu.exception.UpdateException;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
@@ -113,14 +114,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validatePasswordComplexity(String password) {
-
-        Pattern pattern = Pattern.compile(password);
-        Matcher matcher = pattern.matcher(password);
-
-        return matcher.matches();
-    }
-
     private void pop(String title, String message, String button) {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(UpdateProfileActivity.this);
@@ -144,49 +137,49 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     ///////////////
     public void saveP(View view) {
-        username = userNameEditText.getText().toString();
-        if(username == null || username.length() < 6) {
-            pop("Invalid user name", "User name must have at least 6 characters", "Back");
-        }
-        password = passwordEditText.getText().toString();
-        Repassword = retypePasswordEditText.getText().toString();
-        email = emailEditText.getText().toString();
-        gender = genderSpinner.getSelectedItem().toString();
+        try {
+            username = userNameEditText.getText().toString();
+            if (username == null || username.length() < 6) {
+                throw new UpdateException(1);
+            }
+            password = passwordEditText.getText().toString();
+            Repassword = retypePasswordEditText.getText().toString();
+            email = emailEditText.getText().toString();
+            gender = genderSpinner.getSelectedItem().toString();
 
-        if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
-            pop(
-                    "Invalid password",
-                    "password must contain 8 to 20 characters," +
-                            "it must contain at least one uppercase, one lowercase, one digit," +
-                            "one special character (@#$%!)",
-                    "Back"
-            );
+            if (password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
+                throw new UpdateException(2);
+            }
+        } catch (UpdateException e) {
+            e.alert(this);
             return;
         }
-
         if (validateCompleteness()) {
             if (validatePasswordMatch(password,Repassword)) {
-                if (validatePasswordComplexity(password)) {
-                    UpdateDriverProfileReceiver updateDriverProfileReceiver = new UpdateDriverProfileReceiver(null);
-                    Intent intent = new Intent(this, GuuberService.class);
-                    intent.putExtra("operation", Operation.SENDMESSAGE);
-                    intent.putExtra("message", ServerMessageKind.UPDATEPASSENGERPROFILE + ":"
-                            + username + ":"
-                            + password + ":"
-                            + userType + ":"
-                            + email + ":"
-                            + gender);
-                    intent.putExtra("receiver", updateDriverProfileReceiver);
-                    intent.putExtra("activityName", ActivityNames.PASSENGERUPDATEPROFILEACTIVITY);
-                    startService(intent);
-                } else {
-                    pop("Update Error", "Password doesn't meet requirement", "Back");
-                }
+                UpdateDriverProfileReceiver updateDriverProfileReceiver = new UpdateDriverProfileReceiver(null);
+                Intent intent = new Intent(this, GuuberService.class);
+                intent.putExtra("operation", Operation.SENDMESSAGE);
+                intent.putExtra("message", ServerMessageKind.UPDATEPASSENGERPROFILE + ":"
+                        + username + ":"
+                        + password + ":"
+                        + userType + ":"
+                        + email + ":"
+                        + gender);
+                intent.putExtra("receiver", updateDriverProfileReceiver);
+                intent.putExtra("activityName", ActivityNames.PASSENGERUPDATEPROFILEACTIVITY);
             } else {
-                pop("Update Error", "Password and retype don't match", "Back");
+                try {
+                    throw new UpdateException(4);
+                } catch (UpdateException e) {
+                    e.alert(UpdateProfileActivity.this);
+                }
             }
         } else {
-            pop("Update Error", "Information is incomplete", "Back");
+            try {
+                throw new UpdateException(5);
+            } catch (UpdateException e) {
+                e.alert(UpdateProfileActivity.this);
+            }
         }
 
     }
@@ -224,11 +217,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pop(
-                                "Updated failed",
-                                "Please Try Again",
-                                "Save"
-                        );
+                        try {
+                            throw new UpdateException(3);
+                        } catch (UpdateException e) {
+                            e.alert(UpdateProfileActivity.this);
+                        }
                     }
                 });
                 return;

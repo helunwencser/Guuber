@@ -15,6 +15,7 @@ import android.widget.EditText;
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.driver.FindPassengerActivity;
 import guuber.cmu.edu.activities.passenger.FindDriverActivity;
+import guuber.cmu.edu.exception.SignInException;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.ClientMessageKind;
 import guuber.cmu.edu.messageConst.Operation;
@@ -76,19 +77,17 @@ public class CommonSignInActivity extends AppCompatActivity {
     public void signIn(View view) {
         EditText usernameEditText = (EditText)this.findViewById(R.id.sign_in_username_editText);
         username = usernameEditText.getText().toString();
-        if(username == null || username.length() < 6) {
-            pop("Invalid user name", "User name must have at least 6 characters", "Back");
-        }
-        EditText passwordEditText = (EditText)this.findViewById(R.id.sign_in_password_editText);
-        password = passwordEditText.getText().toString();
-        if(password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
-            pop(
-                    "Invalid password",
-                    "password must contain 8 to 20 characters," +
-                            "it must contain at least one uppercase, one lowercase, one digit," +
-                            "one special character (@#$%!)",
-                    "Back"
-            );
+        try {
+            if (username == null || username.length() < 6) {
+                throw new SignInException(1);
+            }
+            EditText passwordEditText = (EditText) this.findViewById(R.id.sign_in_password_editText);
+            password = passwordEditText.getText().toString();
+            if (password == null || password.length() <= 0 || !password.matches(PASSWORD_RESTRICT)) {
+                throw new SignInException(2);
+            }
+        } catch (SignInException e) {
+            e.alert(this);
             return;
         }
         ResultReceiver resultReceiver = new SignInResultReceiver(null);
@@ -155,11 +154,11 @@ public class CommonSignInActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pop(
-                                "Username and password not match",
-                                "Please input your correct username and password or sign up",
-                                "Back"
-                        );
+                        try {
+                            throw new SignInException(3);
+                        } catch (SignInException e) {
+                            e.alert(CommonSignInActivity.this);
+                        }
                     }
                 });
                 return;
