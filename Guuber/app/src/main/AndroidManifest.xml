@@ -170,7 +170,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service
-            android:name="guuber.cmu.edu.service.GuuberService"
+            android:name="guuber.cmu.edu.ws.remote.GuuberService"
             android:enabled="true"
             android:exported="true"></service>
     </application>

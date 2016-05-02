@@ -1,20 +1,15 @@
 package guuber.cmu.edu.activities.driver;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.ResultReceiver;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
@@ -40,7 +35,7 @@ import guuber.cmu.edu.entities.Transaction;
 import guuber.cmu.edu.messageConst.ActivityNames;
 import guuber.cmu.edu.messageConst.Operation;
 import guuber.cmu.edu.messageConst.ServerMessageKind;
-import guuber.cmu.edu.service.GuuberService;
+import guuber.cmu.edu.ws.remote.GuuberService;
 
 /**
  * Created by wangziming on 4/9/16.

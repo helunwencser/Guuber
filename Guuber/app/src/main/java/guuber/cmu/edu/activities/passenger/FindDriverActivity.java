@@ -2,17 +2,12 @@ package guuber.cmu.edu.activities.passenger;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import java.util.ArrayList;
-import java.util.List;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 
@@ -21,7 +16,7 @@ import guuber.cmu.edu.activities.common.CommonSignInActivity;
 import guuber.cmu.edu.activities.common.CommonSignInSignUpActivity;
 import guuber.cmu.edu.activities.common.CommonSignUpActivity;
 import guuber.cmu.edu.messageConst.Operation;
-import guuber.cmu.edu.service.GuuberService;
+import guuber.cmu.edu.ws.remote.GuuberService;
 
 public class FindDriverActivity extends AppCompatActivity  {
 

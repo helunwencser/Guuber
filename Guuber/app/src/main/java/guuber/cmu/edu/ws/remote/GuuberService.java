@@ -1,4 +1,4 @@
-package guuber.cmu.edu.service;
+package guuber.cmu.edu.ws.remote;
 
 import android.app.Service;
 import android.content.Intent;

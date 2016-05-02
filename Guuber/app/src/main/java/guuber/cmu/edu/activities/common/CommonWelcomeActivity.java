@@ -10,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.messageConst.Operation;
-import guuber.cmu.edu.service.GuuberService;
 
 
 public class CommonWelcomeActivity extends AppCompatActivity {
