@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import guuber.cmu.edu.entities.Transaction;
-import android.util.Log;
 
 /**
  * Created by lunwenh on 4/8/2016.

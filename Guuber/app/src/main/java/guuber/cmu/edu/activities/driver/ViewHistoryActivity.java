@@ -1,48 +1,25 @@
 package guuber.cmu.edu.activities.driver;
 
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import edu.cmu.guuber.guuber.R;
 import guuber.cmu.edu.activities.common.CommonSignInActivity;
 import guuber.cmu.edu.activities.common.CommonSignUpActivity;
-import guuber.cmu.edu.activities.driver.DetailedViewActivity;
 import guuber.cmu.edu.dbLayout.TransactionDBController;
 import guuber.cmu.edu.entities.Transaction;
 import java.util.List;
-import android.util.Log;
 
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import edu.cmu.guuber.guuber.R;
-import guuber.cmu.edu.activities.passenger.*;
-import guuber.cmu.edu.dbLayout.TransactionModel;
-import guuber.cmu.edu.dbLayout.TransactionDBController;
-import guuber.cmu.edu.entities.Transaction;
 
 /**
  * Created by wangziming on 4/9/16.

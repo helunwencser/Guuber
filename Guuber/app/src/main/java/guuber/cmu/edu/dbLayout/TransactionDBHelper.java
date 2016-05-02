@@ -3,7 +3,6 @@ package guuber.cmu.edu.dbLayout;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * Created by lunwenh on 4/8/2016.
