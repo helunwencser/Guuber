@@ -142,7 +142,6 @@ public class CommonSignUpActivity extends AppCompatActivity {
         userinfo.setEmail(email);
         userinfo.setGender(gender);
         userinfo.setCarId(carId);
-        Log.d("commonuser",userinfo.getEmail()+userinfo.getPassword());
     }
 
     /**
