@@ -136,8 +136,9 @@ public class ViewHistoryActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
          super.onStart();
-         setContentView(R.layout.driver_activity_view_history);
-         listView = (ListView) this.findViewById(R.id.driversss_view_list);
+        setContentView(R.layout.driver_activity_view_history);
+
+        listView = (ListView) this.findViewById(R.id.driversss_view_list);
 
         View.OnClickListener onClickListener = new View.OnClickListener(){
             public void onClick(View v) {
@@ -170,7 +171,7 @@ public class ViewHistoryActivity extends AppCompatActivity {
 
                 StringBuilder sam = new StringBuilder();
                 sam.append(String.valueOf(transactionList.get(i).getTransaction_id())+"\t");
-                sam.append(transactionList.get(i).getDriver()+"\t");
+                sam.append(transactionList.get(i).getPassenger()+"\t");
                 sam.append(transactionList.get(i).getStartTime());
                 res[i] = sam.toString();
                 Log.d("res[i]",res[i]);
@@ -208,7 +209,6 @@ public class ViewHistoryActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this,"No Related Transactions",Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }
