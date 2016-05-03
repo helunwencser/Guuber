@@ -87,5 +87,7 @@
     <string name="driver_name">driver name</string>
     <string name="finddriver">Find Driver</string>
     <string name="destination">Destination</string>
+    <string name="zoomin">Zoom In</string>
+    <string name="zoomout">Zoom Out</string>
 
 </resources>

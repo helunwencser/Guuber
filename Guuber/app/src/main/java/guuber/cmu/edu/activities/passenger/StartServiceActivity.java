@@ -73,6 +73,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private ResultReceiver resultReceiver;
 
+    private int zoomFactor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
+        zoomFactor = 15;
         try {
             // Acquire a reference to the system Location Manager
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -127,6 +128,14 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         Button submitButton =
                 (Button) findViewById(R.id.passenger_start_submitButton);
         submitButton.setOnClickListener(submitButtonClicked);
+
+        Button zoomInButton =
+                (Button) findViewById(R.id.passenger_start_zoomIn);
+        zoomInButton.setOnClickListener(zoomInButtonClicked);
+
+        Button zoomOutButton =
+                (Button) findViewById(R.id.passenger_start_zoomOut);
+        zoomOutButton.setOnClickListener(zoomOutButtonClicked);
 
         messageInput = (EditText) findViewById(R.id.passenger_start_input);
         destinationInput = (EditText) findViewById(R.id.passenger_destination);
@@ -204,7 +213,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomFactor));
 
         try {
             Location loc = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
@@ -219,6 +228,26 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Mountain View"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+    View.OnClickListener zoomInButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (zoomFactor < 20) {
+                zoomFactor++;
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomFactor));
+            }
+        }
+    };
+
+    View.OnClickListener zoomOutButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (zoomFactor > 1) {
+                zoomFactor--;
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomFactor));
+            }
+        }
+    };
 
     View.OnClickListener sendButtonClicked = new View.OnClickListener() {
         @Override
