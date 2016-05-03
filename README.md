@@ -41,7 +41,9 @@ Note: Make sure you have installed MySQL database. It will promote you input you
 
 ##File structure
 Document: requirements, design, test, and other related documents.
+
 Guuber: the source code of client
+
 Server: the source code of server
 
 ###Contact us
