@@ -62,6 +62,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
 
     private ResultReceiver resultReceiver;
 
+    private int zoomFactor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +72,8 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+        zoomFactor = 15;
 
         try {
             // Acquire a reference to the system Location Manager
@@ -116,6 +119,15 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
         Button sendButton =
                 (Button) findViewById(R.id.driver_start_sendButton);
         sendButton.setOnClickListener(sendButtonClicked);
+
+        Button zoomInButton =
+                (Button) findViewById(R.id.driver_start_zoomIn);
+        zoomInButton.setOnClickListener(zoomInButtonClicked);
+
+        Button zoomOutButton =
+                (Button) findViewById(R.id.driver_start_zoomOut);
+        zoomOutButton.setOnClickListener(zoomOutButtonClicked);
+
         messageInput = (EditText) findViewById(R.id.driver_start_input);
         messageHistory = (TextView) findViewById(R.id.driver_start_history);
         messageHistory.setMovementMethod(new ScrollingMovementMethod());
@@ -192,7 +204,7 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomFactor));
         try {
             Location loc = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
             updateLocation(loc);
@@ -296,6 +308,26 @@ public class StartServiceActivity extends FragmentActivity implements OnMapReady
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
+        }
+    };
+
+    View.OnClickListener zoomInButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (zoomFactor < 20) {
+                zoomFactor++;
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomFactor));
+            }
+        }
+    };
+
+    View.OnClickListener zoomOutButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (zoomFactor > 1) {
+                zoomFactor--;
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomFactor));
+            }
         }
     };
 

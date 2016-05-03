@@ -13,13 +13,15 @@ Lunwen He, Yanning Liu, Ziming Wang
 Java: JDK 8
 Android 5.1
 MySQL
-Download
+
+###Download
 Guuber is a public repository hosted in github. The link of Guuber project is: 
 https://github.com/helunwencser/Guuber.git
 
-###To download Guuber:
+To download Guuber:
 git clone https://github.com/helunwencser/Guuber.git
-Server
+
+###Server
 After downloading Guuber, you can start server using those commands:
 cd Guuber/Server/src/
 sudo chmod +x ./startServer.sh
