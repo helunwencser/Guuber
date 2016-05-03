@@ -39,6 +39,11 @@ Note: Make sure you have installed MySQL database. It will promote you input you
 4. You can run app either on an Android device or an emulator with hardcoded GPS information.
 
 
+##File structure
+Document: requirements, design, test, and other related documents.
+Guuber: the source code of client
+Server: the source code of server
+
 ###Contact us
 If you have any issue to setup Guuber, please feel free to contact us.
 
