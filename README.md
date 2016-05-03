@@ -19,13 +19,17 @@ Guuber is a public repository hosted in github. The link of Guuber project is:
 https://github.com/helunwencser/Guuber.git
 
 To download Guuber:
+```bash
 git clone https://github.com/helunwencser/Guuber.git
+```
 
 ###Server
 After downloading Guuber, you can start server using those commands:
+```bash
 cd Guuber/Server/src/
 sudo chmod +x ./startServer.sh
 ./startServer.sh
+```
 Note: Make sure you have installed MySQL database. It will promote you input your MySQL username and  password.
 
 ###Client
