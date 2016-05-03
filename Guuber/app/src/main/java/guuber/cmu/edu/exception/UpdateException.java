@@ -26,9 +26,6 @@ public class UpdateException extends Exception  {
             case 4:
                 this.errorMessage = "Password and retype don't match";
                 break;
-            case 5:
-                this.errorMessage = "Information is incomplete";
-                break;
             case 6:
                 this.errorMessage = "Invalid email";
                 break;
@@ -65,9 +62,6 @@ public class UpdateException extends Exception  {
                 builder.setMessage("Please Try Again");
                 break;
             case 4:
-                builder.setMessage("Please Try Again");
-                break;
-            case 5:
                 builder.setMessage("Please Try Again");
                 break;
             case 6:

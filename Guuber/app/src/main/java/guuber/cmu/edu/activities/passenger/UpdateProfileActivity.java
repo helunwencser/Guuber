@@ -121,25 +121,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    private void pop(String title, String message, String button) {
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(UpdateProfileActivity.this);
-        // set dialog title & message, and provide Button to dismiss
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setPositiveButton(button, null);
-        builder.show(); // display the Dialog
-    }
-
-    private boolean validateCompleteness() {
-        if (userNameEditText.getText().length() == 0 || passwordEditText.getText().length() == 0
-                || retypePasswordEditText.getText().length() == 0 || emailEditText.getText().length() == 0
-                || genderSpinner.getSelectedItemPosition() < 0) {
-            return false;
-        }
-        return true;
-    }
-
     public void saveP(View view) {
         try {
             username = userNameEditText.getText().toString();
@@ -158,54 +139,46 @@ public class UpdateProfileActivity extends AppCompatActivity {
             e.alert(this);
             return;
         }
-        if (validateCompleteness()) {
-            if (validatePasswordMatch(password,Repassword)) {
-                try {
-                    if (email == null || !email.matches(EMAIL_PATTERN)) {
-                        throw new UpdateException(6);
+        if (validatePasswordMatch(password,Repassword)) {
+            try {
+                if (email == null || !email.matches(EMAIL_PATTERN)) {
+                    throw new UpdateException(6);
 
-                    }
-                    if (userType.equals("Driver") && (carId == null || carId.length() < 6)) {
-                        throw new UpdateException(7);
+                }
+                if (userType.equals("Driver") && (carId == null || carId.length() < 6)) {
+                    throw new UpdateException(7);
 
-                    }
-                } catch (UpdateException e) {
-                    e.alert(UpdateProfileActivity.this);
-                    return;
                 }
-                UpdateDriverProfileReceiver updateDriverProfileReceiver = new UpdateDriverProfileReceiver(null);
-                Intent intent = new Intent(this, GuuberService.class);
-                intent.putExtra("operation", Operation.SENDMESSAGE);
-                intent.putExtra("message", ServerMessageKind.UPDATEPASSENGERPROFILE + ":"
-                        + username + ":"
-                        + password + ":"
-                        + userType + ":"
-                        + email + ":"
-                        + gender);
-                intent.putExtra("receiver", updateDriverProfileReceiver);
-                intent.putExtra("activityName", ActivityNames.PASSENGERUPDATEPROFILEACTIVITY);
-                startService(intent);
-                Toast.makeText(this, "Update Successfully!", Toast.LENGTH_SHORT).show();
-                if(!CommonSignInActivity.userinfo.getUsername().equals("")){
-                    CommonSignInActivity.userinfo.setPassword(password);
-                    CommonSignInActivity.userinfo.setGender(gender);
-                    CommonSignInActivity.userinfo.setEmail(email);
-                }else{
-                    CommonSignUpActivity.userinfo.setPassword(password);
-                    CommonSignUpActivity.userinfo.setGender(gender);
-                    CommonSignUpActivity.userinfo.setEmail(email);
-                }
-
-            } else {
-                try {
-                    throw new UpdateException(4);
-                } catch (UpdateException e) {
-                    e.alert(UpdateProfileActivity.this);
-                }
+            } catch (UpdateException e) {
+                e.alert(UpdateProfileActivity.this);
+                return;
             }
+            UpdateDriverProfileReceiver updateDriverProfileReceiver = new UpdateDriverProfileReceiver(null);
+            Intent intent = new Intent(this, GuuberService.class);
+            intent.putExtra("operation", Operation.SENDMESSAGE);
+            intent.putExtra("message", ServerMessageKind.UPDATEPASSENGERPROFILE + ":"
+                    + username + ":"
+                    + password + ":"
+                    + userType + ":"
+                    + email + ":"
+                    + gender);
+            intent.putExtra("receiver", updateDriverProfileReceiver);
+            intent.putExtra("activityName", ActivityNames.PASSENGERUPDATEPROFILEACTIVITY);
+            startService(intent);
+            Toast.makeText(this, "Update Successfully!", Toast.LENGTH_SHORT).show();
+            if(!CommonSignInActivity.userinfo.getUsername().equals("")){
+                CommonSignInActivity.userinfo.setPassword(password);
+                CommonSignInActivity.userinfo.setGender(gender);
+                CommonSignInActivity.userinfo.setEmail(email);
+            }else{
+                CommonSignUpActivity.userinfo.setPassword(password);
+                CommonSignUpActivity.userinfo.setGender(gender);
+                CommonSignUpActivity.userinfo.setEmail(email);
+            }
+
         } else {
             try {
-                throw new UpdateException(5);
+                throw new UpdateException(4);
             } catch (UpdateException e) {
                 e.alert(UpdateProfileActivity.this);
             }
