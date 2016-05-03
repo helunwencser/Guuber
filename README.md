@@ -43,7 +43,9 @@ Note: Make sure you have installed MySQL database. It will promote you input you
 If you have any issue to setup Guuber, please feel free to contact us.
 
 Lunwen He: lunwenh@andrew.cmu.edu
+
 Yanning Liu: yanningl@andrew.cmu.edu
+
 Ziming Wang: zimingw@andrew.cmu.edu
 
 
