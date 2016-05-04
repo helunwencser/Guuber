@@ -19,13 +19,17 @@ Guuber is a public repository hosted in github. The link of Guuber project is:
 https://github.com/helunwencser/Guuber.git
 
 To download Guuber:
+```bash
 git clone https://github.com/helunwencser/Guuber.git
+```
 
 ###Server
 After downloading Guuber, you can start server using those commands:
+```bash
 cd Guuber/Server/src/
 sudo chmod +x ./startServer.sh
 ./startServer.sh
+```
 Note: Make sure you have installed MySQL database. It will promote you input your MySQL username and  password.
 
 ###Client
@@ -35,11 +39,20 @@ Note: Make sure you have installed MySQL database. It will promote you input you
 4. You can run app either on an Android device or an emulator with hardcoded GPS information.
 
 
+##File structure
+Document: requirements, design, test, and other related documents.
+
+Guuber: the source code of client
+
+Server: the source code of server
+
 ###Contact us
 If you have any issue to setup Guuber, please feel free to contact us.
 
 Lunwen He: lunwenh@andrew.cmu.edu
+
 Yanning Liu: yanningl@andrew.cmu.edu
+
 Ziming Wang: zimingw@andrew.cmu.edu
 
 
