@@ -10,7 +10,7 @@ package guuber.cmu.edu.ws.remote;
 public class ServerConfig {
 
     /* The ip address of server */
-    public static String SERVERIP = "54.183.78.253";
+    public static String SERVERIP = "54.183.188.211";
 
     /* The port number of server */
     public static  int PORTNUMBER = 55555;
